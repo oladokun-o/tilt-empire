@@ -1,5 +1,8 @@
 {
   "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
+  "cli": {
+    "analytics": "67e60318-8bbd-4e3a-84d3-c23fe9ef08cd"
+  },
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
@@ -20,7 +23,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/tilt-empire",
+            "outputPath": "dist/tilt-empire/browser",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
@@ -31,9 +34,19 @@
               "src/assets"
             ],
             "styles": [
+              "node_modules/bootstrap/dist/css/bootstrap.min.css",
               "src/styles.scss"
             ],
-            "scripts": []
+            "scripts": [
+              "node_modules/bootstrap/dist/js/bootstrap.min.js",
+              "node_modules/bootstrap/dist/js/bootstrap.bundle.min.js",
+              "node_modules/jquery/dist/jquery.min.js",
+              "src/assets/js/imagesloaded.pkgd.min.js",
+              "src/assets/js/actions.js",
+              "src/assets/js/demo.js",
+              "src/assets/js/lightbox.js",
+              "src/assets/js/atc.min.js"
+            ]
           },
           "configurations": {
             "production": {
@@ -99,10 +112,79 @@
               "src/assets"
             ],
             "styles": [
+              "node_modules/bootstrap/dist/css/bootstrap.min.css",
               "src/styles.scss"
             ],
-            "scripts": []
+            "scripts": [
+              "node_modules/bootstrap/dist/js/bootstrap.min.js",
+              "node_modules/bootstrap/dist/js/bootstrap.bundle.min.js",
+              "node_modules/jquery/dist/jquery.min.js",
+              "src/assets/js/imagesloaded.pkgd.min.js",
+              "src/assets/js/actions.js",
+              "src/assets/js/demo.js",
+              "src/assets/js/lightbox.js",
+              "src/assets/js/atc.min.js"
+            ]
           }
+        },
+        "server": {
+          "builder": "@angular-devkit/build-angular:server",
+          "options": {
+            "outputPath": "dist/tilt-empire/server",
+            "main": "server.ts",
+            "tsConfig": "tsconfig.server.json",
+            "inlineStyleLanguage": "scss"
+          },
+          "configurations": {
+            "production": {
+              "outputHashing": "media",
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.prod.ts"
+                }
+              ]
+            },
+            "development": {
+              "optimization": false,
+              "sourceMap": true,
+              "extractLicenses": false
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "serve-ssr": {
+          "builder": "@nguniversal/builders:ssr-dev-server",
+          "configurations": {
+            "development": {
+              "browserTarget": "tilt-empire:build:development",
+              "serverTarget": "tilt-empire:server:development"
+            },
+            "production": {
+              "browserTarget": "tilt-empire:build:production",
+              "serverTarget": "tilt-empire:server:production"
+            }
+          },
+          "defaultConfiguration": "development"
+        },
+        "prerender": {
+          "builder": "@nguniversal/builders:prerender",
+          "options": {
+            "routes": [
+              "/"
+            ]
+          },
+          "configurations": {
+            "production": {
+              "browserTarget": "tilt-empire:build:production",
+              "serverTarget": "tilt-empire:server:production"
+            },
+            "development": {
+              "browserTarget": "tilt-empire:build:development",
+              "serverTarget": "tilt-empire:server:development"
+            }
+          },
+          "defaultConfiguration": "production"
         }
       }
     }

@@ -1,0 +1,99 @@
+<footer class="py-3 px-md-5 px-4">
+  <div class="newsletter row d-flex justify-content-center">
+    <div class="col-12 col-md-10 p-3 p-md-4">
+      <form class="row">
+        <div class="col-12 col-md-5 text-center text-md-start d-flex justify-content-center justify-content-md-start align-items-center">
+          <div>
+            <h5>UPCOMING EVENTS AND SPECIAL OFFERS</h5>
+            <h2>GET WEEKLY NEWSLETTERS</h2>
+          </div>
+        </div>
+        <div class="col-12 col-md-7 d-flex align-items-center">
+          <div class="col-12 p-0">
+            <label for="newsletter1" class="visually-hidden">Email address</label>
+            <input id="newsletter1" type="text" class="form-control" placeholder="Email address">
+            <button class="primary-btn text-uppercase m-0 mt-2 col-12" type="submit">Subscribe</button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+  <div class="row -dark p-2 py-4">
+    <div class="col-12 col-md-7 text-center text-md-start">
+      <div class="row" style="height: 100%;">
+        <div class="col-12 col-md-4 ps-md-5 d-flex justify-content-center align-items-center">
+          <a href="/">
+            <img src="assets/img/logo.png" style="width: 100%;" alt="Logo">
+          </a>
+        </div>
+        <div class="col-12 foot col-md-8 d-flex justify-content-center align-items-center">
+          <p>Praesent vel lectus eget turpis aliquam commodo. Aenean pharetra lobortis enim at aliquet. Nam sit amet molestie urna, at luctus lorem. Vestibulum at consectetur libero.</p>
+        </div>
+      </div>
+    </div>
+    <div class="col-12 col-md-5 mb-3 text-center text-md-start  d-flex justify-content-center align-items-center">
+      <div class="col-12 call">
+        <p>
+          <i class="bi bi-telephone-x-fill me-2"></i>
+          <a href="tel:+00800000000">08000000000</a>
+        </p>
+        <p>
+          <i class="bi bi-geo-fill me-2"></i>
+          <a href="javascript:void(0);">Tallinn, Estonia</a>
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <div class="d-flex flex-column flex-sm-row justify-content-between py-4 my-4 border-top">
+    <p>© 2023 TILT Empire, Inc. All rights reserved.</p>
+    <ul class="share">
+      <li>
+        <a href="https://www.facebook.com/pg/tiltempireempire/posts/">
+          <i class="bi bi-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a href="https://www.instagram.com/p/CnnNQiCtMPO/?igshid=YmMyMTA2M2Y=">
+          <i class="bi bi-instagram"></i>
+        </a>
+      </li>
+      <li>
+        <a href="#">
+          <i class="bi bi-telegram"></i>
+        </a>
+      </li>
+    </ul>
+  </div>
+</footer>
+
+<!-- Messenger Chat plugin Code -->
+  <div id="fb-root"></div>
+
+  <!-- Your Chat plugin code -->
+  <div id="fb-customer-chat" class="fb-customerchat">
+  </div>
+
+  <script>
+    var chatbox = document.getElementById('fb-customer-chat');
+    chatbox.setAttribute("page_id", "110161678336023");
+    chatbox.setAttribute("attribution", "biz_inbox");
+  </script>
+
+  <!-- Your SDK code -->
+  <script>
+    window.fbAsyncInit = function() {
+      FB.init({
+        xfbml            : true,
+        version          : 'v15.0'
+      });
+    };
+
+    (function(d, s, id) {
+      var js, fjs = d.getElementsByTagName(s)[0];
+      if (d.getElementById(id)) return;
+      js = d.createElement(s); js.id = id;
+      js.src = 'https://connect.facebook.net/en_US/sdk/xfbml.customerchat.js';
+      fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'facebook-jssdk'));
+  </script>

@@ -1,0 +1,53 @@
+<main class="container-fluid px-4 px-md-5">
+  <div class="home row position-relative text-center mb-5 pb-5">
+    <h4 class="mb-5">NEXT PARTY</h4>
+    <div *ngIf="event" class="col-12 scale-in-center">
+      <h2 class="text-uppercase m-0 p-0">{{ event.title }}</h2>
+      <h3 class="text-uppercase mt-0 d-none"></h3>
+      <div class="col-12 d-flex mt-3 justify-content-center">
+        <p class="mb-3 col-8">
+          {{ event.description }}
+        </p>
+      </div>
+    </div>
+    <div class="col-12 d-flex justify-content-center">
+      <a [routerLink]="['/events']" routerLinkActive="router-link-active"  class="secondary-btn me-3">ALL EVENTS</a>
+      <button data-bs-toggle="modal" data-bs-target="#exampleModal" class="primary-btn ms-3">GET TICKETS</button>
+    </div>
+  </div>
+
+  <app-next-event></app-next-event>
+
+  <app-about></app-about>
+
+  <div id="gallery" class="row -dark p-4 px-3 my-5">
+    <div class="subtitle col-12 p-0 pb-3">LATEST PHOTOS</div>
+    <div class="col-12 gallery">
+      <div class="row">
+        <div class="col-6 col-md-4 img px-0">
+          <img src="assets/gallery/TILT (21 of 210).jpg">
+        </div>
+        <div class="col-6 col-md-4 img px-0">
+          <img src="assets/gallery/TILT (107 of 210).jpg">
+        </div>
+        <div class="col-6 col-md-4 img px-0">
+          <img src="assets/gallery/TILT (112 of 210).jpg">
+        </div>
+        <div class="col-6 col-md-4 img px-0">
+          <img src="assets/gallery/TILT (117 of 210).jpg">
+        </div>
+        <div class="col-6 col-md-4 img px-0">
+          <img src="assets/gallery/TILT (60 of 210).jpg">
+        </div>
+        <div class="col-6 col-md-4 img px-0">
+          <img src="assets/gallery/TILT (124 of 210).jpg">
+        </div>
+      </div>
+    </div>
+    <div class="col-12 d-flex justify-content-center px-0 mt-3">
+      <a routerLink="/gallery" class="primary-btn col-12 col-md-auto">GALLERY</a>
+    </div>
+  </div>
+
+  <app-contact></app-contact>
+</main>

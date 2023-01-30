@@ -1,0 +1,164 @@
+<div class="events-contn container-fluid px-0">
+  <div class="row m-auto">
+      <div class="col-12 hero -dark p-3 p-md-5" style="height: 100%;">
+          <h1 [routerLink]="['/events']" class="px-md-0 col-auto" style="cursor: pointer;">
+              <i class="bi bi-arrow-left me-2"></i>
+              Events
+          </h1>
+
+          <div *ngIf="!event" class="w-100 d-flex align-items-center justify-content-center">
+            <div class="spinner-border text-light spinner-border-xl spinner-primary" role="status">
+                <!--<span class="sr-only">Loading...</span>-->
+            </div>
+          </div>
+
+          <div *ngIf="event" class="event container-fluid mt-3">
+              <div class="row">
+                  <div class="col-12 col-md-5 p-0">
+                      <img src="{{ event.imageUrl }}" alt="{{ event.title }}">
+                  </div>
+                  <div class="col-12 col-md-7">
+                      <div class="row">
+                          <div class="col-12 col-md-6 col-lg-4 px-0 ps-md-3 d-block d-md-none my-3">
+                              <div class="date col-12 p-3 shadow">
+                                  <h5 class="fw-bold">Date & Time</h5>
+                                  <p class="text-mu">{{ convertToDay(event.datetime) }}, {{ convertToMonth(event.datetime) }} {{ convertToDate(event.datetime) }}, {{ convertToYear(event.datetime) }} at {{ convertTime(event.datetime) }}</p>
+                                  <a title="Add to Calendar" class="addeventatc" data-id="tj16041042" href="https://www.addevent.com/event/tj16041042" target="_blank">Add to Calendar</a>
+                                  <script type="text/javascript" src="https://cdn.addevent.com/libs/atc/1.6.1/atc.min.js" async defer></script>
+                                  <div class="col-12 d-flex justify-content-start">
+                                      <a data-bs-toggle="modal" data-bs-target="#exampleModal" class="primary-btn col-12 text-uppercase">get tickets</a>
+                                  </div>
+                                  <div class="col-12 text-center mt-3">
+                                      <p class="text-muted m-0">No Refunds</p>
+                                  </div>
+                              </div>
+                          </div>
+                          <div class="col-12 party col-md-6 col-lg-8 ps-md-4 px-0">
+                              <h4 class="fw-bold">{{ event.title }}</h4>
+
+                              <p class="mb-3">{{ event.description }}</p>
+
+                              <h6 class="fw-bold">Location</h6>
+                              <p class="mb-3">{{ event.location }}</p>
+
+                        <h6 class="fw-bold">Contact</h6>
+                                            <p class="mb-3">
+                                                <div class="col-12 call">
+                            <p>
+                              <i class="bi bi-telephone-x-fill me-2"></i>
+                              <a href="tel:+00800000000">08000000000</a>
+                            </p>
+                            <p>
+                              <i class="bi bi-envelope me-2"></i>
+                              <a href="mailto:support@tiltempire.org">support@tiltempire.org</a>
+                            </p>
+                          </div>
+                              <h6 class="fw-bold">Tags</h6>
+                              <ul class="tags">
+                                <li *ngFor="let tags of event.tags">
+                                  <a href="javascript:void(0)">{{ tags }}</a>
+                                </li>
+                              </ul>
+
+                              <h6 class="fw-bold">Share</h6>
+                              <ul class="share">
+                                  <li>
+                                      <a href="#"><i class="bi bi-twitter"></i></a>
+                                  </li>
+                                  <li>
+                                      <a href="#"><i class="bi bi-instagram"></i></a>
+                                  </li>
+                                  <li>
+                                      <a href="#"><i class="bi bi-whatsapp"></i></a>
+                                  </li>
+                              </ul>
+                          </div>
+                          <div class="col-12 col-md-6 col-lg-4 px-0 ps-md-3 d-none d-md-block">
+                              <div class="date col-12 p-3 shadow">
+                                  <h5 class="fw-bold">Date & Time</h5>
+                                  <p class="text-mu">{{ convertToDay(event.datetime) }}, {{ convertToMonth(event.datetime) }} {{ convertToDate(event.datetime) }}, {{ convertToYear(event.datetime) }} at {{ convertTime(event.datetime) }}</p>
+                                  <a title="Add to Calendar" class="addeventatc" data-id="tj16041042" href="https://www.addevent.com/event/tj16041042" target="_blank">Add to Calendar</a>
+                                <script type="text/javascript" src="https://cdn.addevent.com/libs/atc/1.6.1/atc.min.js" async defer></script>
+                                  <div class="col-12 d-flex justify-content-start">
+                                      <a data-bs-toggle="modal" data-bs-target="#exampleModal" class="primary-btn col-12 text-uppercase">get tickets</a>
+                                  </div>
+                                  <div class="col-12 text-center mt-3">
+                                      <p class="text-muted m-0">No Refunds</p>
+                                  </div>
+                              </div>
+                          </div>
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </div>
+      <div class="col-12 events-list p-3 px-md-5 mt-3">
+          <h1 class="px-md-0 mb-4">Other Upcoming Events</h1>
+          <div *ngIf="events.length > 0" class="events container-fluid px-0">
+              <div class="row">
+                  <div *ngFor="let event of events" class="col-12 col-md-4 col-lg-3 p-3 p-md-2">
+                      <div class="col-12 shadow p-3 -dark event-card">
+                          <h5 class="mb-0">{{ convertToMonth(event.datetime) }} {{ convertToDate(event.datetime) }}</h5>
+                          <h4 class="text-capitalize fw-bold">
+                              <a href="#">{{ event.title }}</a>
+                          </h4>
+                          <p class="mb-3">{{ event.description }}</p>
+                          <h6>
+                              <div class="row">
+                                  <i class="bi bi-calendar-check col-auto pe-0"></i>
+                                  <div class="col-10">{{ convertToDay(event.datetime) }}, {{ convertToMonth(event.datetime) }} {{ convertToDate(event.datetime) }}, {{ convertToYear(event.datetime) }}. <br> {{ convertTime(event.datetime) }}</div>
+                              </div>
+                          </h6>
+                          <h6>
+                              <div class="row">
+                                  <i class="bi bi-geo-alt col-auto pe-0"></i>
+                                  <div class="col-8">{{ event.location }}</div>
+                              </div>
+                          </h6>
+                          <div class="col-12">
+                              <div class="row">
+                                  <div class="col-12 mt-2">
+                                      <p class="mb-2">Tags</p>
+                                      <ul class="tags">
+                                        <li *ngFor="let tags of event.tags">
+                                          <a href="javascript:void(0)">{{ tags }}</a>
+                                        </li>
+                                      </ul>
+                                  </div>
+                                  <div class="col-12">
+                                      <p class="mb-0">Share</p>
+                                      <ul class="share">
+                                          <li>
+                                              <a href="#"><i class="bi bi-twitter"></i></a>
+                                          </li>
+                                          <li>
+                                              <a href="#"><i class="bi bi-instagram"></i></a>
+                                          </li>
+                                          <li>
+                                              <a href="#"><i class="bi bi-whatsapp"></i></a>
+                                          </li>
+                                      </ul>
+                                  </div>
+                              </div>
+                          </div>
+                          <div class="col-12 d-flex justify-content-start">
+                              <a [routerLink]="['/event', event._id]" class="bg-transparent primary-btn border-0 p-0 col-12 col-md-auto text-uppercase">Learn more
+                                  <i class="bi bi-chevron-right tint fs-6"></i>
+                              </a>
+                          </div>
+                      </div>
+                  </div>
+                  <div class="col-12 col-md-4 col-lg-3 p-3 p-md-2">
+                      <div class="col-12 shadow p-5 -dark event-card">
+                          <h2 class="text-muted">Coming soon...</h2>
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </div>
+  </div>
+</div>
+
+<main class="container-fluid px-4 px-md-5">
+  <app-contact></app-contact>
+</main>

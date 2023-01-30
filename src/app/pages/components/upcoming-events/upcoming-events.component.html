@@ -1,0 +1,21 @@
+<h3>Upcoming Events</h3>
+<div class="list pt-2">
+  <ul>
+    <li *ngFor="let event of events">
+    <div class="dropcap_1 mb-2 text-uppercase">{{ convertToMonth(event.datetime) }} {{ convertToDate(event.datetime) }}</div>
+    <h5 class="text-capitalize fw-bold">{{ event.title }}</h5>
+    <p class="mb-4">
+      {{ event.description }}
+    </p>
+    <a class="primary-btn" [routerLink]="['/event', event._id]">View Details</a>
+    </li>
+    <li>
+      <div class="dropcap_1 mb-2 text-uppercase">26 august</div>
+      <h5 class="text-capitalize fw-bold">Coming soon..</h5>
+      <p class="mb-4 invisible">
+        Coming soon..
+      </p>
+      <a href="javascript:void(0)" class="primary-btn invisible">View Details</a>
+    </li>
+  </ul>
+</div>

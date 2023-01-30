@@ -3,7 +3,9 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false
+  production: false,
+  apiBaseUrl: 'https://kg13679a.api.sanity.io/v1/data/query/production',
+  apiHost: 'https://kg13679a.api.sanity.io/v1/data/query/production'
 };
 
 /*

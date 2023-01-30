@@ -1,0 +1,77 @@
+
+<div *ngIf="event" class="row -dark p-2 py-4 pb-5 pb-2 mb-5">
+  <div class="col-12 col-md-12 pe-md-4">
+    <div class="col-12">
+      <h3>Next party</h3>
+      <div class="party col-12 pt-2">
+        <div class="row">
+          <div class="col-12 pb-3 mb-3">
+            <div class="row">
+              <div class="col-12 col-md-5 mb-3 mb-md-0">
+                <a [routerLink]="['/event', event._id]">
+                  <img src="{{ event.imageUrl }}" alt="{{ event.title }}">
+                </a>
+              </div>
+              <div class="col-12 col-md-7">
+                <h5>{{ convertToMonth(event.datetime) }} {{ convertToDate(event.datetime) }}</h5>
+                <h4 class="text-capitalize fw-bold">
+                  <a [routerLink]="['/event', event._id]">{{ event.title }}</a>
+                </h4>
+                <p class="mb-3">
+                  {{ event.description }}
+                </p>
+                <h5>
+                  <div class="row">
+                    <i class="bi bi-calendar-check col-auto pe-0"></i>
+                    <div class="col-10">{{ convertToDay(event.datetime) }}, {{ convertToMonth(event.datetime) }} {{ convertToDate(event.datetime) }}, {{ convertToYear(event.datetime) }}. <br> {{ convertTime(event.datetime) }}</div>
+                  </div>
+                </h5>
+                <h5>
+                  <div class="row">
+                    <i class="bi bi-geo-alt col-auto pe-0"></i>
+                    <div class="col-8">{{ event.location }}</div>
+                  </div>
+                </h5>
+                <div class="col-12 d-flex justify-content-start mb-3">
+                  <a [routerLink]="['/event', event._id]" routerLinkActive="router-link-active" class="primary-btn col-12 col-md-auto text-uppercase">More details</a>
+                </div>
+                <div class="col-12">
+                  <div class="row">
+                    <div class="col-12 col-md-12 col-lg-6">
+                      <p class="mb-0">Tags</p>
+                      <ul class="tags">
+                        <li *ngFor="let tags of event.tags">
+                          <a href="javascript:void(0)">{{ tags }}</a>
+                        </li>
+                      </ul>
+                    </div>
+                    <div class="col-12 col-md-12 col-lg-6">
+                      <p class="mb-0">Share</p>
+                      <ul class="share">
+                        <li>
+                          <a href="https://www.facebook.com/pg/tiltempireempire/posts/">
+                            <i class="bi bi-facebook"></i>
+                          </a>
+                        </li>
+                        <li>
+                          <a href="https://www.instagram.com/p/CnnNQiCtMPO/?igshid=YmMyMTA2M2Y=">
+                            <i class="bi bi-instagram"></i>
+                          </a>
+                        </li>
+                        <li>
+                          <a href="#">
+                            <i class="bi bi-telegram"></i>
+                          </a>
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
