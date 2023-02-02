@@ -22,6 +22,11 @@ export default {
         validation: (Rule: any) => Rule.required()
       },
       {
+        title: 'VIP Price',
+        name: 'vip_price',
+        type: 'number'
+      },
+      {
         title: 'Currency',
         name: 'currency',
         type: 'string',

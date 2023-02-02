@@ -3,6 +3,8 @@ import { EventsService } from '../../core/services/events.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { Event, events_query } from 'src/app/core/models/products.model';
+import { ShoppingCartComponent } from 'src/app/shared/modals/shopping-cart/shopping-cart.component';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-events',
@@ -16,7 +18,8 @@ export class EventsComponent implements OnInit {
     title,
     _id,
     description,
-    price,
+    price,,
+    vip_price,
     currency,
     'imageUrl': image.asset->url,
     datetime,
@@ -30,7 +33,8 @@ export class EventsComponent implements OnInit {
     public router: Router,
     public route: ActivatedRoute,
     private eventService: EventsService,
-    public toastr: ToastrService
+    public toastr: ToastrService,
+    public modalService: NgbModal
   ) {
     if (route.snapshot.data?.events.result.length !== 0) this.events = route.snapshot.data.events.result;
     else this.getEvents();
@@ -38,6 +42,12 @@ export class EventsComponent implements OnInit {
     if (route.snapshot.data.next_event.result.length !== 0) this.event = route.snapshot.data.next_event.result;
     else this.getNextEvent();
   }
+
+  showShoppingCart(event: Event) {
+    const ref = this.modalService.open(ShoppingCartComponent);
+    ref.componentInstance.event = event;
+  }
+
 
   ngOnInit(): void {
   }

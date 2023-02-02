@@ -1,1 +1,129 @@
-<p>shopping-cart works!</p>
+<form *ngIf="formInit" [formGroup]="form" class="h-100" (submit)="checkout()">
+  <div class="modal-header">
+    <div class="eds-modal__title-container eds-modal__title-spacing text-center">
+      <h2 id="eds-modal-title" class="pt-3 eds-text-bl--fixed p-0 eds-text--truncate eds-modal__title eds-text-color--ui-800 text-capitalize" data-spec="eds-modal__title">{{ event.title }}</h2>
+      <span class="eds-l-pad-hor-4 eds-l-mar-top-4 eds-align--center eds-text-bs--fixed eds-text-color--ui-600" data-spec="eds-modal__secondary-title">{{ convertToMonth(event.datetime) }} {{ convertToDate(event.datetime) }}  ·  {{ convertTime(event.datetime) }}</span>
+    </div>
+    <button (click)="activeModal.dismiss()" type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+  </div>
+  <div class="modal-body h-100 p-0">
+    <div class="description col-12 p-0 h-100">
+      <div *ngIf="order_summary" class="summary slide-in-bottom h-100 col-12 py-3 px-4 pt-5">
+        <div class="eds-order-summary eds-text-bs--fixed" role="grid">
+          <div>
+            <div class="eds-l-mar-bot-6">
+              <div class="eds-order-summary-title eds-g-cell eds-g-cell-12-12 eds-text-bm--fixed eds-text-color--grey-900" role="gridcell">Order summary</div>
+            </div>
+          </div>
+          <div>
+            <div class="eds-g-group eds-l-mar-vert-4 eds-text-color--grey-800 row py-3" role="row">
+              <div class="eds-g-cell eds-g-cell-6-12 col-6" role="gridcell">
+                <span class="eds-text-bm--fixed eds-text-color--grey-800">{{ reg_order_amount }} x Regular Ticket</span>
+              </div>
+              <div class="eds-g-cell eds-g-cell-6-12 eds-text--right col-6" role="gridcell">
+                <span class="eds-text-bm--fixed eds-text-color--grey-800">{{ event.currency }}{{ reg_order_total }}</span>
+              </div>
+            </div>
+          </div>
+          <div>
+            <div *ngIf="event.vip_price" class="eds-g-group eds-l-mar-vert-4 eds-text-color--grey-800 row py-3" role="row">
+              <div class="eds-g-cell eds-g-cell-6-12 col-6" role="gridcell">
+                <span class="eds-text-bm--fixed eds-text-color--grey-800">{{ vip_order_amount }} x VIP Ticket</span>
+              </div>
+              <div class="eds-g-cell eds-g-cell-6-12 eds-text--right col-6" role="gridcell">
+                <span class="eds-text-bm--fixed eds-text-color--grey-800">{{ event.currency }}{{ vip_order_total }}</span>
+              </div>
+            </div>
+          </div>
+          <hr class="eds-divider__hr eds-bg-color--ui-200 eds-divider--horizontal" data-spec="divider-hr" aria-hidden="true">
+          <div>
+            <div class="eds-g-group eds-text-color--grey-800 eds-l-mar-top-4 row py-3" role="row">
+              <div class="eds-g-cell eds-g-cell-6-12 col-6" role="gridcell">
+                <span class="eds-text-bm--fixed">Subtotal</span>
+              </div>
+              <div class="eds-g-cell eds-g-cell-6-12 col-6 eds-text--right" role="gridcell">
+                <span class="eds-text-bm--fixed">{{ event.currency }}{{ order_sub_total }}</span>
+              </div>
+            </div>
+            <div class="eds-l-mar-top-4 m-0">
+              <hr class="eds-divider__hr eds-bg-color--ui-200 eds-divider--horizontal" data-spec="divider-hr" aria-hidden="true">
+            </div>
+          </div>
+          <div class="eds-g-group eds-l-mar-vert-4 row py-3" role="row">
+            <div class="eds-g-cell eds-g-cell-6-12 col-6" role="gridcell">
+              <div class="eds-text-weight--heavy eds-text-bl--fixed eds-text-color--ui-800" aria-atomic="true" aria-live="polite">Total</div>
+            </div>
+            <div class="eds-g-cell eds-g-cell-6-12 col-6 eds-text--right" role="gridcell">
+              <span class="eds-text-bm--fixed">
+                <span class="eds-text--uppercase eds-text-color--ui-600"></span>&nbsp; <span class="eds-text-weight--heavy eds-text-bl--fixed eds-text-color--ui-800 price">{{ event.currency }}{{ order_grand_total }}</span>
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="event col-12 p-3 pt-4">
+        <div class="row">
+          <div class="col-12 mb-4">
+            <div class="row">
+              <div class="col-8">
+                <h5 class="m-0">Ticket: Regular pass</h5>
+                <p class="price m-0 fw-bold fs-4">{{ event.currency }}{{ event.price }}</p>
+              </div>
+              <div class="col-4 d-flex justify-content-end align-items-center">
+                <input #reg type="number" formControlName="reg" (input)="addItem(reg, 'reg')" min="1" max="10">
+              </div>
+              <div class="col-12 text-muted">
+                Sales end on Febuary 15, 2023.
+              </div>
+            </div>
+          </div>
+          <div *ngIf="event.vip_price" class="col-12">
+            <div class="row">
+              <div class="col-8">
+                <h5 class="m-0">Ticket: VIP pass</h5>
+                <p class="price m-0 fw-bold fs-4">{{ event.currency }}{{ event.vip_price }}</p>
+              </div>
+              <div class="col-4 d-flex justify-content-end align-items-center">
+                <input #vip type="number" formControlName="vip" (input)="addItem(vip, 'vip')" min="1" max="10">
+              </div>
+              <div class="col-12 text-muted">
+                Sales end on Febuary 20, 2023.
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="modal-footer">
+    <div class="ticket slide-in-bottom col-12 pb-3 px-4 m-0">
+      <div class="col-12 mt-3">
+        <div class="row">
+          <div class="col-12 d-flex justify-content-start p-0">
+            <h4 class="m-0 price"></h4>
+            <div class="col d-flex justify-content-between">
+              <span *ngIf="!order_summary" class="eds-text-weight--heavy eds-text-bl--fixed eds-text-color--ui-800 price">{{ event.currency }}{{ order_grand_total }}</span>
+              <span *ngIf="order_summary" class="invisible">you should not be seeing this</span>
+
+              <button *ngIf="!order_summary" (click)="chevToggle()" class="transparent-btn chev-up pe-0" style="position: relative; top: 1px;">
+                Order summary <i class="bi bi-chevron-down"></i>
+              </button>
+              <button *ngIf="order_summary" (click)="chevToggle()" class="transparent-btn pe-0 chev-down" style="position: relative; top: 1px;">
+                Order summary <i class="bi bi-chevron-up"></i>
+              </button>
+            </div>
+          </div>
+          <div class="col-12 p-0">
+            <button *ngIf="!checking_out" type="submit" [disabled]="order_grand_total === 0" class="primary-btn col-12 col-md-auto text-uppercase">Check Out</button>
+            <button *ngIf="checking_out" type="submit" disabled class="primary-btn col-12 col-md-auto text-uppercase d-flex justify-content-center align-items-center">
+              <div class="spinner-border text-light spinner-border-sm spinner-primary" role="status">
+                <span class="sr-only visually-hidden">Checking out...</span>
+              </div>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</form>

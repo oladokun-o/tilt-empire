@@ -6,6 +6,7 @@ export interface Event {
   description: string;
   imageUrl: string;
   price: number;
+  vip_price?: number;
   stock: number;
   title: string;
   location: string;
@@ -23,6 +24,7 @@ export const events_query: string = `*[_type == 'ticket']{
   _id,
   description,
   price,
+  vip_price,
   currency,
   'imageUrl': image.asset->url,
   datetime,

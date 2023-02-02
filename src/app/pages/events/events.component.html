@@ -1,141 +1,125 @@
 <div class="events-contn container-fluid px-0">
   <div class="row m-auto">
-      <div class="col-12 hero -dark p-3 p-md-5">
-          <h1 class="px-md-0">Latest Event</h1>
-      </div>
-      <div class="col-12 events-list p-3 px-md-5 mt-3">
-          <div class="event-cover shadow">
-              <div class="row">
-                  <div class="col-12 col-md-9 party p-5">
-                      <h5>March 24</h5>
-                      <h4 class="text-capitalize fw-bold">
-                          <a href="#">kiss n tell mask party</a>
-                      </h4>
-                      <p class="mb-3">
-                          Exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-                          Exercitation con...
-                      </p>
-                      <h5>
-                          <div class="row">
-                              <i class="bi bi-calendar-check col-auto pe-0"></i>
-                              <div class="col-10">Thursday, March 24, 2023. <br> 12:00 AM.</div>
-                          </div>
-                      </h5>
-                      <h5>
-                          <div class="row">
-                              <i class="bi bi-geo-alt col-auto pe-0"></i>
-                              <div class="col-8">Cathhouse</div>
-                          </div>
-                      </h5>
-                      <div class="col-12 d-flex justify-content-start mb-3">
-                          <a href="event.html" class="primary-btn col-12 col-md-auto text-uppercase">More details</a>
+    <div class="col-12 hero -dark p-3 p-md-5">
+      <h1 class="px-md-0">Latest Event</h1>
+    </div>
+    <div class="col-12 events-list p-3 px-md-5 mt-3">
+      <div *ngIf="event" class="event-cover shadow" style="background-image: url('{{ event.imageUrl }}')">
+          <div class="row">
+              <div class="col-12 col-md-9 party p-5">
+                  <h5>{{ convertToMonth(event.datetime) }} {{ convertToDate(event.datetime) }}</h5>
+                  <h4 class="text-capitalize fw-bold">
+                      <a [routerLink]="['/event', event._id]">{{ event.title }}</a>
+                  </h4>
+                  <p class="mb-3">{{ event.description }}</p>
+                  <h5>
+                      <div class="row">
+                          <i class="bi bi-calendar-check col-auto pe-0"></i>
+                          <div class="col-10">{{ convertToDay(event.datetime) }}, {{ convertToMonth(event.datetime) }} {{ convertToDate(event.datetime) }}, {{ convertToYear(event.datetime) }}. <br> {{ convertTime(event.datetime) }}</div>
                       </div>
-                      <div class="col-12 invisible">
-                          <div class="row">
-                              <div class="col-12 col-md-12 col-lg-6">
-                                  <p class="mb-0">Tags</p>
-                                  <ul class="tags">
-                                      <li>
-                                          <a href="#">Afro beats</a>
-                                      </li>
-                                      <li>
-                                          <a href="#">Hip Hop</a>
-                                      </li>
-                                      <li>
-                                          <a href="#">RnB</a>
-                                      </li>
-                                  </ul>
-                              </div>
-                              <div class="col-12 col-md-12 col-lg-6">
-                                  <p class="mb-0">Share</p>
-                                  <ul class="share">
-                                      <li>
-                                          <a href="#"><i class="bi bi-twitter"></i></a>
-                                      </li>
-                                      <li>
-                                          <a href="#"><i class="bi bi-instagram"></i></a>
-                                      </li>
-                                      <li>
-                                          <a href="#"><i class="bi bi-whatsapp"></i></a>
-                                      </li>
-                                  </ul>
-                              </div>
+                  </h5>
+                  <h5>
+                      <div class="row">
+                          <i class="bi bi-geo-alt col-auto pe-0"></i>
+                          <div class="col-8">{{ event.location }}</div>
+                      </div>
+                  </h5>
+                  <div class="col-12 d-flex justify-content-start mb-3">
+                      <a [routerLink]="['/event', event._id]" class="primary-btn col-12 col-md-auto text-uppercase">More details</a>
+                  </div>
+                  <div class="col-12 invisible">
+                      <div class="row">
+                          <div class="col-12 col-md-12 col-lg-6">
+                              <p class="mb-0">Tags</p>
+                              <ul class="tags">
+                                <li *ngFor="let tags of event.tags">
+                                  <a href="javascript:void(0)">{{ tags }}</a>
+                                </li>
+                              </ul>
+                          </div>
+                          <div class="col-12 col-md-12 col-lg-6">
+                              <p class="mb-0">Share</p>
+                              <ul class="share">
+                                  <li>
+                                      <a href="#"><i class="bi bi-twitter"></i></a>
+                                  </li>
+                                  <li>
+                                      <a href="#"><i class="bi bi-instagram"></i></a>
+                                  </li>
+                                  <li>
+                                      <a href="#"><i class="bi bi-whatsapp"></i></a>
+                                  </li>
+                              </ul>
                           </div>
                       </div>
                   </div>
               </div>
           </div>
-          <h1 class="px-md-0 mt-5 mb-4">Upcoming Events</h1>
-          <div class="events container-fluid px-0">
-              <div class="row">
-                  <div class="col-12 col-md-4 col-lg-3 p-3 p-md-2">
-                      <div class="col-12 shadow p-3 -dark event-card">
-                          <h5 class="mb-0">March 24</h5>
-                          <h4 class="text-capitalize fw-bold">
-                              <a href="#">kiss n tell mask party</a>
-                          </h4>
-                          <p class="mb-3">
-                              Exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-                          </p>
-                          <h6>
-                              <div class="row">
-                                  <i class="bi bi-calendar-check col-auto pe-0"></i>
-                                  <div class="col-10">Thursday, March 24, 2023. <br> 12:00 AM.</div>
-                              </div>
-                          </h6>
-                          <h6>
-                              <div class="row">
-                                  <i class="bi bi-geo-alt col-auto pe-0"></i>
-                                  <div class="col-8">Cathhouse</div>
-                              </div>
-                          </h6>
-                          <div class="col-12">
-                              <div class="row">
-                                  <div class="col-12 mt-2">
-                                      <p class="mb-2">Tags</p>
-                                      <ul class="tags">
-                                          <li>
-                                              <a href="#">Afro beats</a>
-                                          </li>
-                                          <li>
-                                              <a href="#">Hip Hop</a>
-                                          </li>
-                                          <li>
-                                              <a href="#">RnB</a>
-                                          </li>
-                                      </ul>
-                                  </div>
-                                  <div class="col-12">
-                                      <p class="mb-0">Share</p>
-                                      <ul class="share">
-                                          <li>
-                                              <a href="#"><i class="bi bi-twitter"></i></a>
-                                          </li>
-                                          <li>
-                                              <a href="#"><i class="bi bi-instagram"></i></a>
-                                          </li>
-                                          <li>
-                                              <a href="#"><i class="bi bi-whatsapp"></i></a>
-                                          </li>
-                                      </ul>
-                                  </div>
-                              </div>
-                          </div>
-                          <div class="col-12 d-flex justify-content-start">
-                              <a href="event.html" class="bg-transparent primary-btn border-0 p-0 col-12 col-md-auto text-uppercase">Learn more
-                                  <i class="bi bi-chevron-right tint fs-6"></i>
-                              </a>
-                          </div>
-                      </div>
-                  </div>
-                  <div class="col-12 col-md-4 col-lg-3 p-3 p-md-2">
-                      <div class="col-12 shadow p-5 -dark event-card">
-                          <h2 class="text-muted">Coming soon...</h2>
-                      </div>
-                  </div>
-              </div>
-          </div>
       </div>
+
+      <h1 class="px-md-0 mt-5 mb-4">Upcoming Events</h1>
+      <div *ngIf="events.length > 0" class="events container-fluid px-0">
+        <div class="row">
+            <div *ngFor="let event of events" class="col-12 col-md-4 col-lg-3 p-3 p-md-2">
+                <div class="col-12 shadow p-3 -dark event-card">
+                    <h5 class="mb-0">{{ convertToMonth(event.datetime) }} {{ convertToDate(event.datetime) }}</h5>
+                    <h4 class="text-capitalize fw-bold">
+                        <a href="#">{{ event.title }}</a>
+                    </h4>
+                    <p class="mb-3">{{ event.description }}</p>
+                    <h6>
+                        <div class="row">
+                            <i class="bi bi-calendar-check col-auto pe-0"></i>
+                            <div class="col-10">{{ convertToDay(event.datetime) }}, {{ convertToMonth(event.datetime) }} {{ convertToDate(event.datetime) }}, {{ convertToYear(event.datetime) }}. <br> {{ convertTime(event.datetime) }}</div>
+                        </div>
+                    </h6>
+                    <h6>
+                        <div class="row">
+                            <i class="bi bi-geo-alt col-auto pe-0"></i>
+                            <div class="col-8">{{ event.location }}</div>
+                        </div>
+                    </h6>
+                    <div class="col-12">
+                        <div class="row">
+                            <div class="col-12 mt-2">
+                                <p class="mb-2">Tags</p>
+                                <ul class="tags">
+                                  <li *ngFor="let tags of event.tags">
+                                    <a href="javascript:void(0)">{{ tags }}</a>
+                                  </li>
+                                </ul>
+                            </div>
+                            <div class="col-12">
+                                <p class="mb-0">Share</p>
+                                <ul class="share">
+                                    <li>
+                                        <a href="#"><i class="bi bi-twitter"></i></a>
+                                    </li>
+                                    <li>
+                                        <a href="#"><i class="bi bi-instagram"></i></a>
+                                    </li>
+                                    <li>
+                                        <a href="#"><i class="bi bi-whatsapp"></i></a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12 d-flex justify-content-start">
+                        <a [routerLink]="['/event', event._id]" class="bg-transparent primary-btn border-0 p-0 col-12 col-md-auto text-uppercase">Learn more
+                            <i class="bi bi-chevron-right tint fs-6"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-12 col-md-4 col-lg-3 p-3 p-md-2">
+                <div class="col-12 shadow p-5 -dark event-card">
+                    <h2 class="text-muted">Coming soon...</h2>
+                </div>
+            </div>
+        </div>
+      </div>
+    </div>
   </div>
 </div>
 

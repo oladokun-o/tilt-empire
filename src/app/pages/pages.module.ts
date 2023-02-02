@@ -11,7 +11,6 @@ import { EventsComponent } from './events/events.component';
 import { EventComponent } from './event/event.component';
 import { ComponentsModule } from './components/components.module';
 
-
 @NgModule({
   declarations: [
     PagesComponent,

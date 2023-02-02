@@ -1,4 +1,5 @@
 export const environment = {
   production: true,
-  apiBaseUrl: 'https://kg13679a.api.sanity.io/v1/data/query/production'
+  apiBaseUrl: 'https://kg13679a.api.sanity.io/v1/data/query/production',
+  apiHost: 'https://kg13679a.api.sanity.io/v1/data/query/production'
 };

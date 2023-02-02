@@ -3,6 +3,9 @@ import { ToastrService } from 'ngx-toastr';
 import { EventsService } from './../../core/services/events.service';
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute, Params } from '@angular/router';
+import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { ShoppingCartComponent } from 'src/app/shared/modals/shopping-cart/shopping-cart.component';
+
 
 @Component({
   selector: 'app-event',
@@ -18,7 +21,8 @@ export class EventComponent implements OnInit {
     public router: Router,
     public route: ActivatedRoute,
     private eventService: EventsService,
-    public toastr: ToastrService
+    public toastr: ToastrService,
+    public modalService: NgbModal
   ) {
     if (route.snapshot.data.events.result.length !== 0) this.events = route.snapshot.data.events.result;
     else this.getEvents();
@@ -34,6 +38,12 @@ export class EventComponent implements OnInit {
       this.getEvent(this.event_id);
     }
   }
+
+  showShoppingCart(event: Event) {
+    const ref = this.modalService.open(ShoppingCartComponent);
+    ref.componentInstance.event = event;
+  }
+
 
   ngOnInit(): void {
   }
@@ -55,6 +65,7 @@ export class EventComponent implements OnInit {
       _id,
       description,
       price,
+      vip_price,
       currency,
       'imageUrl': image.asset->url,
       datetime,
