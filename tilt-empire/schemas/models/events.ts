@@ -60,6 +60,11 @@ export default {
         validation: (Rule: any) => Rule.required()
       },
       {
+        title: 'Check out link VIP',
+        name: 'checkout_link_vip',
+        type: 'string'
+      },
+      {
         title: 'Location',
         name: 'location',
         type: 'string',

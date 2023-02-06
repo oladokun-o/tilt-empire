@@ -1,9 +1,10 @@
-import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
+import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Component, OnInit } from '@angular/core';
 import { Event } from 'src/app/core/models/products.model';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { CheckoutComponent } from '../checkout/checkout.component';
 
-interface Order {
+export interface Order {
   event: Event;
   order: {
     reg_ticket: {
@@ -43,7 +44,8 @@ export class ShoppingCartComponent implements OnInit {
   checking_out: boolean = false;
 
   constructor(
-    public activeModal: NgbActiveModal
+    public activeModal: NgbActiveModal,
+    public modalService: NgbModal
   ) {
 
   }
@@ -125,8 +127,10 @@ export class ShoppingCartComponent implements OnInit {
 
   checkout() {
     if (this.form.valid && this.order_grand_total !== 0) {
-      this.checking_out = true;
-
+      //this.checking_out = true;
+      //const ref = this.modalService.open(CheckoutComponent);
+      this.activeModal.dismiss();
+      location.href = 'https://book.stripe.com/test_4gw15V32LaSyfh6aEE';
     }
   }
 

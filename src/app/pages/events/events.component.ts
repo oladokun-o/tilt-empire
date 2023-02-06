@@ -25,6 +25,7 @@ export class EventsComponent implements OnInit {
     datetime,
     stock,
     checkout_link,
+    checkout_link_vip,
     location,
     tags
   }`;
@@ -39,7 +40,7 @@ export class EventsComponent implements OnInit {
     if (route.snapshot.data?.events.result.length !== 0) this.events = route.snapshot.data.events.result;
     else this.getEvents();
 
-    if (route.snapshot.data.next_event.result.length !== 0) this.event = route.snapshot.data.next_event.result;
+    if (route.snapshot.data.next_event.result.length !== 0) this.event = route.snapshot.data.next_event.result[0];
     else this.getNextEvent();
   }
 

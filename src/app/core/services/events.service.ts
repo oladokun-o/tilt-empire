@@ -31,4 +31,42 @@ export class EventsService {
 			})
     )
   }
+
+  submitnews(payload: any) {
+    return this.http.post<{ result: string, error?: string | any}>(ApiConfig.events.news(), payload).pipe(
+      //retry(),
+			catchError(( result: string, error?: string | any) => {
+				let error_msg = '';
+
+				if(error) {
+					//client error
+					error_msg = error;
+				} else {
+					//server error
+					error_msg = error//`Error code: ${error.error.code}\n Error message: ${error.error.message}`
+				}
+        //this.toastr.error(error_msg)
+				return throwError(error_msg)
+			})
+    )
+  }
+
+  submitcontact(payload: any) {
+    return this.http.post<any>(ApiConfig.events.contact(), payload).pipe(
+      //retry(),
+			catchError((error: HttpErrorResponse) => {
+				let error_msg = '';
+
+				if(error.error instanceof Error) {
+					//client error
+					error_msg = error.message;
+				} else {
+					//server error
+					error_msg = `Error code: ${error.error.code}\n Error message: ${error.error.message}`
+				}
+        //this.toastr.error(error_msg)
+				return throwError(error_msg)
+			})
+    )
+  }
 }

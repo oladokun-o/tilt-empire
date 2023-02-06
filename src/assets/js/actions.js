@@ -38,14 +38,15 @@ function showChevDown() {
     show('chev-up');
 }
 
-var menu = document.querySelector('.menu');
 
 function openMenu() {
+  var menu = document.querySelector('.menu');
     menu.classList.add('slide-in-right');
     menu.classList.remove('slide-out-right');
 }
 
 function closeMenu() {
+  var menu = document.querySelector('.menu');
     menu.classList.add('slide-out-right');
     menu.classList.remove('slide-in-right');
 }

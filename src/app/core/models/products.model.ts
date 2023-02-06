@@ -1,6 +1,7 @@
 export interface Event {
   _id: string
   checkout_link: string;
+  checkout_link_vip?: string;
   currency: string;
   datetime: Date;
   description: string;
@@ -30,6 +31,7 @@ export const events_query: string = `*[_type == 'ticket']{
   datetime,
   stock,
   checkout_link,
+  checkout_link_vip,
   location,
   tags
 }`;

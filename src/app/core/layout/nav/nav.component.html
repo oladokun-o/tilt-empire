@@ -186,19 +186,19 @@
 			</button>
 			<ul class="p-0 m-0">
 				<li onclick="selectMenu()">
-					<a href="/">Home</a>
+					<a routerLink="/home">Home</a>
 				</li>
 				<li onclick="selectMenu()">
-					<a href="#about_us">About</a>
+					<a routerLink="/home" fragment="about_us">About</a>
 				</li>
 				<li onclick="selectMenu()">
-					<a href="gallery.html">Gallery</a>
+					<a routerLink="/gallery">Gallery</a>
 				</li>
 				<li onclick="selectMenu()">
-					<a href="events.html">Events</a>
+					<a routerLink="/events">Events</a>
 				</li>
 			</ul>
-			<div class="d-flex justify-content-center p-5" title="₦0.00" style="cursor: pointer;">
+			<div class="d-none justify-content-center p-5" title="₦0.00" style="cursor: pointer;">
 				<div class="col-auto d-flex align-content-center">
 					<span class="d-flex align-items-center pe-2 price"></span>
 				</div>
@@ -226,11 +226,6 @@
 							<img src="assets/img/logo.png" style="width: 90%;" alt="Logo">
 						</a>
 					</div>
-					<div class="col-4 nav-contn d-flex align-items-center d-md-none">
-						<button class="" onclick="openMenu()">
-							<i class="bi bi-list"></i>
-						</button>
-					</div>
 				</div>
 			</div>
 			<div class="col-md-6 d-none d-md-block">
@@ -249,16 +244,21 @@
 					</li>
 				</ul>
 			</div>
-			<div class="col-6 col-md-3 p-3 d-flex justify-content-end align-items-center">
-				<div class="d-flex justify-content-end" title="0.00" style="cursor: pointer;" data-bs-toggle="modal" data-bs-target="#shoppingcart">
-					<div class="col-auto d-flex align-content-center">
-						<span class="d-flex align-items-center pe-2 price" style="color: white;"></span>
+      <div class="col-6 nav-contn d-flex justify-content-end align-items-center d-md-none">
+        <button class="" onclick="openMenu()">
+          <i class="bi bi-list"></i>
+        </button>
+      </div>
+			<div class="col-6 col-md-3 p-3 d-none justify-content-end align-items-center">
+				<div class="d-none justify-content-end" title="{{ Order?.order?.grand_total }}" style="cursor: pointer;">
+					<div class="col-auto d-none align-content-center">
+						<span class="d-none align-items-center pe-2 price" style="color: white;">{{ Order?.event?.currency }}{{ Order?.order?.grand_total }}</span>
 					</div>
-					<div class="col-auto d-flex justify-content-end pe-3 pe-md-4">
+					<div class="col-auto d-none justify-content-end pe-3 pe-md-4">
 						<div class="shop-btn-contn">
 							<button>
 								<i class="bi bi-bag-fill"></i>
-								<div class="amount">0</div>
+								<div class="amount">{{ Order?.order?.grand_total }}</div>
 							</button>
 						</div>
 					</div>

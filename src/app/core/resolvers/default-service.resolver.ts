@@ -24,7 +24,10 @@ export class Event implements Resolve<any> {
           'imageUrl': image.asset->url,
           datetime,
           stock,
-          checkout_link
+          checkout_link,
+          checkout_link_vip,
+          location,
+          tags
         }`;
 
         return this.eventService.get(query).pipe(
@@ -63,7 +66,7 @@ export class NextEvent implements Resolve<any> {
   ) { }
 
   resolve(route: ActivatedRouteSnapshot): Observable<any> {
-      let query = `*[_id == 'next_event']{
+      let query = `*[_type == 'next_event']{
         title,
         _id,
         description,
@@ -73,6 +76,7 @@ export class NextEvent implements Resolve<any> {
         datetime,
         stock,
         checkout_link,
+        checkout_link_vip,
         location,
         tags
       }`;

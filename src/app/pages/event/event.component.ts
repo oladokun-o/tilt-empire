@@ -30,6 +30,7 @@ export class EventComponent implements OnInit {
     if (route.snapshot.data.event.result.length !== 0) {
       this.event = route.snapshot.data.event.result[0];
       this.event_id = this.event._id;
+      console.log(this.event)
     }
     else {
       route.params.subscribe((params: Params) => {
@@ -40,8 +41,9 @@ export class EventComponent implements OnInit {
   }
 
   showShoppingCart(event: Event) {
-    const ref = this.modalService.open(ShoppingCartComponent);
-    ref.componentInstance.event = event;
+    //const ref = this.modalService.open(ShoppingCartComponent);
+    //ref.componentInstance.event = event;
+    location.href = 'https://book.stripe.com/test_4gw15V32LaSyfh6aEE';
   }
 
 
@@ -70,7 +72,8 @@ export class EventComponent implements OnInit {
       'imageUrl': image.asset->url,
       datetime,
       stock,
-      checkout_link
+      checkout_link,
+      checkout_link_vip
     }`;
 
     this.eventService.get(query).subscribe({
@@ -81,6 +84,11 @@ export class EventComponent implements OnInit {
         this.toastr.error(error || 'An error occured, please refresh the application')
       }
     })
+  }
+
+  payout(type: string) {
+    if (type === 'reg') location.href = this.event.checkout_link
+    else if (type === 'vip' && this.event.checkout_link_vip) location.href = this.event.checkout_link_vip
   }
 
   convertToDate(iso: Date) {
