@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Inject } from '@angular/core';
+import { DOCUMENT } from '@angular/common';
 
 @Component({
   selector: 'app-gallery',
@@ -7,9 +8,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class GalleryComponent implements OnInit {
 
-  constructor() { }
+  constructor(@Inject(DOCUMENT) private document: Document) { }
 
   ngOnInit(): void {
+    let docs = this.document.querySelectorAll('a');
+    docs.forEach(a => {
+      a.addEventListener('click', (e) => {
+        e.preventDefault();
+      })
+    })
   }
 
 }

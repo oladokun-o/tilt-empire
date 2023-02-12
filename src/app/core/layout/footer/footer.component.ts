@@ -33,7 +33,7 @@ export class FooterComponent implements OnInit {
       this.saving = true;
       this.eventService.submitnews(this.newsletterform.value).subscribe(
         (response) => {
-          this.toastr.success('Thans for subscribing!');
+          this.toastr.success('Thanks for subscribing!');
           this.newsletterform.enable();
           this.saving = false;
           this.saved = true;

@@ -27,7 +27,6 @@ export class HomeComponent implements OnInit {
     if (route.snapshot.data.next_event.result.length !== 0) this.event = route.snapshot.data.next_event.result[0];
     else this.getNextEvent();
 
-    console.log(this.event)
   }
 
   ngOnInit(): void {

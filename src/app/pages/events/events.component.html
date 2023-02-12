@@ -11,7 +11,7 @@
                   <h4 class="text-capitalize fw-bold">
                       <a [routerLink]="['/event', event._id]">{{ event.title }}</a>
                   </h4>
-                  <p class="mb-3">{{ event.description }}</p>
+                  <p class="mb-3">{{ event?.description }}</p>
                   <h5>
                       <div class="row">
                           <i class="bi bi-calendar-check col-auto pe-0"></i>
@@ -41,14 +41,15 @@
                               <p class="mb-0">Share</p>
                               <ul class="share">
                                   <li>
-                                      <a href="#"><i class="bi bi-twitter"></i></a>
-                                  </li>
-                                  <li>
-                                      <a href="#"><i class="bi bi-instagram"></i></a>
-                                  </li>
-                                  <li>
-                                      <a href="#"><i class="bi bi-whatsapp"></i></a>
-                                  </li>
+                                  <a href="https://www.facebook.com/pg/tiltempireempire/posts/">
+                                    <i class="bi bi-facebook"></i>
+                                  </a>
+                                </li>
+                                <li>
+                                  <a href="https://www.instagram.com/p/CnnNQiCtMPO/?igshid=YmMyMTA2M2Y=">
+                                    <i class="bi bi-instagram"></i>
+                                  </a>
+                                </li>
                               </ul>
                           </div>
                       </div>
@@ -66,7 +67,7 @@
                     <h4 class="text-capitalize fw-bold">
                         <a href="#">{{ event.title }}</a>
                     </h4>
-                    <p class="mb-3">{{ event.description }}</p>
+                    <p class="mb-3">{{ event?.description }}</p>
                     <h6>
                         <div class="row">
                             <i class="bi bi-calendar-check col-auto pe-0"></i>

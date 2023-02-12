@@ -73,3 +73,9 @@ $('#play-video').on('click', function(e){
   function close_video() {
     $('.video-overlay.open').removeClass('open').find('iframe').remove();
   };
+
+  
+ $(document).on('click', '[data-toggle="lightbox"]', function(event) {
+                event.preventDefault();
+                $(this).ekkoLightbox();
+            });

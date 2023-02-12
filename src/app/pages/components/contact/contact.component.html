@@ -47,8 +47,38 @@
         </div>
       </div>
       <div class="col-12 d-flex justify-content-center">
-        <button type="submit" class="primary-btn col-12 col-md-auto">BOOK NOW</button>
+        <button [disabled]="saving || failed || saved" class="primary-btn text-uppercase m-0 mt-2 col-12 col-md-auto d-flex justify-content-center" type="submit">
+              <i *ngIf="failed" class="bi bi-x-circle fs-3 text-danger"></i>
+              <i *ngIf="saved" class="bi bi-check-circle fs-3 text-success"></i>
+              <div *ngIf="saving" class="spinner-border text-light spinner-border spinner-primary" role="status">
+                <span class="sr-only visually-hidden">Loading...</span>
+              </div>
+              <span *ngIf="!saving && !saved && !failed">BOOK NOW</span>
+            </button>
       </div>
+    </form>
+  </div>
+
+  <h5 style="font-size: medium;" class="subtitle col-12 p-0 mt-3">PARTNERSHIP</h5>
+  <hr>
+  <div class="subtitle col-12 p-0 pb-3">Become a sponsor</div>
+  <p class="p-0 pb-2 d-none">Praesent vel lectus eget turpis aliquam commodo. Aenean pharetra lobor- tis enim at aliquet. Nam sit amet molestie urna, at luctus lorem.</p>
+  <div class="col-12 p-0">
+    <form [formGroup]="sponsorform" class="px-0 row" (submit)="savesponsor()">
+      <div class="col-12 d-flex align-items-center">
+          <div class="col-12 p-0">
+            <label for="newsletter1" class="visually-hidden">Email address</label>
+            <input id="newsletter1" formControlName="Email" type="email" class="form-control" placeholder="Enter your email address" required>
+            <button [disabled]="sponsorsaving || sponsorfailed || sponsorsaved" class="primary-btn text-uppercase m-0 mt-2 col-12 d-flex justify-content-center" type="submit">
+              <i *ngIf="sponsorfailed" class="bi bi-x-circle fs-3 text-danger"></i>
+              <i *ngIf="sponsorsaved" class="bi bi-check-circle fs-3 text-success"></i>
+              <div *ngIf="sponsorsaving" class="spinner-border text-light spinner-border spinner-primary" role="status">
+                <span class="sr-only visually-hidden">Loading...</span>
+              </div>
+              <span *ngIf="!sponsorsaving && !sponsorsaved && !sponsorfailed">Join now</span>
+            </button>
+          </div>
+        </div>
     </form>
   </div>
 </div>
