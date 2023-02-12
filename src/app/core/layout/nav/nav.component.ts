@@ -16,7 +16,7 @@ export class NavComponent implements OnInit {
 
   events: Event[] = [];
   event!: Event;
-  storage: Storage = sessionStorage;
+  //storage: Storage = sessionStorage;
   Order!: Order;
   event_id!: string;
 

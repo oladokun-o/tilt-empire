@@ -55,7 +55,6 @@ export class HomeComponent implements OnInit {
     })
   }
   pay: boolean = false;
-  location = location;
   showShoppingCart(event?: Event) {
     //const ref = this.modalService.open(ShoppingCartComponent);
     //ref.componentInstance.event = event;
@@ -65,8 +64,8 @@ export class HomeComponent implements OnInit {
   }
 
   payout(type: string) {
-    if (type === 'reg') this.location.href = this.event.checkout_link
-    else if (type === 'vip' && this.event.checkout_link_vip) this.location.href = this.event.checkout_link_vip
+    if (type === 'reg') location.href = this.event.checkout_link
+    else if (type === 'vip' && this.event.checkout_link_vip) location.href = this.event.checkout_link_vip
   }
 
 }

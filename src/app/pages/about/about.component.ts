@@ -1,4 +1,5 @@
-import { Component, OnInit, ElementRef } from '@angular/core';
+import { DOCUMENT } from '@angular/common';
+import { Component, OnInit, ElementRef, Inject } from '@angular/core';
 
 @Component({
   selector: 'app-about',
@@ -7,16 +8,14 @@ import { Component, OnInit, ElementRef } from '@angular/core';
 })
 export class AboutComponent implements OnInit {
 
-  constructor() { }
+  constructor(@Inject(DOCUMENT) private document: Document) { }
 
   ngOnInit(): void {
-    document.querySelector('.video-overlay, .video-overlay-close')?.addEventListener('click', (e)=> {
+    let doc = this.document.querySelector('.video-overlay, .video-overlay-close')
+    doc?.addEventListener('click', (e)=> {
       e.preventDefault();
       this.close_video();
     });
-    document.addEventListener('keyup', (e: KeyboardEvent) => {
-      if(e.key === '27') this.close_video();
-    })
   }
 
   openVideoModal(video_overlay: HTMLDivElement) {
@@ -25,7 +24,8 @@ export class AboutComponent implements OnInit {
   }
 
   close_video() {
-    document.querySelector('.video-overlay.open')?.classList.remove('open');
-    document.querySelector('.video-overlay.open')?.querySelector('iframe')?.remove();
+    let doc = this.document.querySelector('.video-overlay.open')
+    doc?.classList.remove('open');
+    doc?.querySelector('iframe')?.remove();
   }
 }
