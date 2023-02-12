@@ -4,15 +4,15 @@
       <form [formGroup]="newsletterform" (submit)="save()" class="row">
         <div class="col-12 col-md-5 text-center text-md-start d-flex justify-content-center justify-content-md-start align-items-center">
           <div>
-            <h5>UPCOMING EVENTS AND SPECIAL OFFERS</h5>
-            <h2>GET WEEKLY NEWSLETTERS</h2>
+            <h5>SUBSCRIBE FOR UPCOMING EVENTS</h5>
+            <h2>AND SPECIAL OFFERS</h2>
           </div>
         </div>
         <div class="col-12 col-md-7 d-flex align-items-center">
           <div class="col-12 p-0">
             <label for="newsletter1" class="visually-hidden">Email address</label>
             <input id="newsletter1" formControlName="Email" type="email" class="form-control" placeholder="Email address" required>
-            <button [disabled]="saving" class="primary-btn text-uppercase m-0 mt-2 col-12 d-flex justify-content-center" type="submit">
+            <button [disabled]="saving || failed || saved" class="primary-btn text-uppercase m-0 mt-2 col-12 d-flex justify-content-center" type="submit">
               <i *ngIf="failed" class="bi bi-x-circle fs-3 text-danger"></i>
               <i *ngIf="saved" class="bi bi-check-circle fs-3 text-success"></i>
               <div *ngIf="saving" class="spinner-border text-light spinner-border spinner-primary" role="status">
@@ -33,7 +33,7 @@
             <img src="assets/img/logo.png" style="width: 100%;" alt="Logo">
           </a>
         </div>
-        <div class="col-12 foot col-md-8 d-flex justify-content-center align-items-center">
+        <div class="col-12 foot col-md-8 d-none justify-content-center align-items-center">
           <p>Praesent vel lectus eget turpis aliquam commodo. Aenean pharetra lobortis enim at aliquet. Nam sit amet molestie urna, at luctus lorem. Vestibulum at consectetur libero.</p>
         </div>
       </div>
@@ -65,42 +65,6 @@
           <i class="bi bi-instagram"></i>
         </a>
       </li>
-      <li>
-        <a href="#">
-          <i class="bi bi-telegram"></i>
-        </a>
-      </li>
     </ul>
   </div>
 </footer>
-
-<!-- Messenger Chat plugin Code -->
-  <div id="fb-root"></div>
-
-  <!-- Your Chat plugin code -->
-  <div id="fb-customer-chat" class="fb-customerchat">
-  </div>
-
-  <script>
-    var chatbox = document.getElementById('fb-customer-chat');
-    chatbox.setAttribute("page_id", "110161678336023");
-    chatbox.setAttribute("attribution", "biz_inbox");
-  </script>
-
-  <!-- Your SDK code -->
-  <script>
-    window.fbAsyncInit = function() {
-      FB.init({
-        xfbml            : true,
-        version          : 'v15.0'
-      });
-    };
-
-    (function(d, s, id) {
-      var js, fjs = d.getElementsByTagName(s)[0];
-      if (d.getElementById(id)) return;
-      js = d.createElement(s); js.id = id;
-      js.src = 'https://connect.facebook.net/en_US/sdk/xfbml.customerchat.js';
-      fjs.parentNode.insertBefore(js, fjs);
-    }(document, 'script', 'facebook-jssdk'));
-  </script>

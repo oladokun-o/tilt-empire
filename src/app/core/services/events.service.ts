@@ -53,20 +53,16 @@ export class EventsService {
 
   submitcontact(payload: any) {
     return this.http.post<any>(ApiConfig.events.contact(), payload).pipe(
-      //retry(),
-			catchError((error: HttpErrorResponse) => {
-				let error_msg = '';
-
-				if(error.error instanceof Error) {
-					//client error
-					error_msg = error.message;
-				} else {
-					//server error
-					error_msg = `Error code: ${error.error.code}\n Error message: ${error.error.message}`
-				}
-        //this.toastr.error(error_msg)
-				return throwError(error_msg)
-			})
+      map(
+      	(response) => {
+      		if (response) {
+      			return response;
+      		}
+      	},
+      	(error: any) => {
+      		return error;
+      	}
+      )
     )
   }
 }

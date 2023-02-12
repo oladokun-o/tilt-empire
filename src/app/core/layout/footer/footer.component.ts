@@ -31,8 +31,8 @@ export class FooterComponent implements OnInit {
       this.newsletterform.get('Time')?.patchValue(this.date.toLocaleTimeString())
       this.newsletterform.disable();
       this.saving = true;
-      this.eventService.submitnews(this.newsletterform.value).subscribe({
-        next: (value) => {
+      this.eventService.submitnews(this.newsletterform.value).subscribe(
+        (response) => {
           this.toastr.success('Thans for subscribing!');
           this.newsletterform.enable();
           this.saving = false;
@@ -41,7 +41,7 @@ export class FooterComponent implements OnInit {
             this.saved = false;
           }, 2000);
         },
-        error: (err) => {
+        error => {
           this.toastr.error('An error occured');
           this.newsletterform.enable();
           this.saving = false;
@@ -50,7 +50,7 @@ export class FooterComponent implements OnInit {
             this.failed = false;
           }, 2000);
         },
-      })
+      )
     }
   }
 

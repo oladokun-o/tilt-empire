@@ -2,17 +2,17 @@
 <div id="contact" class="row -dark p-4 px-3 my-5">
   <h5 style="font-size: medium;" class="subtitle col-12 p-0">RESERVATION</h5>
   <hr>
-  <div class="subtitle col-12 p-0 pb-3">Book A Table</div>
-  <p class="p-0 pb-2">Praesent vel lectus eget turpis aliquam commodo. Aenean pharetra lobor- tis enim at aliquet. Nam sit amet molestie urna, at luctus lorem.</p>
+  <div class="subtitle col-12 p-0 pb-3">Reserve A Table</div>
+  <p class="p-0 pb-2 d-none">Praesent vel lectus eget turpis aliquam commodo. Aenean pharetra lobor- tis enim at aliquet. Nam sit amet molestie urna, at luctus lorem.</p>
   <div class="col-12 p-0">
-    <form class="px-0 row">
+    <form [formGroup]="bookform" class="px-0 row" (submit)="save()">
       <div class="mb-3 col-12 col-md-6">
         <label for="name" class="form-label">Name</label>
-        <input type="text" placeholder="Enter your full name" class="form-control" id="name" aria-describedby="name">
+        <input type="text" formControlName="name" placeholder="Enter your full name" class="form-control" id="name" aria-describedby="name" required>
       </div>
       <div class="mb-3 col-12 col-md-6">
         <label for="email" class="form-label">Email address</label>
-        <input type="email" placeholder="Enter email address" class="form-control" id="email" aria-describedby="emailHelp">
+        <input type="email" formControlName="email" placeholder="Enter email address" class="form-control" id="email" aria-describedby="emailHelp" required>
       </div>
       <div class="col-12 mb-2">
         <div class="row">
@@ -20,10 +20,9 @@
             <label for="party" class="form-label">Event</label>
             <div class="input-group mb-3">
               <button class="btn btn-outline-secondary" type="button">Select party</button>
-              <select class="form-select" id="party" aria-label="Example select with button addon">
+              <select class="form-select" formControlName="party" id="party" aria-label="Example select with button addon" required>
                 <option selected>...</option>
-                <option value="kissntell">Kiss N Tell</option>
-                <option value="other">other</option>
+                <option value="kissntell">Kiss N Tell Mask Party</option>
               </select>
             </div>
           </div>
@@ -31,7 +30,7 @@
             <label class="form-label invisible d-none d-md-block">kkkk</label>
             <div class="input-group mb-0">
               <button class="btn btn-outline-secondary" type="button">Number of people</button>
-              <select class="form-select" id="party" aria-label="Example select with button addon">
+              <select class="form-select" id="party" formControlName="people" aria-label="Example select with button addon" required>
                 <option selected value="1">1</option>
                 <option value="2">2</option>
                 <option value="3">3</option>

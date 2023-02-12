@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-contact',
@@ -20,6 +21,10 @@ export class ContactComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
+  }
+
+  save() {
+    console.log(this.bookform.value)
   }
 
 }

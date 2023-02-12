@@ -5,7 +5,7 @@ import { AboutComponent } from '../about/about.component';
 import { NextEventComponent } from './next-event/next-event.component';
 import { UpcomingEventsComponent } from './upcoming-events/upcoming-events.component';
 import { ContactComponent } from './contact/contact.component';
-
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -17,7 +17,9 @@ import { ContactComponent } from './contact/contact.component';
   ],
   imports: [
     CommonModule,
-    RouterModule
+    RouterModule,
+    ReactiveFormsModule,
+    FormsModule
   ],
   exports: [
     AboutComponent,

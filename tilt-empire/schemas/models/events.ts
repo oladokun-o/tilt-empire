@@ -13,7 +13,7 @@ export default {
         title: 'Description',
         name: 'description',
         type: 'string',
-        validation: (Rule: any) => Rule.required()
+        //validation: (Rule: any) => Rule.required()
       },
       {
         title: 'Price',
