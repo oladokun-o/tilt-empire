@@ -13,7 +13,7 @@
 											<img src="logo.png" alt="">
 										</div>
 									</div>-->
-									<article class="fs-5 text-start">
+									<article class="fs-5 text-center text-md-start">
 										Tilt is the first ever jam session in Estonia to bring together all kind of genre of music, hiphop, ukdrill and afrofusion.
 										<br>
 										Tilt is the new wave of concept party in Estonia.
@@ -30,24 +30,20 @@
 						</div>
 					</div>
 				</div>
-			</div>
-
-			<div class="col-12 col-md-5">
-				<app-upcoming-events></app-upcoming-events>
-			</div>
-
-			<div class="col-12 d-flex justify-content-center video">
-				<div class="col-12 col-md-6">
-					<img src="assets/img/dj.jpg" alt="">
+				<div class="col-12 video">
+					<img src="assets/gallery/TILT (104 of 210).jpg" alt="">
 					<div class="img-overlay"></div>
 					<a (click)="openVideoModal(video)" class="video-play-button" href="javascript:void(0)">
 						<span></span>
 					</a>
-				  	<div #video id="video-overlay" class="video-overlay">
+					<div #video id="video-overlay" class="video-overlay">
 						<a class="video-overlay-close" (click)="close_video()">
 	              			<i class="bi bi-x-lg"></i>
 	            		</a>
-            		</div>
+					</div>
 				</div>
+			</div>
+			<div class="col-12 col-md-5">
+				<app-upcoming-events></app-upcoming-events>
 			</div>
 		</div>
