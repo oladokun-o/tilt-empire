@@ -4,7 +4,7 @@
     <li *ngFor="let event of events">
     <div class="dropcap_1 mb-2 text-uppercase">{{ convertToMonth(event.datetime) }} {{ convertToDate(event.datetime) }}</div>
     <h5 class="text-capitalize fw-bold">{{ event.title }}</h5>
-    <p class="mb-4">
+    <p class="mb-4 text-truncate col-12">
       {{ event?.description }}
     </p>
     <a class="primary-btn" [routerLink]="['/event', event._id]">View Details</a>
