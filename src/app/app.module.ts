@@ -22,7 +22,7 @@ import { HashLocationStrategy, LocationStrategy } from '@angular/common';
     ToastrModule.forRoot(),
     RouterModule,
     SharedModule,
-    BrowserAnimationsModule,
+    //BrowserModule,
     NgbModule
   ],
   providers: [ {provide: LocationStrategy, useClass: HashLocationStrategy}],

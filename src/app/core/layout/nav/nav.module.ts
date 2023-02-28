@@ -11,9 +11,7 @@ import { ReactiveFormsModule, FormsModule } from '@angular/forms';
   ],
   imports: [
     CommonModule,
-    RouterModule,
-    FormsModule,
-    ReactiveFormsModule
+    RouterModule
   ],
   exports: [
     NavComponent

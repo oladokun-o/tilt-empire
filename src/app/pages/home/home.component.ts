@@ -3,6 +3,8 @@ import { EventsService } from '../../core/services/events.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { Event, events_query } from 'src/app/core/models/products.model';
+import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import {NgxGalleryOptions, NgxGalleryImage, NgxGalleryAnimation} from '@kolkov/ngx-gallery';
 
 @Component({
   selector: 'app-home',
@@ -14,6 +16,9 @@ export class HomeComponent implements OnInit {
   events: Event[] = [];
   event!: Event;
   event_query: string = `*[_type == 'next_event']{    title,    _id,    description,    price,    vip_price,    currency,    'imageUrl': image.asset->url,    datetime,    stock,    checkout_link,    checkout_link_vip,    location,    tags  }`;
+  images: Array<{ src: string }> = []; 
+  galleryOptions: NgxGalleryOptions[] = [];
+  galleryImages: NgxGalleryImage[] = [];
 
   constructor(
     public router: Router,
@@ -27,9 +32,15 @@ export class HomeComponent implements OnInit {
     if (route.snapshot.data.next_event.result.length !== 0) this.event = route.snapshot.data.next_event.result[0];
     else this.getNextEvent();
 
+    for (let i = 0; i < 12; i++) {
+      const src = 'assets/gallery/TILT (' + (i+1) + ' of 210).jpg'; 
+      const image = { src: src }; 
+      this.images.push(image); 
+    }
   }
 
   ngOnInit(): void {
+  
   }
 
   getEvents() {

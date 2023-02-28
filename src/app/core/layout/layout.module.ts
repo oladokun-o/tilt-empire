@@ -13,9 +13,7 @@ import { FooterComponent } from './footer/footer.component';
   ],
   imports: [
     CommonModule,
-    NavModule,
-    FormsModule,
-    ReactiveFormsModule
+    NavModule
   ],
   exports: [
     NavModule,

@@ -1,0 +1,48 @@
+.close-btn {
+  position: absolute;
+  top: -40px;
+  right: -8px;
+  border: none !important;
+  color: white !important;
+  background: transparent;
+  font-size: 25px;
+  outline: none;
+}
+
+.modal-content {
+  background-color: #000000a6;
+}
+
+button.disabled {
+  opacity: 0.5;
+  pointer-events: none;
+}
+
+.prev-btn, .next-btn {
+  border: none !important;
+  color: white !important;
+  background: transparent;
+  font-size: 25px;
+}
+
+.prev {
+  position: absolute;
+  left: -40px;
+}
+
+.next {
+  position: absolute;
+  right: -40px;
+}
+
+.sm-nav button {
+  position: relative !important;
+}
+
+.sm-nav {
+  position: absolute;
+  bottom: -40px;
+  left: 0;
+  right: 0;
+  background: black;
+}

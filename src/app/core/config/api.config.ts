@@ -3,7 +3,7 @@ import { environment } from "src/environments/environment";
 export const ApiConfig = {
   events: {
     get: (query: string) => `${environment.apiBaseUrl}?query=${query}`,
-    news: () => `https://script.google.com/macros/s/AKfycbx4P8kjQyn9QHoBxNTEmwb6sE8KSlFaaFIUilQ5pZJH2Is07nFqN-jWyf1xZxN2ljqZ/exec`,
+    news: () => `https://script.google.com/macros/s/AKfycbyDUymkzMGpWy1eY-tB9jYLu_PLG18IrQmHFa80-PLZJMB_2YSUeictgadRRgO6bgs9/exec`,
     contact: () => ``,
   }
 }

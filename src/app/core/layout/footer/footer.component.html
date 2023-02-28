@@ -1,7 +1,7 @@
 <footer class="py-3 px-md-5 px-4">
   <div class="newsletter row d-flex justify-content-center">
     <div class="col-12 col-md-10 p-3 p-md-4">
-      <form [formGroup]="newsletterform" (submit)="save()" class="row">
+      <form method="POST" action="https://script.google.com/macros/s/AKfycbyDUymkzMGpWy1eY-tB9jYLu_PLG18IrQmHFa80-PLZJMB_2YSUeictgadRRgO6bgs9/exec" class="row">
         <div class="col-12 col-md-5 text-center text-md-start d-flex justify-content-center justify-content-md-start align-items-center">
           <div>
             <h5>SUBSCRIBE FOR UPCOMING EVENTS</h5>
@@ -11,14 +11,9 @@
         <div class="col-12 col-md-7 d-flex align-items-center">
           <div class="col-12 p-0">
             <label for="newsletter1" class="visually-hidden">Email address</label>
-            <input id="newsletter1" formControlName="Email" type="email" class="form-control" placeholder="Email address" required>
-            <button [disabled]="saving || failed || saved" class="primary-btn text-uppercase m-0 mt-2 col-12 d-flex justify-content-center" type="submit">
-              <i *ngIf="failed" class="bi bi-x-circle fs-3 text-danger"></i>
-              <i *ngIf="saved" class="bi bi-check-circle fs-3 text-success"></i>
-              <div *ngIf="saving" class="spinner-border text-light spinner-border spinner-primary" role="status">
-                <span class="sr-only visually-hidden">Loading...</span>
-              </div>
-              <span *ngIf="!saving && !saved && !failed">Subscribe</span>
+            <input id="newsletter1" name="Email" type="email" class="form-control" placeholder="Email address" required>
+            <button class="primary-btn text-uppercase m-0 mt-2 col-12 d-flex justify-content-center" type="submit">
+              <span>Subscribe</span>
             </button>
           </div>
         </div>

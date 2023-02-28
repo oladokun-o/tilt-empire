@@ -7,8 +7,14 @@ import { DOCUMENT } from '@angular/common';
   styleUrls: ['./gallery.component.scss']
 })
 export class GalleryComponent implements OnInit {
-
-  constructor(@Inject(DOCUMENT) private document: Document) { }
+  images: Array<{ src: string }> = [];
+  constructor(@Inject(DOCUMENT) private document: Document) {
+    for (let i = 0; i < 20; i++) {
+      const src = 'assets/gallery/TILT (' + (i+1) + ' of 210).jpg';
+      const image = { src: src };
+      this.images.push(image);
+    }
+   }
 
   ngOnInit(): void {
     let docs = this.document.querySelectorAll('a');

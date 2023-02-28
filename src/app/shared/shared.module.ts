@@ -2,11 +2,14 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { SharedComponentsModule } from './components/components.module';
 import { ModalsModule } from './modals/modals.module';
+import { LightboxComponent } from './lightbox/lightbox.component';
 
 
 
 @NgModule({
-  declarations: [],
+  declarations: [
+    LightboxComponent
+  ],
   imports: [
     CommonModule,
     SharedComponentsModule,

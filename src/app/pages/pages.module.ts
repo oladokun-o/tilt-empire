@@ -11,6 +11,8 @@ import { EventsComponent } from './events/events.component';
 import { EventComponent } from './event/event.component';
 import { ComponentsModule } from './components/components.module';
 
+import { NgxGalleryModule } from '@kolkov/ngx-gallery';
+
 @NgModule({
   declarations: [
     PagesComponent,
@@ -24,7 +26,8 @@ import { ComponentsModule } from './components/components.module';
     PagesRoutingModule,
     LayoutModule,
     RouterModule,
-    ComponentsModule
+    ComponentsModule,
+    //NgxGalleryModule
   ]
 })
 export class PagesModule { }
