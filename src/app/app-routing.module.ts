@@ -1,16 +1,18 @@
 import { NgModule } from '@angular/core';
 import { ExtraOptions, RouterModule, Routes } from '@angular/router';
 import { PagenotfoundComponent } from './shared/components/pagenotfound/pagenotfound.component';
+import { AppComponent } from './app.component';
 
 const routes: Routes = [
   {
     path: '',
-    loadChildren: () => import('./pages/pages.module').then(m => m.PagesModule)
+    // loadChildren: () => import('./pages/pages.module').then(m => m.PagesModule)
+    component: AppComponent
   },
   {
-      path: '**',
-      pathMatch: 'full',
-      component: PagenotfoundComponent
+    path: '**',
+    pathMatch: 'full',
+    component: PagenotfoundComponent
   }
 ];
 
