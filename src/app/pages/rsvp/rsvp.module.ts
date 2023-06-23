@@ -4,7 +4,7 @@ import { CommonModule } from '@angular/common';
 import { RsvpRoutingModule } from './rsvp-routing.module';
 import { RsvpComponent } from './rsvp.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { TextMaskModule } from 'angular2-text-mask';
+// import { TextMaskModule } from 'angular2-text-mask';
 
 @NgModule({
   declarations: [
@@ -15,7 +15,7 @@ import { TextMaskModule } from 'angular2-text-mask';
     RsvpRoutingModule,
     FormsModule,
     ReactiveFormsModule,
-    TextMaskModule
+    // TextMaskModule
   ]
 })
 export class RsvpModule { }
