@@ -1,0 +1,707 @@
+<main class="container-fluid px-4 px-md-5 py-5 position-relative">
+  <div class="home rsvp py-5 row position-relative text-center mb-5 pb-5">
+    <form
+      [class.disabled]="isSaving"
+      [formGroup]="form"
+      (submit)="save()"
+      (window:keydown.enter)="activeStep.no === 0 || activeStep.no === 4 ? nextStep(activeStep.no + 1) : null; $event.preventDefault()"
+    >
+      <!--progress bar-->
+      <div class="col-12 col-md-8 offset-md-2 col-lg-6 offset-lg-3">
+        <div class="progress" *ngIf="activeStep">
+          <div
+            class="progress-bar"
+            role="progressbar"
+            [style.width.%]="(activeStep.no / (steps.length - 1)) * 100"
+            [attr.aria-valuenow]="(activeStep.no / (steps.length - 1)) * 100"
+            aria-valuemin="0"
+            aria-valuemax="100"
+          ></div>
+        </div>
+      </div>
+      <ng-container *ngIf="activeStep.no === 0">
+        <div class="col-12 scale-in-center pt-5">
+          <h2 class="text-uppercase m-0 p-0">{{ activeStep.label }}</h2>
+        </div>
+
+        <div class="col-12 col-md-8 offset-md-2 col-lg-6 offset-lg-3">
+          <p class="text-center m-0">Ready to party like its 2019?</p>
+          <p class="text-muted">
+            Come join us for a night of food, drinks, and dancing!
+          </p>
+
+          <div
+            class="d-flex justify-content-center p-4 align-items-center position-relative"
+          >
+            <button
+              (click)="nextStep(1)"
+              class="secondary-btn fs-4 m-0"
+              type="button"
+            >
+              Start
+            </button>
+            <!--position in the center-->
+            <small
+              style="right: 28px"
+              class="m-0 text-white position-absolute top-50 translate-middle-y"
+            >
+              press <strong>Enter</strong> ↵
+            </small>
+          </div>
+        </div>
+      </ng-container>
+      <ng-container *ngIf="activeStep.no === 1">
+        <div class="col-12 col-md-8 offset-md-2 col-lg-6 offset-lg-3">
+          <!--form-group for name-->
+          <div class="form-group pt-5 pb-4 text-start position-relative">
+            <label for="name" class="form-label scale-in-center"
+              >{{ activeStep.no }}. {{ activeStep.label }}</label
+            >
+            <input
+              type="text"
+              class="form-control"
+              id="name"
+              formControlName="firstname"
+              placeholder="Enter your first name..."
+            />
+            <div
+              *ngIf="
+                form.get('firstname')?.invalid &&
+                (form.get('firstname')?.dirty || form.get('firstname')?.touched)
+              "
+              class="text-warning position-absolute bottom-0 start-0"
+            >
+              <div *ngIf="form.get('firstname')?.errors?.required">
+                First name is required
+              </div>
+              <div *ngIf="form.get('firstname')?.errors?.minlength">
+                First name must be at least 3 characters long
+              </div>
+            </div>
+          </div>
+          <div class="form-group pb-4 text-start position-relative">
+            <input
+              type="text"
+              class="form-control"
+              formControlName="lastname"
+              placeholder="and last name"
+            />
+            <div
+              *ngIf="
+                form.get('lastname')?.invalid &&
+                (form.get('lastname')?.dirty || form.get('lastname')?.touched)
+              "
+              class="text-warning position-absolute bottom-0 start-0"
+            >
+              <div *ngIf="form.get('lastname')?.errors?.required">
+                Last name is required
+              </div>
+              <div *ngIf="form.get('lastname')?.errors?.minlength">
+                Last name must be at least 3 characters long
+              </div>
+            </div>
+          </div>
+
+          <div
+            class="d-flex pt-5 ps-0 justify-content-start p-4 align-items-center position-relative"
+          >
+            <button
+              (click)="previousStep(0)"
+              class="primary-btn fs-4 m-0 me-4"
+              type="button"
+            >
+              Back
+            </button>
+            <button
+              [disabled]="
+                form.get('firstname')?.invalid && form.get('lastname')?.invalid
+              "
+              (click)="nextStep(2)"
+              class="secondary-btn fs-4 m-0"
+              type="button"
+            >
+              Next
+            </button>
+          </div>
+        </div>
+      </ng-container>
+      <ng-container *ngIf="activeStep.no === 2">
+        <div class="col-12 col-md-8 offset-md-2 col-lg-6 offset-lg-3">
+          <!--form-group for email-->
+          <div class="form-group pt-5 pb-4 text-start position-relative">
+            <label for="email" class="form-label scale-in-center"
+              >{{ activeStep.no }}. {{ activeStep.label }}</label
+            >
+            <input
+              type="email"
+              class="form-control"
+              id="email"
+              formControlName="email"
+              placeholder="Enter your email"
+            />
+            <div
+              *ngIf="
+                form.get('email')?.invalid &&
+                (form.get('email')?.dirty || form.get('email')?.touched)
+              "
+              class="text-warning position-absolute bottom-0 start-0"
+            >
+              <div *ngIf="form.get('email')?.errors?.required">
+                Email is required
+              </div>
+              <div *ngIf="form.get('email')?.errors?.email">
+                Email must be a valid email address
+              </div>
+            </div>
+          </div>
+
+          <div
+            class="d-flex pt-5 ps-0 justify-content-start p-4 align-items-center position-relative"
+          >
+            <button
+              (click)="previousStep(1)"
+              class="primary-btn fs-4 m-0 me-4"
+              type="button"
+            >
+              Back
+            </button>
+            <button
+              [disabled]="form.get('email')?.invalid"
+              (click)="nextStep(3)"
+              class="secondary-btn fs-4 m-0"
+              type="button"
+            >
+              Next
+            </button>
+          </div>
+        </div>
+      </ng-container>
+      <!-- <ng-container *ngIf="activeStep.no === 3">
+        <div class="col-12 col-md-8 offset-md-2 col-lg-6 offset-lg-3">
+          <div class="form-group pt-5 pb-4 text-start position-relative">
+            <label for="phone" class="form-label scale-in-center">{{ activeStep.no }}. {{ activeStep.label }}</label>
+            <input
+              type="tel"
+              class="form-control"
+              id="phone"
+              formControlName="phone"
+              placeholder="Enter your phone number"
+              [textMask]="{ mask: phoneMask }"
+            />
+            <div
+              *ngIf="
+                form.get('phone')?.invalid &&
+                (form.get('phone')?.dirty || form.get('phone')?.touched)
+              "
+              class="text-warning position-absolute bottom-0 start-0"
+            >
+              <div *ngIf="form.get('phone')?.errors?.required">
+                Phone number is required
+              </div>
+              <div *ngIf="form.get('phone')?.errors?.pattern">
+                Phone number must be a valid phone number
+              </div>
+            </div>
+          </div>
+
+          <div
+            class="d-flex pt-5 ps-0 justify-content-start p-4 align-items-center position-relative"
+          >
+            <button
+              (click)="previousStep(2)"
+              class="primary-btn fs-4 m-0 me-4"
+              type="button"
+            >
+              Back
+            </button>
+            <button
+              [disabled]="form.get('phone')?.invalid"
+              (click)="nextStep(4)"
+              class="secondary-btn fs-4 m-0"
+              type="button"
+            >
+              Next
+            </button>
+          </div>
+        </div>
+      </ng-container> -->
+      <ng-container *ngIf="activeStep.no === 3">
+        <div class="col-12 col-md-8 offset-md-2 col-lg-6 offset-lg-3">
+          <div class="form-group pt-5 pb-4 text-start position-relative">
+            <label for="email" class="form-label scale-in-center"
+              >{{ activeStep.no }}. {{ activeStep.label }}</label
+            >
+            <!--form-group for attending with checkbox-->
+            <div class="select">
+              <ul>
+                <li (click)="confirm(true, 'attending')">
+                  <button
+                    class="checkbox"
+                    type="button"
+                    [class.checked]="form.get('attending')?.value"
+                  ></button>
+                  <label for="cb1">Yeah!</label>
+                </li>
+                <li
+                  (click)="confirm(false, 'attending')"
+                  class="mt-3"
+                  [class.flicker-1]="form.get('attending')?.value === false"
+                >
+                  <button
+                    class="checkbox"
+                    type="button"
+                    [class.checked]="form.get('attending')?.value === false"
+                  ></button>
+                  <label for="cb2">Sorry, I can't this time</label>
+                </li>
+              </ul>
+            </div>
+          </div>
+          <div
+            class="d-flex pt-5 ps-0 justify-content-start p-4 align-items-center position-relative"
+          >
+            <button
+              (click)="previousStep(2)"
+              class="primary-btn fs-4 m-0 me-4"
+              type="button"
+            >
+              Back
+            </button>
+            <button
+              [disabled]="form.get('attending')?.invalid"
+              (click)="nextStep(form.get('attending')?.value ? 4 : 9)"
+              class="secondary-btn fs-4 m-0"
+              type="button"
+            >
+              Next
+            </button>
+          </div>
+        </div>
+      </ng-container>
+      <ng-container *ngIf="activeStep.no === 4">
+        <div class="col-12 col-md-8 offset-md-2 col-lg-6 offset-lg-3">
+          <div class="form-group pt-5 pb-4 text-start position-relative">
+            <label for="email" class="form-label scale-in-center"
+              >Great! <br />
+              Here's the address:</label
+            >
+            <p class="text-start col-12 m-0">{{ activeStep.label }}</p>
+
+            <div
+              class="d-flex pt-3 ps-0 justify-content-start p-4 align-items-center position-relative"
+            >
+              <button
+                (click)="nextStep(5)"
+                class="secondary-btn fs-4 m-0"
+                type="button"
+              >
+                Got it
+              </button>
+              <!--position in the center-->
+              <small
+                class="m-0 text-white position-relative ms-2 mt-3 translate-middle-y"
+              >
+                press <strong>Enter</strong> ↵
+              </small>
+            </div>
+          </div>
+        </div>
+      </ng-container>
+      <ng-container *ngIf="activeStep.no === 5">
+        <div class="col-12 col-md-8 offset-md-2 col-lg-6 offset-lg-3">
+          <div class="form-group pt-5 pb-4 text-start position-relative">
+            <label for="email" class="form-label scale-in-center"
+              >{{ activeStep.no }}. {{ activeStep.label }}</label
+            >
+            <!--form-group for guests with checkbox-->
+            <div class="select">
+              <ul>
+                <li (click)="confirm(true, 'guests')">
+                  <button
+                    class="checkbox"
+                    type="button"
+                    [class.checked]="form.get('guests')?.value"
+                  ></button>
+                  <label for="cb1">Yes</label>
+                </li>
+                <li (click)="confirm(false, 'guests')" class="mt-3">
+                  <button
+                    class="checkbox"
+                    type="button"
+                    [class.checked]="form.get('guests')?.value === false"
+                  ></button>
+                  <label for="cb2">No</label>
+                </li>
+              </ul>
+            </div>
+          </div>
+          <div
+            class="d-flex pt-5 ps-0 justify-content-start p-4 align-items-center position-relative"
+          >
+            <button
+              (click)="previousStep(4)"
+              class="primary-btn fs-4 m-0 me-4"
+              type="button"
+            >
+              Back
+            </button>
+            <button
+              [disabled]="form.get('guests')?.invalid"
+              (click)="nextStep(form.get('guests')?.value ? 6 : 7)"
+              class="secondary-btn fs-4 m-0"
+              type="button"
+            >
+              Next
+            </button>
+          </div>
+        </div>
+      </ng-container>
+      <ng-container *ngIf="activeStep.no === 6">
+        <div class="col-12 col-md-8 offset-md-2 col-lg-6 offset-lg-3">
+          <div class="form-group pt-5 pb-4 text-start position-relative">
+            <label for="email" class="form-label scale-in-center"
+              >{{ activeStep.no }}. {{ activeStep.label }}</label
+            >
+            <!--form-group for plusOneOrTwo with checkbox-->
+            <div class="select">
+              <ul>
+                <li (click)="confirm(true, 'plusOneOrTwo', 1)">
+                  <button
+                    class="checkbox"
+                    type="button"
+                    [class.checked]="form.get('plusOneOrTwo')?.value === 1"
+                  ></button>
+                  <label for="cb1">1</label>
+                </li>
+                <li (click)="confirm(false, 'plusOneOrTwo', 2)" class="mt-3">
+                  <button
+                    class="checkbox"
+                    type="button"
+                    [class.checked]="form.get('plusOneOrTwo')?.value === 2"
+                  ></button>
+                  <label for="cb2">2</label>
+                </li>
+              </ul>
+            </div>
+          </div>
+          <div
+            class="d-flex pt-5 ps-0 justify-content-start p-4 align-items-center position-relative"
+          >
+            <button
+              (click)="previousStep(5)"
+              class="primary-btn fs-4 m-0 me-4"
+              type="button"
+            >
+              Back
+            </button>
+            <button
+              [disabled]="form.get('plusOneOrTwo')?.invalid"
+              (click)="nextStep(7)"
+              class="secondary-btn fs-4 m-0"
+              type="button"
+            >
+              Next
+            </button>
+          </div>
+        </div>
+      </ng-container>
+      <ng-container *ngIf="activeStep.no === 7">
+        <div class="col-12 col-md-8 offset-md-2 col-lg-6 offset-lg-3">
+          <div class="form-group pt-5 pb-4 text-start position-relative">
+            <label for="email" class="form-label scale-in-center"
+              >{{ activeStep.no }}. {{ activeStep.label }}</label
+            >
+            <!--form-group for drink with checkbox-->
+            <div class="select">
+              <ul>
+                <li (click)="confirm(true, 'drink')">
+                  <button
+                    class="checkbox"
+                    type="button"
+                    [class.checked]="form.get('drink')?.value"
+                  ></button>
+                  <label for="cb1">Yep</label>
+                </li>
+                <li (click)="confirm(false, 'drink')" class="mt-3">
+                  <button
+                    class="checkbox"
+                    type="button"
+                    [class.checked]="form.get('drink')?.value === false"
+                  ></button>
+                  <label for="cb2">Nope</label>
+                </li>
+              </ul>
+            </div>
+          </div>
+          <div
+            class="d-flex pt-5 ps-0 justify-content-start p-4 align-items-center position-relative"
+          >
+            <button
+              (click)="previousStep(6)"
+              class="primary-btn fs-4 m-0 me-4"
+              type="button"
+            >
+              Back
+            </button>
+            <button
+              [disabled]="form.get('drink')?.invalid"
+              (click)="nextStep(8)"
+              class="secondary-btn fs-4 m-0"
+              type="button"
+            >
+              Next
+            </button>
+          </div>
+        </div>
+      </ng-container>
+      <ng-container *ngIf="activeStep.no === 8">
+        <div class="col-12 col-md-8 offset-md-2 col-lg-6 offset-lg-3">
+          <div class="form-group pt-5 pb-4 text-start position-relative">
+            <label for="email" class="form-label scale-in-center"
+              >{{ activeStep.no }}. {{ activeStep.label }}</label
+            >
+            <!--form-group for smoke with checkbox-->
+            <div class="select">
+              <ul>
+                <li (click)="confirm(true, 'smoke')">
+                  <button
+                    class="checkbox"
+                    type="button"
+                    [class.checked]="form.get('smoke')?.value"
+                  ></button>
+                  <label for="cb1">Yep</label>
+                </li>
+                <li (click)="confirm(false, 'smoke')" class="mt-3">
+                  <button
+                    class="checkbox"
+                    type="button"
+                    [class.checked]="form.get('smoke')?.value === false"
+                  ></button>
+                  <label for="cb2">Nope</label>
+                </li>
+              </ul>
+            </div>
+          </div>
+          <div
+            class="d-flex pt-5 ps-0 justify-content-start p-4 align-items-center position-relative"
+          >
+            <button
+              [disabled]="isSaving"
+              (click)="previousStep(7)"
+              class="primary-btn fs-4 m-0 me-4"
+              type="button"
+            >
+              Back
+            </button>
+            <button
+              [disabled]="form.get('smoke')?.invalid || isSaving"
+              (click)="save()"
+              class="secondary-btn fs-4 m-0"
+              type="submit"
+            >
+              {{ isSaving && saveStatus === '' ? "Saving..." : "Save" }}
+              <!--spinner-->
+              <span
+                *ngIf="isSaving"
+                class="spinner-border spinner-border-sm ms-2"
+                role="status"
+                aria-hidden="true"
+              ></span>
+              <!--status icon-->
+              <i
+                *ngIf="saveStatus === 'success'"
+                class="bi bi-check-circle-fill ms-2"
+                style="color: #28a745"
+              ></i>
+              <i
+                *ngIf="saveStatus === 'error'"
+                class="bi bi-x-circle-fill ms-2"
+                style="color: #dc3545"
+              ></i>
+            </button>
+          </div>
+        </div>
+      </ng-container>
+
+      <ng-container *ngIf="activeStep.no === 10">
+        <div class="col-12 col-md-8 offset-md-2 col-lg-6 offset-lg-3">
+          <div class="form-group pt-5 pb-4 text-start position-relative">
+            <label for="email" class="form-label scale-in-center"
+              >{{ activeStep.label }}! {{ form.get("firstname")?.value }}</label
+            >
+
+            <!--share rsvp on social media, social media icons-->
+            <div class="d-flex">
+              <a
+                aria-label="Share on Facebook"
+                rel="noopener noreferrer"
+                target="_blank"
+                title="Share on Facebook"
+                class="me-2"
+                ><span aria-hidden="true"
+                  ><svg
+                    height="32"
+                    version="1"
+                    width="32"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <g fill="none" fill-rule="evenodd">
+                      <path d="M0 0h32v32H0z" fill="#FFF"></path>
+                      <path
+                        d="M0 0v32h17V20h-4v-5h4v-5c0-3 3-5 6-5h4v4h-3l-2 2v4h5l-1 5h-4v12h10V0H0z"
+                        fill="#3A559F"
+                      ></path>
+                    </g></svg></span></a
+              ><a
+                aria-label="Share on Twitter"
+                class="me-2"
+                rel="noopener noreferrer"
+                target="_blank"
+                title="Share on Twitter"
+                ><span
+                  aria-hidden="true"
+                  class="Boundary-sc-__sc-184gmm6-0 hoYXmG"
+                  ><svg
+                    height="32"
+                    version="1"
+                    width="32"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <g fill="none" fill-rule="evenodd">
+                      <path d="M0 0h32v32H0z" fill="#50ABF1"></path>
+                      <path
+                        d="M4 24l8 2a14 14 0 0 0 13-14l3-3-3 1 2-3-2 1h-1a5 5 0 0 0-8 5c-1 0-6-1-10-5 0 0-2 3 1 6l-2-1s0 4 4 5H7s1 3 4 4c0 0-3 2-7 2z"
+                        fill="#FFF"
+                      ></path>
+                    </g></svg></span></a
+              ><a
+                aria-label="Share on LinkedIn"
+                rel="noopener noreferrer"
+                target="_blank"
+                title="Share on LinkedIn"
+              >
+                <span
+                  aria-hidden="true"
+                  class="Boundary-sc-__sc-184gmm6-0 hoYXmG"
+                >
+                  <svg
+                    width="32"
+                    height="32"
+                    viewBox="0 0 32 32"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <g clip-path="url(#clip0_307_8)">
+                      <path
+                        d="M16.0078 0.242432C9.42808 0.242432 7.12973 0.280249 7.12973 0.280249H0.243631V6.3132V10.871C0.241207 12.1257 0.243631 13.7771 0.243631 15.992L0.282418 24.862V31.7249H7.62523C7.62523 31.7249 11.9936 31.754 15.9741 31.754C19.9545 31.754 24.3156 31.7297 24.3156 31.7297H31.7324V24.9113C31.7324 24.9113 31.7627 20.3109 31.7627 15.9879C31.7627 11.6641 31.7316 7.0718 31.7316 7.0718L31.7627 0.242432H26H21.1373H16.0078Z"
+                        fill="url(#paint0_radial_307_8)"
+                      />
+                      <path
+                        d="M16.0005 4.36349C12.8403 4.36349 12.4437 4.37731 11.2026 4.4338C9.96381 4.49052 9.11826 4.68664 8.3784 4.97439C7.61309 5.27159 6.9639 5.66915 6.31713 6.31616C5.66988 6.96293 5.27232 7.61212 4.97414 8.37719C4.68567 9.11729 4.48931 9.96308 4.43355 11.2013C4.37804 12.4425 4.36349 12.8394 4.36349 15.9995C4.36349 19.1597 4.37756 19.555 4.4338 20.7962C4.49076 22.035 4.68688 22.8805 4.97439 23.6204C5.27183 24.3857 5.66939 25.0349 6.31641 25.6816C6.96293 26.3289 7.61212 26.7274 8.37695 27.0246C9.11729 27.3124 9.96308 27.5085 11.2016 27.5652C12.4428 27.6217 12.8391 27.6355 15.999 27.6355C19.1594 27.6355 19.5548 27.6217 20.796 27.5652C22.0347 27.5085 22.8812 27.3124 23.6216 27.0246C24.3866 26.7274 25.0349 26.3289 25.6814 25.6816C26.3286 25.0349 26.7262 24.3857 27.0244 23.6206C27.3104 22.8805 27.5068 22.0347 27.565 20.7965C27.6207 19.5553 27.6353 19.1597 27.6353 15.9995C27.6353 12.8394 27.6207 12.4428 27.565 11.2016C27.5068 9.96284 27.3104 9.11729 27.0244 8.37743C26.7262 7.61212 26.3286 6.96293 25.6814 6.31616C25.0341 5.66891 24.3869 5.27135 23.6209 4.97439C22.8791 4.68664 22.033 4.49052 20.7943 4.4338C19.5531 4.37731 19.158 4.36349 15.9968 4.36349H16.0005ZM14.9566 6.4604C15.2664 6.45992 15.6121 6.4604 16.0005 6.4604C19.1073 6.4604 19.4755 6.47155 20.7024 6.52731C21.8369 6.57919 22.4526 6.76876 22.8628 6.92802C23.4058 7.13893 23.793 7.39104 24.2 7.7983C24.6072 8.20556 24.8594 8.59343 25.0707 9.13644C25.23 9.54613 25.4198 10.1619 25.4715 11.2964C25.5272 12.523 25.5393 12.8915 25.5393 15.9968C25.5393 19.1022 25.5272 19.4707 25.4715 20.6973C25.4196 21.8318 25.23 22.4476 25.0707 22.8572C24.8598 23.4003 24.6072 23.7869 24.2 24.1939C23.7927 24.6012 23.4061 24.8533 22.8628 25.0642C22.4531 25.2242 21.8369 25.4133 20.7024 25.4652C19.4758 25.5209 19.1073 25.533 16.0005 25.533C12.8934 25.533 12.5252 25.5209 11.2986 25.4652C10.164 25.4128 9.54831 25.2232 9.1379 25.064C8.59488 24.8531 8.20701 24.6009 7.79975 24.1937C7.39249 23.7864 7.14038 23.3995 6.92899 22.8563C6.76973 22.4466 6.57991 21.8308 6.52828 20.6963C6.47252 19.4697 6.46137 19.1012 6.46137 15.9939C6.46137 12.8866 6.47252 12.5201 6.52828 11.2935C6.58016 10.159 6.76973 9.54322 6.92899 9.13305C7.1399 8.59003 7.39249 8.20217 7.79975 7.79491C8.20701 7.38765 8.59488 7.13553 9.1379 6.92414C9.54807 6.76415 10.164 6.57506 11.2986 6.52294C12.372 6.47446 12.788 6.45992 14.9566 6.45749V6.4604ZM22.2117 8.39246C21.4408 8.39246 20.8154 9.01717 20.8154 9.7883C20.8154 10.5592 21.4408 11.1846 22.2117 11.1846C22.9826 11.1846 23.608 10.5592 23.608 9.7883C23.608 9.01741 22.9826 8.39198 22.2117 8.39198V8.39246ZM16.0005 10.0239C12.7005 10.0239 10.0249 12.6995 10.0249 15.9995C10.0249 19.2995 12.7005 21.9739 16.0005 21.9739C19.3005 21.9739 21.9751 19.2995 21.9751 15.9995C21.9751 12.6995 19.3005 10.0239 16.0005 10.0239ZM16.0005 12.1208C18.1425 12.1208 19.8791 13.8573 19.8791 15.9995C19.8791 18.1415 18.1425 19.8782 16.0005 19.8782C13.8582 19.8782 12.1218 18.1415 12.1218 15.9995C12.1218 13.8573 13.8582 12.1208 16.0005 12.1208Z"
+                        fill="white"
+                      />
+                    </g>
+                    <defs>
+                      <radialGradient
+                        id="paint0_radial_307_8"
+                        cx="0"
+                        cy="0"
+                        r="1"
+                        gradientUnits="userSpaceOnUse"
+                        gradientTransform="translate(8.61513 34.181) rotate(-90) scale(31.2303 29.0545)"
+                      >
+                        <stop stop-color="#FFDD55" />
+                        <stop offset="0.1" stop-color="#FFDD55" />
+                        <stop offset="0.5" stop-color="#FF543E" />
+                        <stop offset="1" stop-color="#C837AB" />
+                      </radialGradient>
+                      <clipPath id="clip0_307_8">
+                        <rect width="32" height="31.999" fill="white" />
+                      </clipPath>
+                    </defs>
+                  </svg> </span
+              ></a>
+            </div>
+          </div>
+          <div
+            class="d-flex pt-5 ps-0 justify-content-start p-4 align-items-center position-relative"
+          >
+            <button
+              (click)="restart()"
+              class="secondary-btn fs-4 m-0"
+              type="button"
+            >
+              Again
+            </button>
+          </div>
+        </div>
+      </ng-container>
+      <ng-container *ngIf="activeStep.no === 9">
+        <div class="col-12 col-md-8 offset-md-2 col-lg-6 offset-lg-3">
+          <div class="form-group pt-5 pb-4 text-start position-relative">
+            <label for="email" class="form-label scale-in-center"
+              >That's too bad</label
+            >
+            <p>Thanks for letting us know!</p>
+          </div>
+          <div
+            class="d-flex pt-5 ps-0 justify-content-start p-4 align-items-center position-relative"
+          >
+           <button
+              [disabled]="isSaving"
+              (click)="previousStep(3)"
+              class="primary-btn fs-4 m-0 me-4"
+              type="button"
+            >
+              Back
+            </button>
+            <button
+              [disabled]="isSaving"
+              (click)="save(true)"
+              class="secondary-btn fs-4 m-0"
+              type="submit"
+            >
+              {{ isSaving && saveStatus === '' ? "Saving..." : "Save" }}
+              <!--spinner-->
+              <span
+                *ngIf="isSaving"
+                class="spinner-border spinner-border-sm ms-2"
+                role="status"
+                aria-hidden="true"
+              ></span>
+              <!--status icon-->
+              <i
+                *ngIf="saveStatus === 'success'"
+                class="bi bi-check-circle-fill ms-2"
+                style="color: #28a745"
+              ></i>
+              <i
+                *ngIf="saveStatus === 'error'"
+                class="bi bi-x-circle-fill ms-2"
+                style="color: #dc3545"
+              ></i>
+            </button>
+          </div>
+        </div>
+      </ng-container>
+    </form>
+  </div>
+
+  <!--position button to bottom-right to clear form and restart-->
+  <div
+    class="position-absolute bottom-0 end-0 p-4"
+    style="z-index: 1000; cursor: pointer"
+  >
+    <button
+      *ngIf="activeStep.no !== 0 && activeStep.no !== 1 && activeStep.no !== 10"
+      [disabled]="isSaving"
+      (click)="restart()"
+      style="font-family: inherit; font-size: medium !important;"
+      class="primary-btn fw-normal m-0 fade-in"
+      type="button"
+    >
+      Start over
+    </button>
+  </div>
+
+</main>

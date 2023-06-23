@@ -47,6 +47,10 @@ const routes: Routes = [
           events: Events,
           event: Event
         }
+      },
+      {
+        path: 'rsvp',
+        loadChildren: () => import('./rsvp/rsvp.module').then(m => m.RsvpModule)
       }
     ]
   }

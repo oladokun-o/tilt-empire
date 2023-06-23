@@ -12,6 +12,7 @@ import { LightboxComponent } from '../shared/lightbox/lightbox.component';
 })
 export class PagesComponent implements OnInit {
   loading: boolean = true;
+  currentRoute: string = '';
   constructor(
     public router: Router,
     private cdr: ChangeDetectorRef,
@@ -19,11 +20,12 @@ export class PagesComponent implements OnInit {
     @Inject(DOCUMENT) private document: Document,
     ) {
     router.events.subscribe((event) => {
-        if (event instanceof NavigationStart) {
-          this.loading = true;
-        } else if (event instanceof NavigationEnd) {
-          this.loading = false;
-        }
+      this.currentRoute = router.url.replace('/', '');
+      if (event instanceof NavigationStart) {
+        this.loading = true;
+      } else if (event instanceof NavigationEnd) {
+        this.loading = false;
+      }
       }
     );
   }

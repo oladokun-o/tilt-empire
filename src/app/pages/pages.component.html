@@ -11,4 +11,7 @@
   </div>
 </div>
 
-<app-footer></app-footer>
+<!--do not display app-footer if route contains string rsvp-->
+<app-footer 
+  *ngIf="currentRoute.indexOf('rsvp') === -1">
+</app-footer>
