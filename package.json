@@ -3,11 +3,11 @@
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
-    "start": "ng serve --openssl-legacy-provider",
+    "start": "ng serve",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
-    "dev:ssr": "ng run tilt-empire:serve-ssr --openssl-legacy-provider",
+    "dev:ssr": "ng run tilt-empire:serve-ssr",
     "serve:ssr": "node dist/tilt-empire/server/main.js",
     "build:ssr": "ng build && ng run tilt-empire:server",
     "prerender": "ng run tilt-empire:prerender",
