@@ -121,3 +121,51 @@ form.disabled {
 .fw-normal {
   font-weight: 400 !important;
 }
+
+.flyer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+
+  .void {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    background: #00000077;
+    filter: blur(2px);
+  }
+
+  img.blurred {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+    filter: blur(2px);
+  }
+
+  .col-4 img {
+    width: 100%;
+    position: relative;
+    z-index: 10;
+    visibility: hidden;
+  }
+}
+
+main {
+  height: 100vh;
+}
+
+.bi-clipboard-check {
+  color: #c412c7;
+  padding: 5px;
+  background: white;
+  border-radius: 3px;
+}

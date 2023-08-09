@@ -5,7 +5,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ShoppingCartComponent } from 'src/app/shared/modals/shopping-cart/shopping-cart.component';
-
+import { Title } from "@angular/platform-browser";
 
 @Component({
   selector: 'app-event',
@@ -22,7 +22,8 @@ export class EventComponent implements OnInit {
     public route: ActivatedRoute,
     private eventService: EventsService,
     public toastr: ToastrService,
-    public modalService: NgbModal
+    public modalService: NgbModal,
+    public titleService: Title
   ) {
     if (route.snapshot.data.events.result.length !== 0) this.events = route.snapshot.data.events.result;
     else this.getEvents();
@@ -30,7 +31,7 @@ export class EventComponent implements OnInit {
     if (route.snapshot.data.event.result.length !== 0) {
       this.event = route.snapshot.data.event.result[0];
       this.event_id = this.event._id;
-      console.log(this.event)
+      this.titleService.setTitle('TILT Empire presents: ' + this.event.title);
     }
     else {
       route.params.subscribe((params: Params) => {
@@ -79,6 +80,7 @@ export class EventComponent implements OnInit {
     this.eventService.get(query).subscribe({
       next: (result) => {
         this.event = result.result[0];
+        this.titleService.setTitle('TILT Empire presents: ' + this.event.title);
       },
       error: (error) => {
         this.toastr.error(error || 'An error occured, please refresh the application')

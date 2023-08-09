@@ -1,10 +1,11 @@
 
 <div id="contact" class="row -dark p-4 px-3 my-5">
-  <h5 style="font-size: medium;" class="subtitle col-12 p-0">RESERVATION</h5>
+  <h5 style="font-size: medium;" class="subtitle col-12 p-0">RSVP and book your spot now!</h5>
   <hr>
-  <div class="subtitle col-12 p-0 pb-3">Reserve A Table</div>
-  <p class="p-0 pb-2 d-none">Praesent vel lectus eget turpis aliquam commodo. Aenean pharetra lobor- tis enim at aliquet. Nam sit amet molestie urna, at luctus lorem.</p>
-  <div class="col-12 p-0">
+  <div class="subtitle col-12 p-0 pb-3 my-4">  <a routerLink="/rsvp" class="primary-btn">BOOK NOW</a></div>
+
+  <!-- <p class="p-0 pb-2 d-none">Praesent vel lectus eget turpis aliquam commodo. Aenean pharetra lobor- tis enim at aliquet. Nam sit amet molestie urna, at luctus lorem.</p> -->
+  <!-- <div class="col-12 p-0">
     <form [formGroup]="bookform" class="px-0 row" (submit)="save()">
       <div class="mb-3 col-12 col-md-6">
         <label for="name" class="form-label">Name</label>
@@ -57,19 +58,21 @@
             </button>
       </div>
     </form>
-  </div>
+  </div> -->
 
   <h5 style="font-size: medium;" class="subtitle col-12 p-0 mt-3">PARTNERSHIP</h5>
   <hr>
   <div class="subtitle col-12 p-0 pb-3">Become a sponsor</div>
-  <p class="p-0 pb-2 d-none">Praesent vel lectus eget turpis aliquam commodo. Aenean pharetra lobor- tis enim at aliquet. Nam sit amet molestie urna, at luctus lorem.</p>
+  <!-- <p class="p-0 pb-2 d-none">Praesent vel lectus eget turpis aliquam commodo. Aenean pharetra lobor- tis enim at aliquet. Nam sit amet molestie urna, at luctus lorem.</p> -->
   <div class="col-12 p-0">
     <form [formGroup]="sponsorform" class="px-0 row" (submit)="savesponsor()">
-      <div class="col-12 d-flex align-items-center">
-          <div class="col-12 p-0">
-            <label for="newsletter1" class="visually-hidden">Email address</label>
-            <input id="newsletter1" formControlName="Email" type="email" class="form-control" placeholder="Enter your email address" required>
-            <button [disabled]="sponsorsaving || sponsorfailed || sponsorsaved" class="primary-btn text-uppercase m-0 mt-2 col-12 d-flex justify-content-center" type="submit">
+      <div class="row">
+        <div class="col-12 col-md-8 d-flex align-items-center">
+          <label for="newsletter1" class="visually-hidden">Email address</label>
+          <input id="newsletter1" formControlName="Email" type="email" class="form-control" placeholder="Enter your email address" required>
+        </div>
+        <div class="col-12 col-md-4">
+          <button [disabled]="sponsorsaving || sponsorfailed || sponsorsaved" class="primary-btn text-uppercase m-0 h-100 col-12 d-flex justify-content-center" type="submit">
               <i *ngIf="sponsorfailed" class="bi bi-x-circle fs-3 text-danger"></i>
               <i *ngIf="sponsorsaved" class="bi bi-check-circle fs-3 text-success"></i>
               <div *ngIf="sponsorsaving" class="spinner-border text-light spinner-border spinner-primary" role="status">
@@ -77,8 +80,8 @@
               </div>
               <span *ngIf="!sponsorsaving && !sponsorsaved && !sponsorfailed">Join now</span>
             </button>
-          </div>
         </div>
+      </div>
     </form>
   </div>
 </div>

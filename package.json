@@ -37,6 +37,7 @@
     "jquery": "^3.6.3",
     "ng-shopping-cart": "^1.0.0",
     "ngx-bootstrap": "^10.2.0",
+    "ngx-clipboard": "^14.0.2",
     "ngx-lightbox": "^3.0.0",
     "ngx-toastr": "^14.3.0",
     "rxjs": "~6.6.0",

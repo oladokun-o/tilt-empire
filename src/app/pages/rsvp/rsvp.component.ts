@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { AfterViewChecked, Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Title } from '@angular/platform-browser';
 import { ActivatedRoute, Router } from '@angular/router';
 import * as e from 'express';
 import { ToastrService } from 'ngx-toastr';
@@ -17,9 +18,9 @@ interface Step {
   templateUrl: './rsvp.component.html',
   styleUrls: ['./rsvp.component.scss']
 })
-export class RsvpComponent implements OnInit {
+export class RsvpComponent implements OnInit, AfterViewChecked {
 
-  address: string = 'The White Dove, 2 Windmorrow Road, Edinburgh, ED89 7RT'
+  address: string = 'Railroom, Telliskivi 59a.'
 
   steps: Step[] = [
     { label: 'RSVP', no: 0, active: true },
@@ -52,12 +53,16 @@ export class RsvpComponent implements OnInit {
   //Estonia phone mask
   // phoneMask = ['+', '3', '7', '2', ' ', /[1-9]/, /\d/, /\d/, ' ', /\d/, /\d/, /\d/, ' ', /\d/, /\d/, /\d/, /\d/];
 
+  @ViewChild('main') main!: ElementRef<HTMLElement>;
+
   constructor(
     public route: ActivatedRoute,
     public router: Router,
     public toast: ToastrService,
-    private rsvpService: RsvpService
+    private rsvpService: RsvpService,
+    public titleService: Title
   ) {
+    this.titleService.setTitle('TILT Empire presents: Eat-a-thon');
     toast.toastrConfig.preventDuplicates = true;  
     this.route.params.subscribe(params => {
       //get from session storage
@@ -68,7 +73,6 @@ export class RsvpComponent implements OnInit {
       // rsvp.plusOneOrTwo = 0;
       if (rsvp) this.form.patchValue(rsvp);
       if (ActiveStep) this.activeStep = ActiveStep;
-      console.log(this.form.value)
 
       // if (ActiveStep && ) {
       //   const index = this.steps.findIndex(step => step.no === ActiveStep.no);
@@ -81,13 +85,20 @@ export class RsvpComponent implements OnInit {
       if (params.activeStep && rsvp) {
         const index = this.steps.findIndex(step => step.no === +params.activeStep);
         this.steps[index].active = true;
-        console.log('params, rsvp')
+        // console.log('params, rsvp')
         this.activeStep = this.steps[index];
       } else if (!params.activeStep && !rsvp.firstname && !rsvp.lastname) {
         this.activeStep = this.steps[0];
-        console.log('no params, no rsvp')
+        // console.log('no params, no rsvp')
       }
     });
+  }
+
+  ngAfterViewChecked(): void {
+    if (this.main) {
+      this.main.nativeElement.scrollIntoView();
+      // console.log('scrolling', this.main)
+    }
   }
 
   ngOnInit(): void {
@@ -148,7 +159,7 @@ export class RsvpComponent implements OnInit {
     }
 
     sessionStorage.setItem('rsvp', JSON.stringify(this.form.value));
-    console.log(this.form.value)
+    // console.log(this.form.value)
   }
 
   restart() {
@@ -160,6 +171,20 @@ export class RsvpComponent implements OnInit {
 
   isSaving: boolean = false;
   saveStatus: string = '';
+
+  timeleft: number = 10;
+  starttimer: 'saved' | null = null;
+
+  countdown() {
+    console.log('countdown started')
+    this.timeleft--;    
+    console.log(this.timeleft)
+    if (this.timeleft > 0) {
+      setTimeout(() => this.countdown(), 1000);
+    } else if (this.timeleft === 0) {
+      this.goto('https://buy.stripe.com/14kaG13xzfQ6dpK000');
+    }
+  };
 
   save(bypass?: boolean) {
     this.saveStatus = '';
@@ -182,11 +207,23 @@ export class RsvpComponent implements OnInit {
       this.rsvpService.saveRsvp(payload).subscribe(res => {
         this.isSaving = false;
         this.form.enable();
+        this.starttimer = 'saved';
+
+        setTimeout(() => this.countdown(), 1000);
+
         setTimeout(() => {
           this.saveStatus = '';
         }, 2000);
         this.nextStep(10);
     });
     }
+  }
+
+  goto(link: string) {
+    window.location.href = link;
+  }
+
+  copied() {
+    this.toast.info('Address copied!')
   }
 }

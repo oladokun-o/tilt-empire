@@ -1,10 +1,22 @@
-<main class="container-fluid px-4 px-md-5 py-5 position-relative">
+<main #main class="container-fluid px-4 px-md-5 py-5 position-relative">
+  <div class="flyer h-100">
+    <img class="blurred" src="assets/img/Eath-a-thon Flyer2B.png" />
+    <div class="void"></div>
+    <div class="col-4">
+      <img src="assets/img/Eath-a-thon Flyer2B.png" />
+    </div>
+  </div>
   <div class="home rsvp py-5 row position-relative text-center mb-5 pb-5">
     <form
       [class.disabled]="isSaving"
       [formGroup]="form"
       (submit)="save()"
-      (window:keydown.enter)="activeStep.no === 0 || activeStep.no === 4 ? nextStep(activeStep.no + 1) : null; $event.preventDefault()"
+      (window:keydown.enter)="
+        activeStep.no === 0 || activeStep.no === 4
+          ? nextStep(activeStep.no + 1)
+          : null;
+        $event.preventDefault()
+      "
     >
       <!--progress bar-->
       <div class="col-12 col-md-8 offset-md-2 col-lg-6 offset-lg-3">
@@ -25,17 +37,26 @@
         </div>
 
         <div class="col-12 col-md-8 offset-md-2 col-lg-6 offset-lg-3">
-          <p class="text-center m-0">Ready to party like its 2019?</p>
+          <p class="text-center m-0">Are you ready to have a blast?</p>
           <p class="text-muted">
-            Come join us for a night of food, drinks, and dancing!
+            Come join us for a day of food, drinks, and dancing!
           </p>
 
           <div
-            class="d-flex justify-content-center p-4 align-items-center position-relative"
+            class="d-flex justify-content-center p-4 align-items-center flex-wrap position-relative"
           >
             <button
+              routerLink="/event/759e691e-88e2-4e00-8b42-271ca651da5d"
+              class="primary-btn col-12 col-md-auto mb-3 mb-lg-0 fs-4 m-0 me-md-3"
+              type="button"
+              role="link"
+              ngbTooltip="Learn more about the event"
+            >
+              Learn more
+            </button>
+            <button
               (click)="nextStep(1)"
-              class="secondary-btn fs-4 m-0"
+              class="secondary-btn col-12 col-md-auto fs-4 m-0 me-md-3"
               type="button"
             >
               Start
@@ -114,7 +135,7 @@
             </button>
             <button
               [disabled]="
-                form.get('firstname')?.invalid && form.get('lastname')?.invalid
+                form.get('firstname')?.invalid || form.get('lastname')?.invalid
               "
               (click)="nextStep(2)"
               class="secondary-btn fs-4 m-0"
@@ -285,8 +306,29 @@
               >Great! <br />
               Here's the address:</label
             >
-            <p class="text-start col-12 m-0">{{ activeStep.label }}</p>
-
+            <p class="text-start col-12 m-0 pb-2">
+              <span #addr>{{ activeStep.label }}</span>
+              <i
+                role="button"
+                ngbTooltip="Copy address to clipboard"
+                placement="right"
+                ngxClipboard 
+                [cbContent]="addr.innerHTML"
+                (cbOnSuccess)="copied()"                
+                class="bi bi-clipboard-check ms-2"
+              ></i>
+            </p>
+            <div class="col-12" style="height: 200px">
+              <iframe
+                style="height: inherit; width: inherit; border: 0"
+                src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d8114.140476898324!2d24.7288034!3d59.4408276!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x46929300b988ebff%3A0x3d89de5bab5d28d!2sRailrooms!5e0!3m2!1sen!2sng!4v1691534208612!5m2!1sen!2sng"
+                width="600"
+                height="450"
+                allowfullscreen=""
+                loading="lazy"
+                referrerpolicy="no-referrer-when-downgrade"
+              ></iframe>
+            </div>
             <div
               class="d-flex pt-3 ps-0 justify-content-start p-4 align-items-center position-relative"
             >
@@ -499,7 +541,7 @@
               class="secondary-btn fs-4 m-0"
               type="submit"
             >
-              {{ isSaving && saveStatus === '' ? "Saving..." : "Save" }}
+              {{ isSaving && saveStatus === "" ? "Saving RSVP..." : "Proceed" }}
               <!--spinner-->
               <span
                 *ngIf="isSaving"
@@ -527,11 +569,26 @@
         <div class="col-12 col-md-8 offset-md-2 col-lg-6 offset-lg-3">
           <div class="form-group pt-5 pb-4 text-start position-relative">
             <label for="email" class="form-label scale-in-center"
-              >{{ activeStep.label }}! {{ form.get("firstname")?.value }}</label
+              >Hey {{ form.get("firstname")?.value }}!</label
             >
-
+            <p>We got your RSVP, go ahead to buy your ticket.</p>
+          </div>
+          <div
+            class="d-flex pt-3 ps-0 justify-content-start p-4 align-items-center position-relative"
+          >
+            <button
+              (click)="goto('https://buy.stripe.com/14kaG13xzfQ6dpK000')"
+              class="secondary-btn fs-4 m-0"
+              type="button"
+              role="link"
+            >
+              Buy ticket now
+              {{ timeleft && starttimer === 'saved' ? timeleft : '' }}
+            </button>
+          </div>
+          
             <!--share rsvp on social media, social media icons-->
-            <div class="d-flex">
+            <!-- <div class="d-flex">
               <a
                 aria-label="Share on Facebook"
                 rel="noopener noreferrer"
@@ -621,19 +678,7 @@
                     </defs>
                   </svg> </span
               ></a>
-            </div>
-          </div>
-          <div
-            class="d-flex pt-5 ps-0 justify-content-start p-4 align-items-center position-relative"
-          >
-            <button
-              (click)="restart()"
-              class="secondary-btn fs-4 m-0"
-              type="button"
-            >
-              Again
-            </button>
-          </div>
+            </div> -->
         </div>
       </ng-container>
       <ng-container *ngIf="activeStep.no === 9">
@@ -647,7 +692,7 @@
           <div
             class="d-flex pt-5 ps-0 justify-content-start p-4 align-items-center position-relative"
           >
-           <button
+            <button
               [disabled]="isSaving"
               (click)="previousStep(3)"
               class="primary-btn fs-4 m-0 me-4"
@@ -656,30 +701,12 @@
               Back
             </button>
             <button
-              [disabled]="isSaving"
-              (click)="save(true)"
+              (click)="goto('https://buy.stripe.com/14kaG13xzfQ6dpK000')"
               class="secondary-btn fs-4 m-0"
-              type="submit"
+              type="button"
+              role="link"
             >
-              {{ isSaving && saveStatus === '' ? "Saving..." : "Save" }}
-              <!--spinner-->
-              <span
-                *ngIf="isSaving"
-                class="spinner-border spinner-border-sm ms-2"
-                role="status"
-                aria-hidden="true"
-              ></span>
-              <!--status icon-->
-              <i
-                *ngIf="saveStatus === 'success'"
-                class="bi bi-check-circle-fill ms-2"
-                style="color: #28a745"
-              ></i>
-              <i
-                *ngIf="saveStatus === 'error'"
-                class="bi bi-x-circle-fill ms-2"
-                style="color: #dc3545"
-              ></i>
+              Buy the ticket anyway?
             </button>
           </div>
         </div>
@@ -696,12 +723,11 @@
       *ngIf="activeStep.no !== 0 && activeStep.no !== 1 && activeStep.no !== 10"
       [disabled]="isSaving"
       (click)="restart()"
-      style="font-family: inherit; font-size: medium !important;"
+      style="font-family: inherit; font-size: medium !important"
       class="primary-btn fw-normal m-0 fade-in"
       type="button"
     >
       Start over
     </button>
   </div>
-
 </main>

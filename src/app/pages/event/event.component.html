@@ -19,11 +19,14 @@
 							<div class="col-12 col-md-6 col-lg-4 px-0 ps-md-3 d-block d-md-none my-3">
 								<div class="date col-12 p-3 shadow">
 									<h5 class="fw-bold">Date & Time</h5>
-									<p class="text-mu">{{ convertToDay(event.datetime) }}, {{ convertToMonth(event.datetime) }} {{ convertToDate(event.datetime) }}, {{ convertToYear(event.datetime) }} at {{ convertTime(event.datetime) }}</p>
-									<a title="Add to Calendar" class="addeventatc" data-id="tj16041042" href="https://www.addevent.com/event/tj16041042" target="_blank">Add to Calendar</a>
+									<p class="text-mu">{{ convertToDay(event.datetime) }}, {{ convertToMonth(event.datetime) }} {{ convertToDate(event.datetime) }}, {{ convertToYear(event.datetime) }} <br> {{ convertTime(event.datetime) }}</p>
+									<!-- <a title="Add to Calendar" class="addeventatc" data-id="tj16041042" href="https://www.addevent.com/event/tj16041042" target="_blank">Add to Calendar</a> -->
 									<script type="text/javascript" src="https://cdn.addevent.com/libs/atc/1.6.1/atc.min.js" async defer></script>
 									<div class="col-12 d-flex justify-content-start">
 										<a (click)="showShoppingCart(event)" class="primary-btn col-12 text-uppercase">get tickets</a>
+									</div>
+                  <div class="col-12 d-flex justify-content-start">
+										<a routerLink="/rsvp" class="primary-btn col-12 text-uppercase">rsvp</a>
 									</div>
 									<div class="col-12 text-center mt-3">
 										<p class="text-muted m-0">No Refunds</p>
@@ -37,7 +40,7 @@
 								<h6 class="fw-bold">Location</h6>
 								<p class="mb-3">{{ event.location }}</p>
 								<div class="col-12" style="height: 250px;">
-									<iframe style="height: inherit; width: inherit;border: 0;" src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2028.945253954731!2d24.759946415669543!3d59.43398760966925!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x4692935f7351dba9%3A0x4f3d78a17c5b1ab4!2sCatHouse%20Club!5e0!3m2!1sen!2sng!4v1676218156560!5m2!1sen!2sng" width="600" height="450" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+									<iframe style="height: inherit; width: inherit;border: 0;" src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d8114.140476898324!2d24.7288034!3d59.4408276!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x46929300b988ebff%3A0x3d89de5bab5d28d!2sRailrooms!5e0!3m2!1sen!2sng!4v1691534208612!5m2!1sen!2sng" width="600" height="450" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
 								</div>
 
 								<h6 class="fw-bold mt-4">Contact</h6>
@@ -76,12 +79,15 @@
 							<div class="col-12 col-md-6 col-lg-4 px-0 ps-md-3 d-none d-md-block">
 								<div class="date col-12 p-3 shadow">
 									<h5 class="fw-bold">Date & Time</h5>
-									<p class="text-mu">{{ convertToDay(event.datetime) }}, {{ convertToMonth(event.datetime) }} {{ convertToDate(event.datetime) }}, {{ convertToYear(event.datetime) }} at {{ convertTime(event.datetime) }}</p>
-									<a title="Add to Calendar" class="addeventatc" data-id="tj16041042" href="https://www.addevent.com/event/tj16041042" target="_blank">Add to Calendar</a>
+									<p class="text-mu">{{ convertToDay(event.datetime) }}, {{ convertToMonth(event.datetime) }} {{ convertToDate(event.datetime) }}, {{ convertToYear(event.datetime) }} <br> {{ convertTime(event.datetime) }}</p>
+									<!-- <a title="Add to Calendar" class="addeventatc" data-id="tj16041042" href="https://www.addevent.com/event/tj16041042" target="_blank">Add to Calendar</a> -->
 									<script type="text/javascript" src="https://cdn.addevent.com/libs/atc/1.6.1/atc.min.js" async defer></script>
 									<div class="col-12 d-flex flex-wrap flex-column">
 										<a *ngIf="event.checkout_link" (click)="payout('reg')" class="primary-btn col-12 text-uppercase">Early Bird Ticket Pass</a>
 										<a *ngIf="event.checkout_link_vip" (click)="payout('vip')" class="primary-btn col-12 text-uppercase mt-3">VIP Ticket Pass</a>
+                  <div class="col-12 d-flex justify-content-start">
+										<a routerLink="/rsvp" class="primary-btn col-12 text-uppercase">rsvp</a>
+									</div>
 									</div>
 									<div class="col-12 text-center mt-3">
 										<p class="text-muted m-0">No Refunds</p>
