@@ -44,7 +44,7 @@ export class EventComponent implements OnInit {
   showShoppingCart(event: Event) {
     //const ref = this.modalService.open(ShoppingCartComponent);
     //ref.componentInstance.event = event;
-    location.href = 'https://book.stripe.com/test_4gw15V32LaSyfh6aEE';
+    location.href = event.checkout_link;
   }
 
 
