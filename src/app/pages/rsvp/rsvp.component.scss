@@ -58,7 +58,7 @@
         background-color: purple;
         border-color: purple;
 
-        & + label {
+        &+label {
           color: white;
           font-weight: 600;
           background-color: #c412c7;
@@ -148,7 +148,6 @@ form.disabled {
     height: 100%;
     width: 100%;
     object-fit: cover;
-    filter: blur(2px);
   }
 
   .col-4 img {

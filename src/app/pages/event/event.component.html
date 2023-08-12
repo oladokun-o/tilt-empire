@@ -26,25 +26,29 @@
                   <!-- <a title="Add to Calendar" class="addeventatc" data-id="tj16041042" href="https://www.addevent.com/event/tj16041042" target="_blank">Add to Calendar</a> -->
                   <script type="text/javascript" src="https://cdn.addevent.com/libs/atc/1.6.1/atc.min.js" async
                     defer></script>
-                  <div class="col-12 d-flex justify-content-start">
-                    <a routerLink="/rsvp" class="primary-btn col-12 text-uppercase">rsvp</a>
-                  </div>
-                  <div class="col-12 text-center mt-3">
-                    <p class="text-muted m-0">No Refunds</p>
+                  <div class="col-12 d-flex flex-wrap flex-column">
+                    <a *ngIf="event.checkout_link" (click)="payout('reg')" class="primary-btn col-12 text-uppercase">Get
+                      Tickets</a>
+                    <a *ngIf="event.checkout_link_vip" (click)="payout('vip')"
+                      class="primary-btn col-12 text-uppercase mt-3">VIP Ticket
+                      Pass</a>
+                    <div class="col-12 d-flex justify-content-start">
+                      <a routerLink="/rsvp" class="primary-btn col-12 text-uppercase">rsvp</a>
+                    </div>
+                    <div class="col-12 text-center mt-3">
+                      <p class="text-muted m-0">No Refunds</p>
+                    </div>
                   </div>
                 </div>
-                <div class="col-12 mt-3">
+                <div
+                  *ngIf="event._id === '4c4c9544-6edd-40e7-b898-4b850bef87c7' || event._id ===  '759e691e-88e2-4e00-8b42-271ca651da5d'"
+                  class="col-12 mt-3 py-4">
                   <div class="col-12 video mt-4">
                     <img src="assets/video/eatahthon-cover.jpg" alt="">
                     <div class="img-overlay"></div>
                     <a (click)="openVideo()" class="video-play-button" href="javascript:void(0)">
                       <span></span>
                     </a>
-                    <div #video id="video-overlay" class="video-overlay">
-                      <a class="video-overlay-close">
-                        <i class="bi bi-x-lg"></i>
-                      </a>
-                    </div>
                   </div>
                 </div>
               </div>
@@ -117,18 +121,15 @@
                     </div>
                   </div>
                 </div>
-                <div class="col-12 mt-2">
+                <div
+                  *ngIf="event._id === '4c4c9544-6edd-40e7-b898-4b850bef87c7' || event._id ===  '759e691e-88e2-4e00-8b42-271ca651da5d'"
+                  class="col-12 mt-2">
                   <div class="col-12 video mt-2">
                     <img src="assets/video/eatahthon-cover.jpg" alt="">
                     <div class="img-overlay"></div>
                     <a (click)="openVideo()" class="video-play-button" href="javascript:void(0)">
                       <span></span>
                     </a>
-                    <div #video id="video-overlay" class="video-overlay">
-                      <a class="video-overlay-close">
-                        <i class="bi bi-x-lg"></i>
-                      </a>
-                    </div>
                   </div>
                 </div>
               </div>

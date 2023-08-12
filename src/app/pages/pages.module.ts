@@ -12,6 +12,7 @@ import { EventComponent } from './event/event.component';
 import { ComponentsModule } from './components/components.module';
 
 import { NgxGalleryModule } from '@kolkov/ngx-gallery';
+import { SharedComponentsModule } from '../shared/components/components.module';
 
 @NgModule({
   declarations: [
@@ -27,7 +28,8 @@ import { NgxGalleryModule } from '@kolkov/ngx-gallery';
     LayoutModule,
     RouterModule,
     ComponentsModule,
-    //NgxGalleryModule
+    //NgxGalleryModule,
+    SharedComponentsModule
   ]
 })
 export class PagesModule { }
