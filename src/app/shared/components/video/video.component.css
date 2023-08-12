@@ -1,0 +1,16 @@
+::ng-deep .modal-dialog.video {
+  .modal-content {
+    background-color: #c412c7 !important;
+
+    video::-webkit-media-controls {
+      color: #c412c7 !important;
+      background-color: #c412c7 !important;
+    }
+  }
+}
+
+.btn-close {
+  font-size: 20px !important;
+  padding: 15px;
+  z-index: 10;
+}

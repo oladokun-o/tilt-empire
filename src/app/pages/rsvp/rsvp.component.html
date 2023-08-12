@@ -1,34 +1,25 @@
 <main #main class="container-fluid px-4 px-md-5 py-5 position-relative">
   <div class="flyer h-100">
-    <img class="blurred" src="assets/img/Eath-a-thon Flyer2B.png" />
+    <!-- <img class="blurred" src="assets/img/Eath-a-thon Flyer2B.png" /> -->
+    <video class="blurred" [autoplay]="true" [loop]="true" [volume]="0.2" src="assets/video/eatahthon.mp4"></video>
     <div class="void"></div>
     <div class="col-4">
       <img src="assets/img/Eath-a-thon Flyer2B.png" />
     </div>
   </div>
   <div class="home rsvp py-5 row position-relative text-center mb-5 pb-5">
-    <form
-      [class.disabled]="isSaving"
-      [formGroup]="form"
-      (submit)="save()"
-      (window:keydown.enter)="
+    <form [class.disabled]="isSaving" [formGroup]="form" (submit)="save()" (window:keydown.enter)="
         activeStep.no === 0 || activeStep.no === 4
           ? nextStep(activeStep.no + 1)
           : null;
         $event.preventDefault()
-      "
-    >
+      ">
       <!--progress bar-->
       <div class="col-12 col-md-8 offset-md-2 col-lg-6 offset-lg-3">
         <div class="progress" *ngIf="activeStep">
-          <div
-            class="progress-bar"
-            role="progressbar"
-            [style.width.%]="(activeStep.no / (steps.length - 1)) * 100"
-            [attr.aria-valuenow]="(activeStep.no / (steps.length - 1)) * 100"
-            aria-valuemin="0"
-            aria-valuemax="100"
-          ></div>
+          <div class="progress-bar" role="progressbar" [style.width.%]="(activeStep.no / (steps.length - 1)) * 100"
+            [attr.aria-valuenow]="(activeStep.no / (steps.length - 1)) * 100" aria-valuemin="0" aria-valuemax="100">
+          </div>
         </div>
       </div>
       <ng-container *ngIf="activeStep.no === 0">
@@ -42,30 +33,18 @@
             Come join us for a day of food, drinks, and dancing!
           </p>
 
-          <div
-            class="d-flex justify-content-center p-4 align-items-center flex-wrap position-relative"
-          >
-            <button
-              routerLink="/event/759e691e-88e2-4e00-8b42-271ca651da5d"
-              class="primary-btn col-12 col-md-auto mb-3 mb-lg-0 fs-4 m-0 me-md-3"
-              type="button"
-              role="link"
-              ngbTooltip="Learn more about the event"
-            >
+          <div class="d-flex justify-content-center p-4 align-items-center flex-wrap position-relative">
+            <button routerLink="/event/759e691e-88e2-4e00-8b42-271ca651da5d"
+              class="primary-btn col-12 col-md-auto mb-3 mb-lg-0 fs-4 m-0 me-md-3" type="button" role="link"
+              ngbTooltip="Learn more about the event">
               Learn more
             </button>
-            <button
-              (click)="nextStep(1)"
-              class="secondary-btn col-12 col-md-auto fs-4 m-0 me-md-3"
-              type="button"
-            >
+            <button (click)="nextStep(1)" class="secondary-btn col-12 col-md-auto fs-4 m-0 me-md-3" type="button">
               Start
             </button>
             <!--position in the center-->
-            <small
-              style="right: 28px"
-              class="m-0 d-none d-md-block text-white position-absolute top-50 translate-middle-y"
-            >
+            <small style="right: 28px"
+              class="m-0 d-none d-md-block text-white position-absolute top-50 translate-middle-y">
               press <strong>Enter</strong> ↵
             </small>
           </div>
@@ -75,23 +54,13 @@
         <div class="col-12 col-md-8 offset-md-2 col-lg-6 offset-lg-3">
           <!--form-group for name-->
           <div class="form-group pt-5 pb-4 text-start position-relative">
-            <label for="name" class="form-label scale-in-center"
-              >{{ activeStep.no }}. {{ activeStep.label }}</label
-            >
-            <input
-              type="text"
-              class="form-control"
-              id="name"
-              formControlName="firstname"
-              placeholder="Enter your first name..."
-            />
-            <div
-              *ngIf="
+            <label for="name" class="form-label scale-in-center">{{ activeStep.no }}. {{ activeStep.label }}</label>
+            <input type="text" class="form-control" id="name" formControlName="firstname"
+              placeholder="Enter your first name..." />
+            <div *ngIf="
                 form.get('firstname')?.invalid &&
                 (form.get('firstname')?.dirty || form.get('firstname')?.touched)
-              "
-              class="text-warning position-absolute bottom-0 start-0"
-            >
+              " class="text-warning position-absolute bottom-0 start-0">
               <div *ngIf="form.get('firstname')?.errors?.required">
                 First name is required
               </div>
@@ -101,19 +70,11 @@
             </div>
           </div>
           <div class="form-group pb-4 text-start position-relative">
-            <input
-              type="text"
-              class="form-control"
-              formControlName="lastname"
-              placeholder="and last name"
-            />
-            <div
-              *ngIf="
+            <input type="text" class="form-control" formControlName="lastname" placeholder="and last name" />
+            <div *ngIf="
                 form.get('lastname')?.invalid &&
                 (form.get('lastname')?.dirty || form.get('lastname')?.touched)
-              "
-              class="text-warning position-absolute bottom-0 start-0"
-            >
+              " class="text-warning position-absolute bottom-0 start-0">
               <div *ngIf="form.get('lastname')?.errors?.required">
                 Last name is required
               </div>
@@ -123,24 +84,13 @@
             </div>
           </div>
 
-          <div
-            class="d-flex pt-5 ps-0 justify-content-start p-4 align-items-center position-relative"
-          >
-            <button
-              (click)="previousStep(0)"
-              class="primary-btn fs-4 m-0 me-4"
-              type="button"
-            >
+          <div class="d-flex pt-5 ps-0 justify-content-start p-4 align-items-center position-relative">
+            <button (click)="previousStep(0)" class="primary-btn fs-4 m-0 me-4" type="button">
               Back
             </button>
-            <button
-              [disabled]="
+            <button [disabled]="
                 form.get('firstname')?.invalid || form.get('lastname')?.invalid
-              "
-              (click)="nextStep(2)"
-              class="secondary-btn fs-4 m-0"
-              type="button"
-            >
+              " (click)="nextStep(2)" class="secondary-btn fs-4 m-0" type="button">
               Next
             </button>
           </div>
@@ -150,23 +100,13 @@
         <div class="col-12 col-md-8 offset-md-2 col-lg-6 offset-lg-3">
           <!--form-group for email-->
           <div class="form-group pt-5 pb-4 text-start position-relative">
-            <label for="email" class="form-label scale-in-center"
-              >{{ activeStep.no }}. {{ activeStep.label }}</label
-            >
-            <input
-              type="email"
-              class="form-control"
-              id="email"
-              formControlName="email"
-              placeholder="Enter your email"
-            />
-            <div
-              *ngIf="
+            <label for="email" class="form-label scale-in-center">{{ activeStep.no }}. {{ activeStep.label }}</label>
+            <input type="email" class="form-control" id="email" formControlName="email"
+              placeholder="Enter your email" />
+            <div *ngIf="
                 form.get('email')?.invalid &&
                 (form.get('email')?.dirty || form.get('email')?.touched)
-              "
-              class="text-warning position-absolute bottom-0 start-0"
-            >
+              " class="text-warning position-absolute bottom-0 start-0">
               <div *ngIf="form.get('email')?.errors?.required">
                 Email is required
               </div>
@@ -176,22 +116,12 @@
             </div>
           </div>
 
-          <div
-            class="d-flex pt-5 ps-0 justify-content-start p-4 align-items-center position-relative"
-          >
-            <button
-              (click)="previousStep(1)"
-              class="primary-btn fs-4 m-0 me-4"
-              type="button"
-            >
+          <div class="d-flex pt-5 ps-0 justify-content-start p-4 align-items-center position-relative">
+            <button (click)="previousStep(1)" class="primary-btn fs-4 m-0 me-4" type="button">
               Back
             </button>
-            <button
-              [disabled]="form.get('email')?.invalid"
-              (click)="nextStep(3)"
-              class="secondary-btn fs-4 m-0"
-              type="button"
-            >
+            <button [disabled]="form.get('email')?.invalid" (click)="nextStep(3)" class="secondary-btn fs-4 m-0"
+              type="button">
               Next
             </button>
           </div>
@@ -249,51 +179,29 @@
       <ng-container *ngIf="activeStep.no === 3">
         <div class="col-12 col-md-8 offset-md-2 col-lg-6 offset-lg-3">
           <div class="form-group pt-5 pb-4 text-start position-relative">
-            <label for="email" class="form-label scale-in-center"
-              >{{ activeStep.no }}. {{ activeStep.label }}</label
-            >
+            <label for="email" class="form-label scale-in-center">{{ activeStep.no }}. {{ activeStep.label }}</label>
             <!--form-group for attending with checkbox-->
             <div class="select">
               <ul>
                 <li (click)="confirm(true, 'attending')">
-                  <button
-                    class="checkbox"
-                    type="button"
-                    [class.checked]="form.get('attending')?.value"
-                  ></button>
+                  <button class="checkbox" type="button" [class.checked]="form.get('attending')?.value"></button>
                   <label for="cb1">Yeah!</label>
                 </li>
-                <li
-                  (click)="confirm(false, 'attending')"
-                  class="mt-3"
-                  [class.flicker-1]="form.get('attending')?.value === false"
-                >
-                  <button
-                    class="checkbox"
-                    type="button"
-                    [class.checked]="form.get('attending')?.value === false"
-                  ></button>
+                <li (click)="confirm(false, 'attending')" class="mt-3"
+                  [class.flicker-1]="form.get('attending')?.value === false">
+                  <button class="checkbox" type="button"
+                    [class.checked]="form.get('attending')?.value === false"></button>
                   <label for="cb2">Sorry, I can't this time</label>
                 </li>
               </ul>
             </div>
           </div>
-          <div
-            class="d-flex pt-5 ps-0 justify-content-start p-4 align-items-center position-relative"
-          >
-            <button
-              (click)="previousStep(2)"
-              class="primary-btn fs-4 m-0 me-4"
-              type="button"
-            >
+          <div class="d-flex pt-5 ps-0 justify-content-start p-4 align-items-center position-relative">
+            <button (click)="previousStep(2)" class="primary-btn fs-4 m-0 me-4" type="button">
               Back
             </button>
-            <button
-              [disabled]="form.get('attending')?.invalid"
-              (click)="nextStep(form.get('attending')?.value ? 4 : 9)"
-              class="secondary-btn fs-4 m-0"
-              type="button"
-            >
+            <button [disabled]="form.get('attending')?.invalid" (click)="nextStep(form.get('attending')?.value ? 4 : 9)"
+              class="secondary-btn fs-4 m-0" type="button">
               Next
             </button>
           </div>
@@ -302,47 +210,25 @@
       <ng-container *ngIf="activeStep.no === 4">
         <div class="col-12 col-md-8 offset-md-2 col-lg-6 offset-lg-3">
           <div class="form-group pt-5 pb-4 text-start position-relative">
-            <label for="email" class="form-label scale-in-center"
-              >Great! <br />
-              Here's the address:</label
-            >
+            <label for="email" class="form-label scale-in-center">Great! <br />
+              Here's the address:</label>
             <p class="text-start col-12 m-0 pb-2">
               <span #addr>{{ activeStep.label }}</span>
-              <i
-                role="button"
-                ngbTooltip="Copy address to clipboard"
-                placement="right"
-                ngxClipboard 
-                [cbContent]="addr.innerHTML"
-                (cbOnSuccess)="copied()"                
-                class="bi bi-clipboard-check ms-2"
-              ></i>
+              <i role="button" ngbTooltip="Copy address to clipboard" placement="right" ngxClipboard
+                [cbContent]="addr.innerHTML" (cbOnSuccess)="copied()" class="bi bi-clipboard-check ms-2"></i>
             </p>
             <div class="col-12" style="height: 200px">
-              <iframe
-                style="height: inherit; width: inherit; border: 0"
+              <iframe style="height: inherit; width: inherit; border: 0"
                 src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d8114.140476898324!2d24.7288034!3d59.4408276!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x46929300b988ebff%3A0x3d89de5bab5d28d!2sRailrooms!5e0!3m2!1sen!2sng!4v1691534208612!5m2!1sen!2sng"
-                width="600"
-                height="450"
-                allowfullscreen=""
-                loading="lazy"
-                referrerpolicy="no-referrer-when-downgrade"
-              ></iframe>
+                width="600" height="450" allowfullscreen="" loading="lazy"
+                referrerpolicy="no-referrer-when-downgrade"></iframe>
             </div>
-            <div
-              class="d-flex pt-3 ps-0 justify-content-start p-4 align-items-center position-relative"
-            >
-              <button
-                (click)="nextStep(5)"
-                class="secondary-btn fs-4 m-0"
-                type="button"
-              >
+            <div class="d-flex pt-3 ps-0 justify-content-start p-4 align-items-center position-relative">
+              <button (click)="nextStep(5)" class="secondary-btn fs-4 m-0" type="button">
                 Got it
               </button>
               <!--position in the center-->
-              <small
-                class="m-0 d-none d-md-block text-white position-relative ms-2 mt-3 translate-middle-y"
-              >
+              <small class="m-0 d-none d-md-block text-white position-relative ms-2 mt-3 translate-middle-y">
                 press <strong>Enter</strong> ↵
               </small>
             </div>
@@ -352,47 +238,27 @@
       <ng-container *ngIf="activeStep.no === 5">
         <div class="col-12 col-md-8 offset-md-2 col-lg-6 offset-lg-3">
           <div class="form-group pt-5 pb-4 text-start position-relative">
-            <label for="email" class="form-label scale-in-center"
-              >{{ activeStep.no }}. {{ activeStep.label }}</label
-            >
+            <label for="email" class="form-label scale-in-center">{{ activeStep.no }}. {{ activeStep.label }}</label>
             <!--form-group for guests with checkbox-->
             <div class="select">
               <ul>
                 <li (click)="confirm(true, 'guests')">
-                  <button
-                    class="checkbox"
-                    type="button"
-                    [class.checked]="form.get('guests')?.value"
-                  ></button>
+                  <button class="checkbox" type="button" [class.checked]="form.get('guests')?.value"></button>
                   <label for="cb1">Yes</label>
                 </li>
                 <li (click)="confirm(false, 'guests')" class="mt-3">
-                  <button
-                    class="checkbox"
-                    type="button"
-                    [class.checked]="form.get('guests')?.value === false"
-                  ></button>
+                  <button class="checkbox" type="button" [class.checked]="form.get('guests')?.value === false"></button>
                   <label for="cb2">No</label>
                 </li>
               </ul>
             </div>
           </div>
-          <div
-            class="d-flex pt-5 ps-0 justify-content-start p-4 align-items-center position-relative"
-          >
-            <button
-              (click)="previousStep(4)"
-              class="primary-btn fs-4 m-0 me-4"
-              type="button"
-            >
+          <div class="d-flex pt-5 ps-0 justify-content-start p-4 align-items-center position-relative">
+            <button (click)="previousStep(4)" class="primary-btn fs-4 m-0 me-4" type="button">
               Back
             </button>
-            <button
-              [disabled]="form.get('guests')?.invalid"
-              (click)="nextStep(form.get('guests')?.value ? 6 : 7)"
-              class="secondary-btn fs-4 m-0"
-              type="button"
-            >
+            <button [disabled]="form.get('guests')?.invalid" (click)="nextStep(form.get('guests')?.value ? 6 : 7)"
+              class="secondary-btn fs-4 m-0" type="button">
               Next
             </button>
           </div>
@@ -401,47 +267,30 @@
       <ng-container *ngIf="activeStep.no === 6">
         <div class="col-12 col-md-8 offset-md-2 col-lg-6 offset-lg-3">
           <div class="form-group pt-5 pb-4 text-start position-relative">
-            <label for="email" class="form-label scale-in-center"
-              >{{ activeStep.no }}. {{ activeStep.label }}</label
-            >
-            <!--form-group for plusOneOrTwo with checkbox-->
+            <label for="email" class="form-label scale-in-center">{{ activeStep.no }}. {{ activeStep.label }}</label>
+            <!--form-group for plu
+sOneOrTwo with checkbox-->
             <div class="select">
               <ul>
                 <li (click)="confirm(true, 'plusOneOrTwo', 1)">
-                  <button
-                    class="checkbox"
-                    type="button"
-                    [class.checked]="form.get('plusOneOrTwo')?.value === 1"
-                  ></button>
+                  <button class="checkbox" type="button"
+                    [class.checked]="form.get('plusOneOrTwo')?.value === 1"></button>
                   <label for="cb1">1</label>
                 </li>
                 <li (click)="confirm(false, 'plusOneOrTwo', 2)" class="mt-3">
-                  <button
-                    class="checkbox"
-                    type="button"
-                    [class.checked]="form.get('plusOneOrTwo')?.value === 2"
-                  ></button>
+                  <button class="checkbox" type="button"
+                    [class.checked]="form.get('plusOneOrTwo')?.value === 2"></button>
                   <label for="cb2">2</label>
                 </li>
               </ul>
             </div>
           </div>
-          <div
-            class="d-flex pt-5 ps-0 justify-content-start p-4 align-items-center position-relative"
-          >
-            <button
-              (click)="previousStep(5)"
-              class="primary-btn fs-4 m-0 me-4"
-              type="button"
-            >
+          <div class="d-flex pt-5 ps-0 justify-content-start p-4 align-items-center position-relative">
+            <button (click)="previousStep(5)" class="primary-btn fs-4 m-0 me-4" type="button">
               Back
             </button>
-            <button
-              [disabled]="form.get('plusOneOrTwo')?.invalid"
-              (click)="nextStep(7)"
-              class="secondary-btn fs-4 m-0"
-              type="button"
-            >
+            <button [disabled]="form.get('plusOneOrTwo')?.invalid" (click)="nextStep(7)" class="secondary-btn fs-4 m-0"
+              type="button">
               Next
             </button>
           </div>
@@ -450,47 +299,27 @@
       <ng-container *ngIf="activeStep.no === 7">
         <div class="col-12 col-md-8 offset-md-2 col-lg-6 offset-lg-3">
           <div class="form-group pt-5 pb-4 text-start position-relative">
-            <label for="email" class="form-label scale-in-center"
-              >{{ activeStep.no }}. {{ activeStep.label }}</label
-            >
+            <label for="email" class="form-label scale-in-center">{{ activeStep.no }}. {{ activeStep.label }}</label>
             <!--form-group for drink with checkbox-->
             <div class="select">
               <ul>
                 <li (click)="confirm(true, 'drink')">
-                  <button
-                    class="checkbox"
-                    type="button"
-                    [class.checked]="form.get('drink')?.value"
-                  ></button>
+                  <button class="checkbox" type="button" [class.checked]="form.get('drink')?.value"></button>
                   <label for="cb1">Yep</label>
                 </li>
                 <li (click)="confirm(false, 'drink')" class="mt-3">
-                  <button
-                    class="checkbox"
-                    type="button"
-                    [class.checked]="form.get('drink')?.value === false"
-                  ></button>
+                  <button class="checkbox" type="button" [class.checked]="form.get('drink')?.value === false"></button>
                   <label for="cb2">Nope</label>
                 </li>
               </ul>
             </div>
           </div>
-          <div
-            class="d-flex pt-5 ps-0 justify-content-start p-4 align-items-center position-relative"
-          >
-            <button
-              (click)="previousStep(6)"
-              class="primary-btn fs-4 m-0 me-4"
-              type="button"
-            >
+          <div class="d-flex pt-5 ps-0 justify-content-start p-4 align-items-center position-relative">
+            <button (click)="previousStep(6)" class="primary-btn fs-4 m-0 me-4" type="button">
               Back
             </button>
-            <button
-              [disabled]="form.get('drink')?.invalid"
-              (click)="nextStep(8)"
-              class="secondary-btn fs-4 m-0"
-              type="button"
-            >
+            <button [disabled]="form.get('drink')?.invalid" (click)="nextStep(8)" class="secondary-btn fs-4 m-0"
+              type="button">
               Next
             </button>
           </div>
@@ -499,67 +328,34 @@
       <ng-container *ngIf="activeStep.no === 8">
         <div class="col-12 col-md-8 offset-md-2 col-lg-6 offset-lg-3">
           <div class="form-group pt-5 pb-4 text-start position-relative">
-            <label for="email" class="form-label scale-in-center"
-              >{{ activeStep.no }}. {{ activeStep.label }}</label
-            >
+            <label for="email" class="form-label scale-in-center">{{ activeStep.no }}. {{ activeStep.label }}</label>
             <!--form-group for smoke with checkbox-->
             <div class="select">
               <ul>
                 <li (click)="confirm(true, 'smoke')">
-                  <button
-                    class="checkbox"
-                    type="button"
-                    [class.checked]="form.get('smoke')?.value"
-                  ></button>
+                  <button class="checkbox" type="button" [class.checked]="form.get('smoke')?.value"></button>
                   <label for="cb1">Yep</label>
                 </li>
                 <li (click)="confirm(false, 'smoke')" class="mt-3">
-                  <button
-                    class="checkbox"
-                    type="button"
-                    [class.checked]="form.get('smoke')?.value === false"
-                  ></button>
+                  <button class="checkbox" type="button" [class.checked]="form.get('smoke')?.value === false"></button>
                   <label for="cb2">Nope</label>
                 </li>
               </ul>
             </div>
           </div>
-          <div
-            class="d-flex pt-5 ps-0 justify-content-start p-4 align-items-center position-relative"
-          >
-            <button
-              [disabled]="isSaving"
-              (click)="previousStep(7)"
-              class="primary-btn fs-4 m-0 me-4"
-              type="button"
-            >
+          <div class="d-flex pt-5 ps-0 justify-content-start p-4 align-items-center position-relative">
+            <button [disabled]="isSaving" (click)="previousStep(7)" class="primary-btn fs-4 m-0 me-4" type="button">
               Back
             </button>
-            <button
-              [disabled]="form.get('smoke')?.invalid || isSaving"
-              (click)="save()"
-              class="secondary-btn fs-4 m-0"
-              type="submit"
-            >
+            <button [disabled]="form.get('smoke')?.invalid || isSaving" (click)="save()" class="secondary-btn fs-4 m-0"
+              type="submit">
               {{ isSaving && saveStatus === "" ? "Saving RSVP..." : "Proceed" }}
               <!--spinner-->
-              <span
-                *ngIf="isSaving"
-                class="spinner-border spinner-border-sm ms-2"
-                role="status"
-                aria-hidden="true"
-              ></span>
+              <span *ngIf="isSaving" class="spinner-border spinner-border-sm ms-2" role="status"
+                aria-hidden="true"></span>
               <!--status icon-->
-              <i
-                *ngIf="saveStatus === 'success'"
-                class="bi bi-check-circle-fill ms-2"
-                style="color: #28a745"
-              ></i>
-              <i
-                *ngIf="saveStatus === 'error'"
-                class="bi bi-x-circle-fill ms-2"
-                style="color: #dc3545"
-              ></i>
+              <i *ngIf="saveStatus === 'success'" class="bi bi-check-circle-fill ms-2" style="color: #28a745"></i>
+              <i *ngIf="saveStatus === 'error'" class="bi bi-x-circle-fill ms-2" style="color: #dc3545"></i>
             </button>
           </div>
         </div>
@@ -568,27 +364,19 @@
       <ng-container *ngIf="activeStep.no === 10">
         <div class="col-12 col-md-8 offset-md-2 col-lg-6 offset-lg-3">
           <div class="form-group pt-5 pb-4 text-start position-relative">
-            <label for="email" class="form-label scale-in-center"
-              >Hey {{ form.get("firstname")?.value }}!</label
-            >
+            <label for="email" class="form-label scale-in-center">Hey {{ form.get("firstname")?.value }}!</label>
             <p>We got your RSVP, go ahead to buy your ticket.</p>
           </div>
-          <div
-            class="d-flex pt-3 ps-0 justify-content-start p-4 align-items-center position-relative"
-          >
-            <button
-              (click)="goto('https://buy.stripe.com/14kaG13xzfQ6dpK000')"
-              class="secondary-btn fs-4 m-0"
-              type="button"
-              role="link"
-            >
+          <div class="d-flex pt-3 ps-0 justify-content-start p-4 align-items-center position-relative">
+            <button (click)="goto('https://buy.stripe.com/14kaG13xzfQ6dpK000')" class="secondary-btn fs-4 m-0"
+              type="button" role="link">
               Buy ticket now
               {{ timeleft && starttimer === 'saved' ? timeleft : '' }}
             </button>
           </div>
-          
-            <!--share rsvp on social media, social media icons-->
-            <!-- <div class="d-flex">
+
+          <!--share rsvp on social media, social media icons-->
+          <!-- <div class="d-flex">
               <a
                 aria-label="Share on Facebook"
                 rel="noopener noreferrer"
@@ -684,28 +472,15 @@
       <ng-container *ngIf="activeStep.no === 9">
         <div class="col-12 col-md-8 offset-md-2 col-lg-6 offset-lg-3">
           <div class="form-group pt-5 pb-4 text-start position-relative">
-            <label for="email" class="form-label scale-in-center"
-              >That's too bad</label
-            >
+            <label for="email" class="form-label scale-in-center">That's too bad</label>
             <p>Thanks for letting us know!</p>
           </div>
-          <div
-            class="d-flex pt-5 ps-0 justify-content-start p-4 align-items-center position-relative"
-          >
-            <button
-              [disabled]="isSaving"
-              (click)="previousStep(3)"
-              class="primary-btn fs-4 m-0 me-4"
-              type="button"
-            >
+          <div class="d-flex pt-5 ps-0 justify-content-start p-4 align-items-center position-relative">
+            <button [disabled]="isSaving" (click)="previousStep(3)" class="primary-btn fs-4 m-0 me-4" type="button">
               Back
             </button>
-            <button
-              (click)="goto('https://buy.stripe.com/14kaG13xzfQ6dpK000')"
-              class="secondary-btn fs-4 m-0"
-              type="button"
-              role="link"
-            >
+            <button (click)="goto('https://buy.stripe.com/14kaG13xzfQ6dpK000')" class="secondary-btn fs-4 m-0"
+              type="button" role="link">
               Buy the ticket anyway?
             </button>
           </div>
@@ -715,18 +490,10 @@
   </div>
 
   <!--position button to bottom-right to clear form and restart-->
-  <div
-    class="position-absolute bottom-0 end-0 p-4"
-    style="z-index: 1000; cursor: pointer"
-  >
-    <button
-      *ngIf="activeStep.no !== 0 && activeStep.no !== 1 && activeStep.no !== 10"
-      [disabled]="isSaving"
-      (click)="restart()"
-      style="font-family: inherit; font-size: medium !important"
-      class="primary-btn fw-normal m-0 fade-in"
-      type="button"
-    >
+  <div class="position-absolute bottom-0 end-0 p-4" style="z-index: 1000; cursor: pointer">
+    <button *ngIf="activeStep.no !== 0 && activeStep.no !== 1 && activeStep.no !== 10" [disabled]="isSaving"
+      (click)="restart()" style="font-family: inherit; font-size: medium !important"
+      class="primary-btn fw-normal m-0 fade-in" type="button">
       Start over
     </button>
   </div>

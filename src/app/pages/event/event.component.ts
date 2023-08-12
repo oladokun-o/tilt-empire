@@ -6,6 +6,7 @@ import { Router, ActivatedRoute, Params } from '@angular/router';
 import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ShoppingCartComponent } from 'src/app/shared/modals/shopping-cart/shopping-cart.component';
 import { Title } from "@angular/platform-browser";
+import { VideoComponent } from 'src/app/shared/components/video/video.component';
 
 @Component({
   selector: 'app-event',
@@ -17,7 +18,7 @@ export class EventComponent implements OnInit {
   event!: Event;
   event_id!: string;
 
-  constructor(
+  constructor (
     public router: Router,
     public route: ActivatedRoute,
     private eventService: EventsService,
@@ -36,7 +37,7 @@ export class EventComponent implements OnInit {
     else {
       route.params.subscribe((params: Params) => {
         this.event_id = params['id'];
-      })
+      });
       this.getEvent(this.event_id);
     }
   }
@@ -57,9 +58,9 @@ export class EventComponent implements OnInit {
         this.events = result.result;
       },
       error: (error) => {
-        this.toastr.error(error || 'An error occured, please refresh the application')
+        this.toastr.error(error || 'An error occured, please refresh the application');
       }
-    })
+    });
   }
 
   getEvent(id: string) {
@@ -83,14 +84,14 @@ export class EventComponent implements OnInit {
         this.titleService.setTitle('TILT Empire presents: ' + this.event.title);
       },
       error: (error) => {
-        this.toastr.error(error || 'An error occured, please refresh the application')
+        this.toastr.error(error || 'An error occured, please refresh the application');
       }
-    })
+    });
   }
 
   payout(type: string) {
-    if (type === 'reg') location.href = this.event.checkout_link
-    else if (type === 'vip' && this.event.checkout_link_vip) location.href = this.event.checkout_link_vip
+    if (type === 'reg') location.href = this.event.checkout_link;
+    else if (type === 'vip' && this.event.checkout_link_vip) location.href = this.event.checkout_link_vip;
   }
 
   convertToDate(iso: Date) {
@@ -100,12 +101,12 @@ export class EventComponent implements OnInit {
 
   convertToDay(iso: Date) {
     let date = new Date(iso.toString());
-    return [ 'Sun', 'Mon','Tue','Wed','Thu', 'Fri','Sat'][date.getDay()];
+    return ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'][date.getDay()];
   }
 
   convertToMonth(iso: Date) {
     let date = new Date(iso.toString());
-    return ['January', 'February', 'March', 'April', 'May','June','July', 'August', 'September', 'October', 'November', 'December'][date.getMonth()];
+    return ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'][date.getMonth()];
   }
 
   convertToYear(iso: Date) {
@@ -116,5 +117,16 @@ export class EventComponent implements OnInit {
   convertTime(iso: Date) {
     let date = new Date(iso.toString());
     return date.getHours() + ' : ' + date.getMinutes();
+  }
+
+  openVideo() {
+    const ref = this.modalService.open(VideoComponent, {
+      centered: true,
+      size: 'sm',
+      modalDialogClass: 'video'
+    });
+    ref.componentInstance.video = 'assets/video/eatahthon.mp4';
+    ref.componentInstance.controls = true;
+    ref.componentInstance.loop = true;
   }
 }
