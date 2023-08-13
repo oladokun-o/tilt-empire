@@ -12,7 +12,9 @@
         <div
           *ngIf="event._id === '4c4c9544-6edd-40e7-b898-4b850bef87c7' || event._id ===  '759e691e-88e2-4e00-8b42-271ca651da5d'"
           class="col-12 p-0">
-          <video #video class="col-12" [autoplay]="true" [volume]="0.2" loop src="assets/video/eatahthon.mp4"></video>
+          <video #video class="col-12" autoplay volume="0.2" playsinline loop>
+            <source src="assets/video/eatahthon.mp4" type="video/mp4">
+          </video>
         </div>
       </div>
     </div>
