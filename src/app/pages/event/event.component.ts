@@ -126,7 +126,7 @@ export class EventComponent implements OnInit {
       modalDialogClass: 'video'
     });
     ref.componentInstance.video = 'assets/video/eatahthon.mp4';
-    ref.componentInstance.controls = true;
+    ref.componentInstance.controls = false;
     ref.componentInstance.loop = true;
   }
 }

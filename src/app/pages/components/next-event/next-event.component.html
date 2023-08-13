@@ -1,4 +1,3 @@
-
 <div *ngIf="event" class="row -dark p-2 py-4 pb-5 pb-2 mb-5">
   <div class="col-12 col-md-12 pe-md-4">
     <div class="col-12">
@@ -23,7 +22,9 @@
                 <h5>
                   <div class="row">
                     <i class="bi bi-calendar-check col-auto pe-0"></i>
-                    <div class="col-10">{{ convertToDay(event.datetime) }}, {{ convertToMonth(event.datetime) }} {{ convertToDate(event.datetime) }}, {{ convertToYear(event.datetime) }}. <br> {{ convertTime(event.datetime) }}</div>
+                    <div class="col-10">{{ convertToDay(event.datetime) }}, {{ convertToMonth(event.datetime) }}
+                      {{ convertToDate(event.datetime) }}, {{ convertToYear(event.datetime) }}. <br>
+                      {{ convertTime(event.datetime) }}</div>
                   </div>
                 </h5>
                 <h5>
@@ -33,7 +34,8 @@
                   </div>
                 </h5>
                 <div class="col-12 d-flex justify-content-start mb-3">
-                  <a [routerLink]="['/event', event._id]" routerLinkActive="router-link-active" class="primary-btn col-12 col-md-auto text-uppercase">More details</a>
+                  <a [routerLink]="['/event', event._id]" routerLinkActive="router-link-active"
+                    class="primary-btn col-12 col-md-auto text-uppercase">More details</a>
                 </div>
                 <div class="col-12">
                   <div class="row">
@@ -49,12 +51,12 @@
                       <p class="mb-0">Share</p>
                       <ul class="share">
                         <li>
-                          <a href="https://www.facebook.com/pg/tiltempireempire/posts/">
+                          <a href="https://www.facebook.com/tiltempire">
                             <i class="bi bi-facebook"></i>
                           </a>
                         </li>
                         <li>
-                          <a href="https://www.instagram.com/p/CnnNQiCtMPO/?igshid=YmMyMTA2M2Y=">
+                          <a href="https://instagram.com/tilt_emp?igshid=MzRlODBiNWFlZA==">
                             <i class="bi bi-instagram"></i>
                           </a>
                         </li>
