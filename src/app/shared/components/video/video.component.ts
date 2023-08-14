@@ -8,7 +8,7 @@ import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 })
 export class VideoComponent implements OnInit {
 
-  video!: string;
+  video: string = 'https://tiltempire.b-cdn.net/eatahthon.mp4';
   volume: number = 0.2;
   controls: boolean = false;
   loop: boolean = true;

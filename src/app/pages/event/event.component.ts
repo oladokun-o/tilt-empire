@@ -125,8 +125,8 @@ export class EventComponent implements OnInit {
       size: 'sm',
       modalDialogClass: 'video'
     });
-    ref.componentInstance.video = 'assets/video/eatahthon.mp4';
-    ref.componentInstance.controls = false;
+    ref.componentInstance.video = 'https://tiltempire.b-cdn.net/eatahthon.mp4';
+    ref.componentInstance.controls = true;
     ref.componentInstance.loop = true;
   }
 }
