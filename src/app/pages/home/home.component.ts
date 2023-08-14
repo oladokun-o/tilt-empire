@@ -20,7 +20,7 @@ export class HomeComponent implements OnInit, AfterViewChecked {
   galleryOptions: NgxGalleryOptions[] = [];
   galleryImages: NgxGalleryImage[] = [];
 
-  @ViewChild('video') video!: ElementRef<HTMLVideoElement>;
+  // @ViewChild('video') video!: ElementRef<HTMLVideoElement>;
 
   constructor (
     public router: Router,
