@@ -2,7 +2,7 @@
   <div class="flyer h-100">
     <!-- <img class="blurred" src="assets/img/Eath-a-thon Flyer2B.png" /> -->
     <video class="blurred" [autoplay]="true" [loop]="true" [volume]="0.2"
-      src="https://tiltempire.b-cdn.net/eatahthon.mp4"></video>
+      src="assets/video/IMG_1779.MOV"></video>
     <div class="void"></div>
     <div class="col-4">
       <img src="assets/img/Eath-a-thon Flyer2B.png" />
@@ -201,7 +201,7 @@
             <button (click)="previousStep(2)" class="primary-btn fs-4 m-0 me-4" type="button">
               Back
             </button>
-            <button [disabled]="form.get('attending')?.invalid" (click)="nextStep(form.get('attending')?.value ? 4 : 9)"
+            <button [disabled]="form.get('attending')?.invalid" (click)="nextStep(form.get('attending')?.value ? 4 : 7)"
               class="secondary-btn fs-4 m-0" type="button">
               Next
             </button>
@@ -220,7 +220,7 @@
             </p>
             <div class="col-12" style="height: 200px">
               <iframe style="height: inherit; width: inherit; border: 0"
-                src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d8114.140476898324!2d24.7288034!3d59.4408276!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x46929300b988ebff%3A0x3d89de5bab5d28d!2sRailrooms!5e0!3m2!1sen!2sng!4v1691534208612!5m2!1sen!2sng"
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d7451627.046116159!2d16.36278392493409!3d52.763948507575805!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x46eecfea39052619%3A0xf916a356eb3a2665!2sFIRST%20Club!5e0!3m2!1sen!2sng!4v1692516682612!5m2!1sen!2sng"
                 width="600" height="450" allowfullscreen="" loading="lazy"
                 referrerpolicy="no-referrer-when-downgrade"></iframe>
             </div>
@@ -290,18 +290,24 @@ sOneOrTwo with checkbox-->
             <button (click)="previousStep(5)" class="primary-btn fs-4 m-0 me-4" type="button">
               Back
             </button>
-            <button [disabled]="form.get('plusOneOrTwo')?.invalid" (click)="nextStep(7)" class="secondary-btn fs-4 m-0"
-              type="button">
-              Next
+             <button [disabled]="form.get('attending')?.invalid || isSaving" (click)="save(true)" class="secondary-btn fs-4 m-0"
+              type="submit">
+              {{ isSaving && saveStatus === "" ? "Saving RSVP..." : "Proceed" }}
+
+              <span *ngIf="isSaving" class="spinner-border spinner-border-sm ms-2" role="status"
+                aria-hidden="true"></span>
+
+              <i *ngIf="saveStatus === 'success'" class="bi bi-check-circle-fill ms-2" style="color: #28a745"></i>
+              <i *ngIf="saveStatus === 'error'" class="bi bi-x-circle-fill ms-2" style="color: #dc3545"></i>
             </button>
           </div>
         </div>
       </ng-container>
-      <ng-container *ngIf="activeStep.no === 7">
+      <!-- <ng-container *ngIf="activeStep.no === 7">
         <div class="col-12 col-md-8 offset-md-2 col-lg-6 offset-lg-3">
           <div class="form-group pt-5 pb-4 text-start position-relative">
             <label for="email" class="form-label scale-in-center">{{ activeStep.no }}. {{ activeStep.label }}</label>
-            <!--form-group for drink with checkbox-->
+
             <div class="select">
               <ul>
                 <li (click)="confirm(true, 'drink')">
@@ -330,7 +336,7 @@ sOneOrTwo with checkbox-->
         <div class="col-12 col-md-8 offset-md-2 col-lg-6 offset-lg-3">
           <div class="form-group pt-5 pb-4 text-start position-relative">
             <label for="email" class="form-label scale-in-center">{{ activeStep.no }}. {{ activeStep.label }}</label>
-            <!--form-group for smoke with checkbox-->
+
             <div class="select">
               <ul>
                 <li (click)="confirm(true, 'smoke')">
@@ -351,30 +357,30 @@ sOneOrTwo with checkbox-->
             <button [disabled]="form.get('smoke')?.invalid || isSaving" (click)="save()" class="secondary-btn fs-4 m-0"
               type="submit">
               {{ isSaving && saveStatus === "" ? "Saving RSVP..." : "Proceed" }}
-              <!--spinner-->
+
               <span *ngIf="isSaving" class="spinner-border spinner-border-sm ms-2" role="status"
                 aria-hidden="true"></span>
-              <!--status icon-->
+
               <i *ngIf="saveStatus === 'success'" class="bi bi-check-circle-fill ms-2" style="color: #28a745"></i>
               <i *ngIf="saveStatus === 'error'" class="bi bi-x-circle-fill ms-2" style="color: #dc3545"></i>
             </button>
           </div>
         </div>
-      </ng-container>
+      </ng-container> -->
 
-      <ng-container *ngIf="activeStep.no === 10">
+      <ng-container *ngIf="activeStep.no === 8">
         <div class="col-12 col-md-8 offset-md-2 col-lg-6 offset-lg-3">
           <div class="form-group pt-5 pb-4 text-start position-relative">
             <label for="email" class="form-label scale-in-center">Hey {{ form.get("firstname")?.value }}!</label>
-            <p>We got your RSVP, go ahead to buy your ticket.</p>
+            <p>We got your RSVP!, We'll stay in touch.</p>
           </div>
-          <div class="d-flex pt-3 ps-0 justify-content-start p-4 align-items-center position-relative">
+          <!-- <div class="d-flex pt-3 ps-0 justify-content-start p-4 align-items-center position-relative">
             <button (click)="goto('https://buy.stripe.com/14kaG13xzfQ6dpK000')" class="secondary-btn fs-4 m-0"
               type="button" role="link">
               Buy ticket now
               {{ timeleft && starttimer === 'saved' ? timeleft : '' }}
             </button>
-          </div>
+          </div> -->
 
           <!--share rsvp on social media, social media icons-->
           <!-- <div class="d-flex">
@@ -470,7 +476,7 @@ sOneOrTwo with checkbox-->
             </div> -->
         </div>
       </ng-container>
-      <ng-container *ngIf="activeStep.no === 9">
+      <ng-container *ngIf="activeStep.no === 7">
         <div class="col-12 col-md-8 offset-md-2 col-lg-6 offset-lg-3">
           <div class="form-group pt-5 pb-4 text-start position-relative">
             <label for="email" class="form-label scale-in-center">That's too bad</label>
@@ -480,9 +486,15 @@ sOneOrTwo with checkbox-->
             <button [disabled]="isSaving" (click)="previousStep(3)" class="primary-btn fs-4 m-0 me-4" type="button">
               Back
             </button>
-            <button (click)="goto('https://buy.stripe.com/14kaG13xzfQ6dpK000')" class="secondary-btn fs-4 m-0"
-              type="button" role="link">
-              Buy the ticket anyway?
+             <button [disabled]="isSaving" (click)="save()" class="secondary-btn fs-4 m-0"
+              type="submit">
+              {{ isSaving && saveStatus === "" ? "Saving RSVP..." : "Register anyway?" }}
+
+              <span *ngIf="isSaving" class="spinner-border spinner-border-sm ms-2" role="status"
+                aria-hidden="true"></span>
+
+              <i *ngIf="saveStatus === 'success'" class="bi bi-check-circle-fill ms-2" style="color: #28a745"></i>
+              <i *ngIf="saveStatus === 'error'" class="bi bi-x-circle-fill ms-2" style="color: #dc3545"></i>
             </button>
           </div>
         </div>
@@ -492,10 +504,15 @@ sOneOrTwo with checkbox-->
 
   <!--position button to bottom-right to clear form and restart-->
   <div class="position-absolute bottom-0 end-0 p-4" style="z-index: 1000; cursor: pointer">
-    <button *ngIf="activeStep.no !== 0 && activeStep.no !== 1 && activeStep.no !== 10" [disabled]="isSaving"
+    <button *ngIf="activeStep.no !== 0 && activeStep.no !== 1 && activeStep.no !== 8" [disabled]="isSaving"
       (click)="restart()" style="font-family: inherit; font-size: medium !important"
       class="primary-btn fw-normal m-0 fade-in" type="button">
       Start over
+    </button>
+    <button *ngIf="activeStep.no === 8" [disabled]="isSaving"
+      routerLink="/" style="font-family: inherit; font-size: medium !important"
+      class="primary-btn fw-normal m-0 fade-in" type="button">
+      Home
     </button>
   </div>
 </main>

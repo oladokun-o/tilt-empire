@@ -20,7 +20,7 @@ interface Step {
 })
 export class RsvpComponent implements OnInit, AfterViewChecked {
 
-  address: string = 'Railroom, Telliskivi 59a.'
+  address: string = 'Andrejostas iela 5k-3, Ziemeļu rajons, Rīga, LV-1050, Latvia'
 
   steps: Step[] = [
     { label: 'RSVP', no: 0, active: true },
@@ -31,10 +31,10 @@ export class RsvpComponent implements OnInit, AfterViewChecked {
     { label: this.address, no: 4, active: false },
     { label: 'Bringing guests?', no: 5, active: false },
     { label: 'Plus one or two?', no: 6, active: false },
-    { label: 'Do you drink?', no: 7, active: false },
-    { label: 'Do you smoke?', no: 8, active: false },
-    { label: 'That\'s too bad', no: 9, active: false },
-    { label: 'Thank you', no: 10, active: false }
+    // { label: 'Do you drink?', no: 7, active: false },
+    // { label: 'Do you smoke?', no: 8, active: false },
+    { label: 'That\'s too bad', no: 7, active: false },
+    { label: 'Thank you', no: 8, active: false }
   ]
 
   activeStep: Step = this.steps[0];
@@ -63,7 +63,7 @@ export class RsvpComponent implements OnInit, AfterViewChecked {
     public titleService: Title
   ) {
     this.titleService.setTitle('TILT Empire presents: Eat-a-thon');
-    toast.toastrConfig.preventDuplicates = true;  
+    toast.toastrConfig.preventDuplicates = true;
     this.route.params.subscribe(params => {
       //get from session storage
       const rsvp: any = JSON.parse(sessionStorage.getItem('rsvp')!),
@@ -81,7 +81,7 @@ export class RsvpComponent implements OnInit, AfterViewChecked {
       // } else {
       //   this.activeStep = this.steps[0];
       // }
-      
+
       if (params.activeStep && rsvp) {
         const index = this.steps.findIndex(step => step.no === +params.activeStep);
         this.steps[index].active = true;
@@ -112,7 +112,7 @@ export class RsvpComponent implements OnInit, AfterViewChecked {
         this.form.get('drink')?.patchValue(false);
         this.form.get('smoke')?.patchValue(false);
         setTimeout(() => {
-          const index = this.steps.findIndex(step => step.no === 9);
+          const index = this.steps.findIndex(step => step.no === 7);
           this.steps[index].active = true;
           this.activeStep = this.steps[index];
         }, 2500);
@@ -177,7 +177,7 @@ export class RsvpComponent implements OnInit, AfterViewChecked {
 
   countdown() {
     console.log('countdown started')
-    this.timeleft--;    
+    this.timeleft--;
     console.log(this.timeleft)
     if (this.timeleft > 0) {
       setTimeout(() => this.countdown(), 1000);
@@ -200,8 +200,8 @@ export class RsvpComponent implements OnInit, AfterViewChecked {
         attending: this.form.value.attending.toString(),
         guests: this.form.value.guests.toString(),
         plusOneOrTwo: this.form.value.plusOneOrTwo.toString(),
-        drink: this.form.value.drink.toString(),
-        smoke: this.form.value.smoke.toString()
+        drink: false,
+        smoke: false
       }
 
       this.rsvpService.saveRsvp(payload).subscribe(res => {
@@ -209,12 +209,12 @@ export class RsvpComponent implements OnInit, AfterViewChecked {
         this.form.enable();
         this.starttimer = 'saved';
 
-        setTimeout(() => this.countdown(), 1000);
+        // setTimeout(() => this.countdown(), 1000);
 
         setTimeout(() => {
           this.saveStatus = '';
         }, 2000);
-        this.nextStep(10);
+        this.nextStep(8);
     });
     }
   }

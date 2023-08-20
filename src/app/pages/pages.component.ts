@@ -42,6 +42,22 @@ export class PagesComponent implements OnInit, AfterViewChecked {
         });
       }
     });
+
+    const LongstringHelper = (str: any) => {
+      const sliceBoundary = (str: any) => str.substr(0, str.lastIndexOf(" "));
+      const truncate = (n: number, useWordBoundary: any) =>
+        str.length <= n ? str : `${useWordBoundary
+          ? sliceBoundary(str.slice(0, n - 1))
+          : str.slice(0, n - 1)}&hellip;`;
+      return { full: str, truncate };
+    };
+
+    let descs = this.document.querySelectorAll(".desc");
+    descs.forEach(desc => {
+      let descText = desc.innerHTML;
+      let descTextTruncated = LongstringHelper(descText).truncate(300, true);
+      desc.innerHTML = descTextTruncated;
+    });
   }
 
   ngOnInit(): void {

@@ -5,16 +5,17 @@
     </div>
     <div class="col-12 events-list p-3 px-md-5 mt-3">
       <div *ngIf="event" class="event-cover shadow position-relative"
-        [ngStyle]="{ 'background-image': event && event._id === '4c4c9544-6edd-40e7-b898-4b850bef87c7' && event.imageUrl ? 'url(' + event.imageUrl + ')' : null }">
-        <video *ngIf="event && event._id !== '4c4c9544-6edd-40e7-b898-4b850bef87c7'" class="blurred" [autoplay]="true"
-          [loop]="true" [volume]="0" src="assets/video/eatahthon.mp4"></video>
+        [ngStyle]="{ 'background-image': event && event._id === '4c4c9544-6edd-40e7-b898-4b850bef87c7' || event._id ===  '759e691e-88e2-4e00-8b42-271ca651da5d' && event.imageUrl ? 'url(' + event.imageUrl + ')' : null }">
+       <video class="blurred" [autoplay]="true" controls volume="0.5" loop>
+            <source src="https://tiltempire.b-cdn.net/eatahthon.mp4" type="video/mp4">
+          </video>
         <div class="row">
           <div class="col-12 party p-5">
             <h5>{{ convertToMonth(event.datetime) }} {{ convertToDate(event.datetime) }}</h5>
             <h4 class="text-capitalize fw-bold">
               <a [routerLink]="['/event', event._id]">{{ event.title }}</a>
             </h4>
-            <p class="mb-3 col-md-9">{{ event.description }}</p>
+            <p class="mb-3 col-md-9 desc" data-truncateat="100" data-onword="0">{{ event.description }}</p>
             <h5>
               <div class="row">
                 <i class="bi bi-calendar-check col-auto pe-0"></i>
@@ -36,7 +37,7 @@
             </div>
             <div class="col-12 invisible">
               <div class="row">
-                <div class="col-12 col-md-12 col-lg-6">
+                <div *ngIf="event.tags.length" class="col-12 col-md-12 col-lg-6">
                   <p class="mb-0">Tags</p>
                   <ul class="tags">
                     <li *ngFor="let tags of event.tags">
@@ -74,7 +75,7 @@
               <h4 class="text-capitalize fw-bold">
                 <a href="#">{{ event.title }}</a>
               </h4>
-              <p class="mb-3">{{ event?.description }}</p>
+              <p class="mb-3 desc" data-truncateat="120" data-onword="0">{{ event?.description }}</p>
               <h6>
                 <div class="row">
                   <i class="bi bi-calendar-check col-auto pe-0"></i>
@@ -92,7 +93,7 @@
               </h6>
               <div class="col-12">
                 <div class="row">
-                  <div class="col-12 mt-2">
+                  <div *ngIf="event.tags.length" class="col-12 mt-2">
                     <p class="mb-2">Tags</p>
                     <ul class="tags">
                       <li *ngFor="let tags of event.tags">

@@ -17,4 +17,5 @@
 
 video {
   pointer-events: all !important;
+  height: 100vh;
 }
