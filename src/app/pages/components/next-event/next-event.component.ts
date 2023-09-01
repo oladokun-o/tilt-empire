@@ -69,8 +69,15 @@ export class NextEventComponent implements OnInit {
     return new Date(iso.toString()).getFullYear();
   }
 
-  convertTime(iso: Date) {
-    let date = new Date(iso.toString());
-    return date.getHours() + ' : ' + date.getMinutes();
+  convertTime(date: Date) {
+    //convert date object to time in am/pm format
+    let hours = new Date(date.toString()).getHours();
+    let minutes = new Date(date.toString()).getMinutes();
+    let ampm = hours >= 12 ? 'pm' : 'am';
+    hours = hours % 12;
+    hours = hours ? hours : 12; // the hour '0' should be '12'
+    let minutesStr = minutes < 10 ? '0' + minutes : minutes;
+    let strTime = hours + ':' + minutesStr + ' ' + ampm;
+    return strTime;
   }
 }
