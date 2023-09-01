@@ -17,5 +17,13 @@
 
 video {
   pointer-events: all !important;
-  height: 100vh;
+  object-fit: cover;
+}
+
+@media screen and (min-width: 768px) {
+  video {
+    height: 90vh;
+    object-fit: cover;
+    object-position: center;
+  }
 }

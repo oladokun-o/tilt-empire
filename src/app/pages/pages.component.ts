@@ -36,7 +36,7 @@ export class PagesComponent implements OnInit, AfterViewChecked {
     let aS = this.document.querySelectorAll('a');
     aS.forEach(a => {
       if (a.href.includes('facebook') || a.href.includes('instagram')) {
-        console.log(a);
+        // console.log(a);
         a.addEventListener('click', () => {
           window.open(a.href, '_blank');
         });

@@ -1,21 +1,11 @@
 <div class="events-contn container-fluid px-0">
   <div class="row m-auto">
     <div class="col-12 hero -dark p-3 p-md-5" style="height: 100%">
-      <h1
-        [routerLink]="['/events']"
-        class="px-md-0 col-auto"
-        style="cursor: pointer"
-      >
+      <h1 [routerLink]="['/events']" class="px-md-0 col-auto" style="cursor: pointer">
         <i class="bi bi-arrow-left me-2"></i> Events
       </h1>
-      <div
-        *ngIf="!event"
-        class="w-100 d-flex align-items-center justify-content-center"
-      >
-        <div
-          class="spinner-border text-light spinner-border-xl spinner-primary"
-          role="status"
-        >
+      <div *ngIf="!event" class="w-100 d-flex align-items-center justify-content-center">
+        <div class="spinner-border text-light spinner-border-xl spinner-primary" role="status">
           <!--<span class="sr-only">Loading...</span>-->
         </div>
       </div>
@@ -26,9 +16,7 @@
           </div>
           <div class="col-12 col-md-7">
             <div class="row">
-              <div
-                class="col-12 col-md-6 col-lg-4 px-0 ps-md-3 d-block d-md-none my-3"
-              >
+              <div class="col-12 col-md-6 col-lg-4 px-0 ps-md-3 d-block d-md-none my-3">
                 <div class="date col-12 p-3 shadow">
                   <h5 class="fw-bold">Date & Time</h5>
                   <p class="text-mu">
@@ -39,57 +27,28 @@
                     {{ convertTime(event.datetime) }}
                   </p>
                   <!-- <a title="Add to Calendar" class="addeventatc" data-id="tj16041042" href="https://www.addevent.com/event/tj16041042" target="_blank">Add to Calendar</a> -->
-                  <script
-                    type="text/javascript"
-                    src="https://cdn.addevent.com/libs/atc/1.6.1/atc.min.js"
-                    async
-                    defer
-                  ></script>
+                  <script type="text/javascript" src="https://cdn.addevent.com/libs/atc/1.6.1/atc.min.js" async
+                    defer></script>
                   <div class="col-12 d-flex flex-wrap flex-column">
-                    <a
-                      *ngIf="event.checkout_link !== '0'"
-                      (click)="payout('reg')"
-                      class="primary-btn col-12 text-uppercase"
-                      >Get Tickets</a
-                    >
-                    <a
-                      *ngIf="event.checkout_link_vip && event.price !== 0"
-                      (click)="payout('vip')"
-                      class="primary-btn col-12 text-uppercase mt-3"
-                      >VIP Ticket Pass</a
-                    >
-                    <div
-                      *ngIf="event.checkout_link === '0'"
-                      class="col-12 d-flex justify-content-start"
-                    >
-                      <a
-                        routerLink="/rsvp"
-                        class="primary-btn col-12 text-uppercase"
-                        >rsvp</a
-                      >
-                    </div>
-                    <div *ngIf="event.checkout_link !== '0'" class="col-12 text-center mt-3">
+                    <a (click)="payout('reg')" [class.disabled]="checkIfEventHasPassed(event)"
+                      [class.strike]="checkIfEventHasPassed(event)" class="primary-btn col-12 text-uppercase">Get
+                      Tickets</a>
+                    <!-- <a *ngIf="event.checkout_link_vip && event.price !== 0" (click)="payout('vip')"
+                      class="primary-btn col-12 text-uppercase mt-3">VIP Ticket Pass</a> -->
+                    <!-- <div *ngIf="event.checkout_link === '0'" class="col-12 d-flex justify-content-start">
+                      <a routerLink="/rsvp" class="primary-btn col-12 text-uppercase">rsvp</a>
+                    </div> -->
+                    <div class="col-12 text-center mt-3">
                       <p class="text-muted m-0">No Refunds</p>
                     </div>
                   </div>
                 </div>
-                <div
-                  *ngIf="
-                    event._id === '4c4c9544-6edd-40e7-b898-4b850bef87c7' ||
-                    event._id === '759e691e-88e2-4e00-8b42-271ca651da5d' ||
-                    event._id === '3d8a73af-56a7-4fc5-969b-8aa37dcab459'
-                  "
-                  class="col-12 mt-3 py-4"
-                >
+                <div *ngIf="event._id === '759e691e-88e2-4e00-8b42-271ca651da5d'
+                          || event_id === '3d8a73af-56a7-4fc5-969b-8aa37dcab459'" class="col-12 mt-3 py-4">
                   <div class="col-12 video mt-4">
-                    <img *ngIf="event.checkout_link !== '0'" src="assets/video/eatahthon-cover.jpg" alt="" />
-                    <img *ngIf="event.checkout_link === '0'" src="assets/video/youngjohn-cover.png" alt="" />
+                    <img src="assets/video/youngjohn-cover.png" alt="" />
                     <div class="img-overlay"></div>
-                    <a
-                      (click)="openVideo()"
-                      class="video-play-button"
-                      href="javascript:void(0)"
-                    >
+                    <a (click)="openVideo()" class="video-play-button" href="javascript:void(0)">
                       <span></span>
                     </a>
                   </div>
@@ -101,27 +60,12 @@
 
                 <h6 class="fw-bold">Location</h6>
                 <p class="mb-3">{{ event.location }}</p>
-                <div class="col-12" style="height: 250px">
-                  <iframe
-                    *ngIf="event.checkout_link !== '0'"
-                    style="height: inherit; width: inherit; border: 0"
-                    src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d8114.140476898324!2d24.7288034!3d59.4408276!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x46929300b988ebff%3A0x3d89de5bab5d28d!2sRailrooms!5e0!3m2!1sen!2sng!4v1691534208612!5m2!1sen!2sng"
-                    width="600"
-                    height="450"
-                    allowfullscreen=""
-                    loading="lazy"
-                    referrerpolicy="no-referrer-when-downgrade"
-                  ></iframe>
-                  <iframe
-                    *ngIf="event.checkout_link === '0'"
-                    style="height: inherit; width: inherit; border: 0"
+                <div *ngIf="event._id === '759e691e-88e2-4e00-8b42-271ca651da5d'
+                          || event_id === '3d8a73af-56a7-4fc5-969b-8aa37dcab459'" class="col-12" style="height: 250px">
+                  <iframe style="height: inherit; width: inherit; border: 0"
                     src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d7451627.046116159!2d16.36278392493409!3d52.763948507575805!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x46eecfea39052619%3A0xf916a356eb3a2665!2sFIRST%20Club!5e0!3m2!1sen!2sng!4v1692516682612!5m2!1sen!2sng"
-                    width="600"
-                    height="450"
-                    allowfullscreen=""
-                    loading="lazy"
-                    referrerpolicy="no-referrer-when-downgrade"
-                  ></iframe>
+                    width="600" height="450" allowfullscreen="" loading="lazy"
+                    referrerpolicy="no-referrer-when-downgrade"></iframe>
                 </div>
 
                 <h6 class="fw-bold mt-4">Contact</h6>
@@ -132,9 +76,7 @@
                   </p>
                   <p>
                     <i class="bi bi-envelope me-2"></i>
-                    <a href="mailto:support@tiltempire.org"
-                      >support@tiltempire.org</a
-                    >
+                    <a href="mailto:support@tiltempire.org">support@tiltempire.org</a>
                   </p>
                 </div>
 
@@ -148,26 +90,18 @@
                 <h6 class="fw-bold">Share</h6>
                 <ul class="share">
                   <li>
-                    <a
-                      target="_blank"
-                      href="https://www.facebook.com/tiltempire"
-                    >
+                    <a target="_blank" href="https://www.facebook.com/tiltempire">
                       <i class="bi bi-facebook"></i>
                     </a>
                   </li>
                   <li>
-                    <a
-                      target="_blank"
-                      href="https://instagram.com/tilt_emp?igshid=MzRlODBiNWFlZA=="
-                    >
+                    <a target="_blank" href="https://instagram.com/tilt_emp?igshid=MzRlODBiNWFlZA==">
                       <i class="bi bi-instagram"></i>
                     </a>
                   </li>
                 </ul>
               </div>
-              <div
-                class="col-12 col-md-6 col-lg-4 px-0 ps-md-3 d-none d-md-block"
-              >
+              <div class="col-12 col-md-6 col-lg-4 px-0 ps-md-3 d-none d-md-block">
                 <div class="date col-12 p-3 shadow mb-5">
                   <h5 class="fw-bold">Date & Time</h5>
                   <p class="text-mu">
@@ -178,57 +112,28 @@
                     {{ convertTime(event.datetime) }}
                   </p>
                   <!-- <a title="Add to Calendar" class="addeventatc" data-id="tj16041042" href="https://www.addevent.com/event/tj16041042" target="_blank">Add to Calendar</a> -->
-                  <script
-                    type="text/javascript"
-                    src="https://cdn.addevent.com/libs/atc/1.6.1/atc.min.js"
-                    async
-                    defer
-                  ></script>
+                  <script type="text/javascript" src="https://cdn.addevent.com/libs/atc/1.6.1/atc.min.js" async
+                    defer></script>
                   <div class="col-12 d-flex flex-wrap flex-column">
-                    <a
-                      *ngIf="event.checkout_link !== '0'"
-                      (click)="payout('reg')"
-                      class="primary-btn col-12 text-uppercase"
-                      >Get Tickets</a
-                    >
-                    <a
-                      *ngIf="event.checkout_link_vip && event.price !== 0"
-                      (click)="payout('vip')"
-                      class="primary-btn col-12 text-uppercase mt-3"
-                      >VIP Ticket Pass</a
-                    >
-                    <div
-                      *ngIf="event.checkout_link === '0'"
-                      class="col-12 d-flex justify-content-start"
-                    >
-                      <a
-                        routerLink="/rsvp"
-                        class="primary-btn col-12 text-uppercase"
-                        >rsvp</a
-                      >
-                    </div>
-                    <div *ngIf="event.checkout_link !== '0'" class="col-12 text-center mt-3">
+                    <a (click)="payout('reg')" [class.disabled]="checkIfEventHasPassed(event)"
+                      [class.strike]="checkIfEventHasPassed(event)" class="primary-btn col-12 text-uppercase">Get
+                      Tickets</a>
+                    <!-- <a *ngIf="event.checkout_link_vip && event.price !== 0" (click)="payout('vip')"
+                      class="primary-btn col-12 text-uppercase mt-3">VIP Ticket Pass</a>
+                    <div *ngIf="event.checkout_link === '0'" class="col-12 d-flex justify-content-start">
+                      <a routerLink="/rsvp" class="primary-btn col-12 text-uppercase">rsvp</a>
+                    </div> -->
+                    <div class="col-12 text-center mt-3">
                       <p class="text-muted m-0">No Refunds</p>
                     </div>
                   </div>
                 </div>
-                <div
-                  *ngIf="
-                    event._id === '4c4c9544-6edd-40e7-b898-4b850bef87c7' ||
-                    event._id === '759e691e-88e2-4e00-8b42-271ca651da5d' ||
-                    event._id === '3d8a73af-56a7-4fc5-969b-8aa37dcab459'
-                  "
-                  class="col-12 mt-2"
-                >
+                <div *ngIf="event._id === '759e691e-88e2-4e00-8b42-271ca651da5d'
+                          || event_id === '3d8a73af-56a7-4fc5-969b-8aa37dcab459'" class="col-12 mt-2">
                   <div class="col-12 video mt-2">
-                    <img *ngIf="event.checkout_link !== '0'" src="assets/video/eatahthon-cover.jpg" alt="" />
-                    <img *ngIf="event.checkout_link === '0'" src="assets/video/youngjohn-cover.png" alt="" />
+                    <img src="assets/video/youngjohn-cover.png" alt="" />
                     <div class="img-overlay"></div>
-                    <a
-                      (click)="openVideo()"
-                      class="video-play-button"
-                      href="javascript:void(0)"
-                    >
+                    <a (click)="openVideo()" class="video-play-button" href="javascript:void(0)">
                       <span></span>
                     </a>
                   </div>
@@ -238,21 +143,93 @@
           </div>
         </div>
       </div>
+      <div *ngIf="nextEvent" class="col-12 events-list p-3 px-md-5 mt-3">
+        <h1 class="px-md-0 mb-4">Latest Events</h1>
+        <div class="events container-fluid px-0">
+          <div class="row">
+            <div class="col-12 col-md-4 col-lg-3 p-3 p-md-2">
+              <div class="col-12 shadow p-3 -dark event-card">
+                <h5 class="mb-0">
+                  {{ convertToMonth(nextEvent.datetime) }}
+                  {{ convertToDate(nextEvent.datetime) }}
+                </h5>
+                <h4 class="text-capitalize fw-bold">
+                  <a [routerLink]="['/event', nextEvent._id]">{{ nextEvent.title }}</a>
+                </h4>
+                <p class="mb-3 desc">{{ event?.description }}</p>
+                <h6>
+                  <div class="row">
+                    <i class="bi bi-calendar-check col-auto pe-0"></i>
+                    <div class="col-10">
+                      {{ convertToDay(nextEvent.datetime) }},
+                      {{ convertToMonth(nextEvent.datetime) }}
+                      {{ convertToDate(nextEvent.datetime) }},
+                      {{ convertToYear(nextEvent.datetime) }}. <br />
+                      {{ convertTime(nextEvent.datetime) }}
+                    </div>
+                  </div>
+                </h6>
+                <h6>
+                  <div class="row">
+                    <i class="bi bi-geo-alt col-auto pe-0"></i>
+                    <div class="col-8">{{ nextEvent.location }}</div>
+                  </div>
+                </h6>
+                <div class="col-12">
+                  <div class="row">
+                    <div *ngIf="nextEvent.tags.length" class="col-12 mt-2">
+                      <p class="mb-2">Tags</p>
+                      <ul class="tags">
+                        <li *ngFor="let tags of nextEvent.tags">
+                          <a href="javascript:void(0)">{{ tags }}</a>
+                        </li>
+                      </ul>
+                    </div>
+                    <div class="col-12">
+                      <p class="mb-0">Share</p>
+                      <ul class="share">
+                        <li>
+                          <a target="_blank" href="https://www.facebook.com/tiltempire">
+                            <i class="bi bi-facebook"></i>
+                          </a>
+                        </li>
+                        <li>
+                          <a target="_blank" href="https://instagram.com/tilt_emp?igshid=MzRlODBiNWFlZA==">
+                            <i class="bi bi-instagram"></i>
+                          </a>
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+                <div class="col-12 d-flex justify-content-start">
+                  <a [routerLink]="['/event', nextEvent._id]"
+                    class="bg-transparent primary-btn border-0 p-0 col-12 col-md-auto text-uppercase">Learn more <i
+                      class="bi bi-chevron-right tint fs-6"></i>
+                  </a>
+                </div>
+              </div>
+            </div>
+            <div class="col-12 col-md-4 col-lg-3 p-3 p-md-2">
+              <div class="col-12 shadow p-5 -dark event-card">
+                <h2 class="text-muted">Coming soon...</h2>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
       <div class="col-12 events-list p-3 px-md-5 mt-3">
-        <h1 class="px-md-0 mb-4">Other Upcoming Events</h1>
+        <h1 class="px-md-0 mb-4">Past Events</h1>
         <div *ngIf="events.length > 0" class="events container-fluid px-0">
           <div class="row">
-            <div
-              *ngFor="let event of events"
-              class="col-12 col-md-4 col-lg-3 p-3 p-md-2"
-            >
+            <div *ngFor="let event of events" class="col-12 col-md-4 col-lg-3 p-3 p-md-2">
               <div class="col-12 shadow p-3 -dark event-card">
                 <h5 class="mb-0">
                   {{ convertToMonth(event.datetime) }}
                   {{ convertToDate(event.datetime) }}
                 </h5>
                 <h4 class="text-capitalize fw-bold">
-                  <a href="#">{{ event.title }}</a>
+                  <a [routerLink]="['/event', event._id]">{{ event.title }}</a>
                 </h4>
                 <p class="mb-3 desc">{{ event?.description }}</p>
                 <h6>
@@ -287,18 +264,12 @@
                       <p class="mb-0">Share</p>
                       <ul class="share">
                         <li>
-                          <a
-                            target="_blank"
-                            href="https://www.facebook.com/tiltempire"
-                          >
+                          <a target="_blank" href="https://www.facebook.com/tiltempire">
                             <i class="bi bi-facebook"></i>
                           </a>
                         </li>
                         <li>
-                          <a
-                            target="_blank"
-                            href="https://instagram.com/tilt_emp?igshid=MzRlODBiNWFlZA=="
-                          >
+                          <a target="_blank" href="https://instagram.com/tilt_emp?igshid=MzRlODBiNWFlZA==">
                             <i class="bi bi-instagram"></i>
                           </a>
                         </li>
@@ -307,17 +278,11 @@
                   </div>
                 </div>
                 <div class="col-12 d-flex justify-content-start">
-                  <a
-                    [routerLink]="['/event', event._id]"
-                    class="bg-transparent primary-btn border-0 p-0 col-12 col-md-auto text-uppercase"
-                    >Learn more <i class="bi bi-chevron-right tint fs-6"></i>
+                  <a [routerLink]="['/event', event._id]"
+                    class="bg-transparent primary-btn border-0 p-0 col-12 col-md-auto text-uppercase">Learn more <i
+                      class="bi bi-chevron-right tint fs-6"></i>
                   </a>
                 </div>
-              </div>
-            </div>
-            <div class="col-12 col-md-4 col-lg-3 p-3 p-md-2">
-              <div class="col-12 shadow p-5 -dark event-card">
-                <h2 class="text-muted">Coming soon...</h2>
               </div>
             </div>
           </div>

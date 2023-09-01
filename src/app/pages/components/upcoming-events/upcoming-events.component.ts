@@ -12,6 +12,8 @@ import { EventsService } from 'src/app/core/services/events.service';
 export class UpcomingEventsComponent implements OnInit {
 
   events: Event[] = [];
+  nextEventId: string = '3d8a73af-56a7-4fc5-969b-8aa37dcab459';
+  nextEvent!: Event;
 
   constructor(
     public router: Router,
@@ -20,7 +22,11 @@ export class UpcomingEventsComponent implements OnInit {
     public toastr: ToastrService
   ) {
     if (this.events.length === 0) {
-      if (route.snapshot.data.event) this.events = route.snapshot.data.event.result;
+      if (route.snapshot.data.event) {
+        this.events = route.snapshot.data.event.result;
+        this.nextEvent = this.events.find(event => event._id === this.nextEventId)!;
+        this.events = this.events.filter(event => event._id !== this.nextEventId);
+      }
       else this.getEvents();
     }
   }
@@ -32,6 +38,8 @@ export class UpcomingEventsComponent implements OnInit {
     this.eventService.get(events_query).subscribe({
       next: (result) => {
         this.events = result.result;
+        this.nextEvent = this.events.find(event => event._id === this.nextEventId)!;
+        this.events = this.events.filter(event => event._id !== this.nextEventId);
       },
       error: (error) => {
         this.toastr.error(error || 'An error occured, please refresh the application')
@@ -60,9 +68,16 @@ export class UpcomingEventsComponent implements OnInit {
     return new Date(iso.toString()).getFullYear();
   }
 
-  convertTime(iso: Date) {
-    let date = new Date(iso.toString());
-    return date.getHours() + ' : ' + date.getMinutes();
+  convertTime(date: Date) {
+    //convert date object to time in am/pm format
+    let hours = new Date(date.toString()).getHours();
+    let minutes = new Date(date.toString()).getMinutes();
+    let ampm = hours >= 12 ? 'pm' : 'am';
+    hours = hours % 12;
+    hours = hours ? hours : 12; // the hour '0' should be '12'
+    let minutesStr = minutes < 10 ? '0' + minutes : minutes;
+    let strTime = hours + ':' + minutesStr + ' ' + ampm;
+    return strTime;
   }
 
 }

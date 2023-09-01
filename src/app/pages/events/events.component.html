@@ -7,7 +7,7 @@
       <div *ngIf="event" class="event-cover shadow position-relative"
         [ngStyle]="{ 'background-image': event && event._id === '4c4c9544-6edd-40e7-b898-4b850bef87c7' || event._id ===  '759e691e-88e2-4e00-8b42-271ca651da5d' && event.imageUrl ? 'url(' + event.imageUrl + ')' : null }">
        <video class="blurred" [autoplay]="true" controls volume="0.5" loop>
-            <source src="https://tiltempire.b-cdn.net/eatahthon.mp4" type="video/mp4">
+            <source src="assets/video/IMG_1779.MOV" type="video/mp4">
           </video>
         <div class="row">
           <div class="col-12 party p-5">
@@ -65,8 +65,75 @@
           </div>
         </div>
       </div>
+<h1 class="px-md-0 mt-5 mb-4">Upcoming Events</h1>
+      <div *ngIf="nextEvent" class="events container-fluid px-0">
+        <div class="row">
+          <div class="col-12 col-md-4 col-lg-3 p-3 p-md-2">
+            <div class="col-12 shadow p-3 -dark event-card">
+              <h5 class="mb-0">{{ convertToMonth(nextEvent.datetime) }} {{ convertToDate(nextEvent.datetime) }}</h5>
+              <h4 class="text-capitalize fw-bold">
+                <a href="#">{{ nextEvent.title }}</a>
+              </h4>
+              <p class="mb-3 desc" data-truncateat="120" data-onword="0">{{ event?.description }}</p>
+              <h6>
+                <div class="row">
+                  <i class="bi bi-calendar-check col-auto pe-0"></i>
+                  <div class="col-10">{{ convertToDay(nextEvent.datetime) }}, {{ convertToMonth(nextEvent.datetime) }}
+                    {{ convertToDate(nextEvent.datetime) }}, {{ convertToYear(nextEvent.datetime) }}. <br>
+                    {{ convertTime(nextEvent.datetime) }}
+                  </div>
+                </div>
+              </h6>
+              <h6>
+                <div class="row">
+                  <i class="bi bi-geo-alt col-auto pe-0"></i>
+                  <div class="col-8">{{ nextEvent.location }}</div>
+                </div>
+              </h6>
+              <div class="col-12">
+                <div class="row">
+                  <div *ngIf="nextEvent.tags.length" class="col-12 mt-2">
+                    <p class="mb-2">Tags</p>
+                    <ul class="tags">
+                      <li *ngFor="let tags of nextEvent.tags">
+                        <a href="javascript:void(0)">{{ tags }}</a>
+                      </li>
+                    </ul>
+                  </div>
+                  <div class="col-12">
+                    <p class="mb-0">Share</p>
+                    <ul class="share">
+                      <li>
+                        <a href="https://www.facebook.com/tiltempire">
+                          <i class="bi bi-facebook"></i>
+                        </a>
+                      </li>
+                      <li>
+                        <a href="https://instagram.com/tilt_emp?igshid=MzRlODBiNWFlZA==">
+                          <i class="bi bi-instagram"></i>
+                        </a>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+              <div class="col-12 d-flex justify-content-start">
+                <a [routerLink]="['/event', nextEvent._id]"
+                  class="bg-transparent primary-btn border-0 p-0 col-12 col-md-auto text-uppercase">Learn more
+                  <i class="bi bi-chevron-right tint fs-6"></i>
+                </a>
+              </div>
+            </div>
+          </div>
+          <div class="col-12 col-md-4 col-lg-3 p-3 p-md-2">
+            <div class="col-12 shadow p-5 -dark event-card">
+              <h2 class="text-muted">Coming soon...</h2>
+            </div>
+          </div>
+        </div>
+      </div>
 
-      <h1 class="px-md-0 mt-5 mb-4">Upcoming Events</h1>
+      <h1 class="px-md-0 mt-5 mb-4">Past Events</h1>
       <div *ngIf="events.length > 0" class="events container-fluid px-0">
         <div class="row">
           <div *ngFor="let event of events" class="col-12 col-md-4 col-lg-3 p-3 p-md-2">
@@ -124,11 +191,6 @@
                   <i class="bi bi-chevron-right tint fs-6"></i>
                 </a>
               </div>
-            </div>
-          </div>
-          <div class="col-12 col-md-4 col-lg-3 p-3 p-md-2">
-            <div class="col-12 shadow p-5 -dark event-card">
-              <h2 class="text-muted">Coming soon...</h2>
             </div>
           </div>
         </div>
