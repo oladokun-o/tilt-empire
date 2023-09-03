@@ -1,8 +1,7 @@
 <footer class="py-3 px-md-5 px-4 pt-5 mt-5">
   <div class="newsletter mt-5 row d-flex justify-content-center">
     <div class="col-12 col-md-10 p-3 p-md-4">
-      <form method="POST"
-        action="https://script.google.com/macros/s/AKfycbyDUymkzMGpWy1eY-tB9jYLu_PLG18IrQmHFa80-PLZJMB_2YSUeictgadRRgO6bgs9/exec"
+      <form [formGroup]="Form" (ngSubmit)="submitForm()"
         class="row">
         <div
           class="col-12 col-md-5 text-center text-md-start d-flex justify-content-center justify-content-md-start align-items-center">
@@ -14,9 +13,9 @@
         <div class="col-12 col-md-7 d-flex align-items-center">
           <div class="col-12 p-0">
             <label for="newsletter1" class="visually-hidden">Email address</label>
-            <input id="newsletter1" name="Email" type="email" class="form-control" placeholder="Email address" required>
-            <button class="primary-btn text-uppercase m-0 mt-2 col-12 d-flex justify-content-center" type="submit">
-              <span>Subscribe</span>
+            <input id="newsletter1" formControlName="Email" type="email" class="form-control" placeholder="Email address" required>
+            <button [disabled]="submitting" (click)="submitForm()" class="primary-btn text-uppercase m-0 mt-2 col-12 d-flex justify-content-center" type="submit">
+              <span>{{ submitting ? 'Submitting...' : 'Subscribe' }}</span>
             </button>
           </div>
         </div>

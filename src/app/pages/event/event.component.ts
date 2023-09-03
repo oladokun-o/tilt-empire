@@ -17,8 +17,6 @@ export class EventComponent implements OnInit {
   events: Event[] = [];
   event!: Event;
   event_id!: string;
-  nextEventId: string = '3d8a73af-56a7-4fc5-969b-8aa37dcab459';
-  nextEvent!: Event;
 
   constructor(
     public router: Router,
@@ -30,8 +28,6 @@ export class EventComponent implements OnInit {
   ) {
     if (route.snapshot.data.events.result.length !== 0) {
       this.events = route.snapshot.data.events.result;
-      this.nextEvent = this.events.find(event => event._id === this.nextEventId)!;
-      this.events = this.events.filter(event => event._id !== this.nextEventId)
     }
     else this.getEvents();
 
@@ -62,8 +58,6 @@ export class EventComponent implements OnInit {
     this.eventService.get(events_query).subscribe({
       next: (result) => {
         this.events = result.result;
-        this.nextEvent = this.events.find(event => event._id === this.nextEventId)!;
-        this.events = this.events.filter(event => event._id !== this.nextEventId);
       },
       error: (error) => {
         this.toastr.error(error || 'An error occured, please refresh the application');

@@ -1,14 +1,14 @@
-<h3 *ngIf="nextEvent">Latest Events</h3>
-<div class="list pt-2 mb-5" style="height:auto;">
+<h3 *ngIf="upcomingEvents.length">Latest Events</h3>
+<div *ngIf="upcomingEvents.length" class="list pt-2 mb-5" style="height:auto;">
   <ul class="mb-0">
-    <li>
-      <div class="dropcap_1 mb-2 text-uppercase">{{ convertToMonth(nextEvent.datetime) }} {{ convertToDate(nextEvent.datetime)
+    <li *ngFor="let event of upcomingEvents">
+      <div class="dropcap_1 mb-2 text-uppercase">{{ convertToMonth(event.datetime) }} {{ convertToDate(event.datetime)
         }}</div>
-      <h5 class="text-capitalize fw-bold">{{ nextEvent.title }}</h5>
+      <h5 class="text-capitalize fw-bold">{{ event.title }}</h5>
       <p class="mb-4 text-truncate col-12">
-        {{ nextEvent?.description }}
+        {{ event?.description }}
       </p>
-      <a class="primary-btn" [routerLink]="['/event', nextEvent._id]">View Details</a>
+      <a class="primary-btn" [routerLink]="['/event', event._id]">View Details</a>
     </li>
     <li>
       <div class="dropcap_1 text-uppercase">October</div>
@@ -18,10 +18,10 @@
 </div>
 
 
-<h3>Past Events</h3>
+<h3 *ngIf="pastEvents.length">Past Events</h3>
 <div class="list pt-2" style="height: 330px;">
   <ul>
-    <li *ngFor="let event of events">
+    <li *ngFor="let event of pastEvents">
     <div class="dropcap_1 mb-2 text-uppercase">{{ convertToMonth(event.datetime) }} {{ convertToDate(event.datetime) }}</div>
     <h5 class="text-capitalize fw-bold">{{ event.title }}</h5>
     <p class="mb-4 text-truncate col-12">

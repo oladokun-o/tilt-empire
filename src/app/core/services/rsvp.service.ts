@@ -10,10 +10,10 @@ export class RsvpService {
 
   constructor(
     public http: HttpClient
-  ) { 
+  ) {
   }
 
   saveRsvp(rsvp: any): Observable<any> {
-    return this.http.post(ApiConfig.rsvp.post(), rsvp)
+    return this.http.get(ApiConfig.rsvp.post(), rsvp)
   }
 }

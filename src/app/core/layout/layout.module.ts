@@ -13,7 +13,9 @@ import { FooterComponent } from './footer/footer.component';
   ],
   imports: [
     CommonModule,
-    NavModule
+    NavModule,
+    FormsModule,
+    ReactiveFormsModule
   ],
   exports: [
     NavModule,

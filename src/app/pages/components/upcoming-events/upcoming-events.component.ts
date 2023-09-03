@@ -14,6 +14,8 @@ export class UpcomingEventsComponent implements OnInit {
   events: Event[] = [];
   nextEventId: string = '3d8a73af-56a7-4fc5-969b-8aa37dcab459';
   nextEvent!: Event;
+  pastEvents: Event[] = [];
+  upcomingEvents: Event[] = [];
 
   constructor(
     public router: Router,
@@ -24,22 +26,23 @@ export class UpcomingEventsComponent implements OnInit {
     if (this.events.length === 0) {
       if (route.snapshot.data.event) {
         this.events = route.snapshot.data.event.result;
-        this.nextEvent = this.events.find(event => event._id === this.nextEventId)!;
-        this.events = this.events.filter(event => event._id !== this.nextEventId);
+        this.upcomingEvents = this.events.filter(event => new Date(event.datetime.toString()) > new Date());
+        this.pastEvents = this.events.filter(event => new Date(event.datetime.toString()) < new Date());
       }
       else this.getEvents();
     }
   }
 
   ngOnInit(): void {
+
   }
 
   getEvents() {
     this.eventService.get(events_query).subscribe({
       next: (result) => {
         this.events = result.result;
-        this.nextEvent = this.events.find(event => event._id === this.nextEventId)!;
-        this.events = this.events.filter(event => event._id !== this.nextEventId);
+        this.upcomingEvents = this.events.filter(event => new Date(event.datetime.toString()) > new Date());
+        this.pastEvents = this.events.filter(event => new Date(event.datetime.toString()) < new Date());
       },
       error: (error) => {
         this.toastr.error(error || 'An error occured, please refresh the application')
