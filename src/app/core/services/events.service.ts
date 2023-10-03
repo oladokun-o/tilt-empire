@@ -14,7 +14,7 @@ export class EventsService {
   constructor(private http: HttpClient) { }
 
   get(query: string) {
-    return this.http.get<RootObject>(ApiConfig.events.get(query)).pipe(
+    return this.http.get<any>(ApiConfig.events.get(query)).pipe(
       //retry(),
 			catchError((error: HttpErrorResponse) => {
 				let error_msg = '';

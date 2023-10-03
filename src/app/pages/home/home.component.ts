@@ -5,6 +5,7 @@ import { Component, OnInit, AfterViewChecked, ViewChild, ElementRef } from '@ang
 import { Event, events_query } from 'src/app/core/models/products.model';
 import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { NgxGalleryOptions, NgxGalleryImage, NgxGalleryAnimation } from '@kolkov/ngx-gallery';
+import { AboutUs, LastVideo } from 'src/app/core/models/index.model';
 
 @Component({
   selector: 'app-home',
@@ -19,6 +20,10 @@ export class HomeComponent implements OnInit, AfterViewChecked {
   images: Array<{ src: string; }> = [];
   galleryOptions: NgxGalleryOptions[] = [];
   galleryImages: NgxGalleryImage[] = [];
+  aboutUs!: AboutUs;
+  about_query: string = `*[_type == 'aboutUs']{ title, _id, mission }`;
+  lastVideo!: LastVideo;
+  video_query: string = `*[_type == 'lastEventVideo']{ title, _id, description, videoUrl }`;
 
   // @ViewChild('video') video!: ElementRef<HTMLVideoElement>;
 
@@ -42,7 +47,8 @@ export class HomeComponent implements OnInit, AfterViewChecked {
   }
 
   ngOnInit(): void {
-
+    this.getAboutUs();
+    this.getLastVideo();
   }
 
   ngAfterViewChecked(): void {
@@ -86,6 +92,28 @@ export class HomeComponent implements OnInit, AfterViewChecked {
   payout(type: string) {
     if (type === 'reg') location.href = this.event.checkout_link;
     else if (type === 'vip' && this.event.checkout_link_vip) location.href = this.event.checkout_link_vip;
+  }
+
+  getAboutUs() {
+    this.eventService.get(this.about_query).subscribe({
+      next: (result) => {
+        this.aboutUs = result.result[0];
+      },
+      error: (error) => {
+        this.toastr.error(error || 'An error occured, please refresh the application');
+      }
+    })
+  }
+
+  getLastVideo() {
+    this.eventService.get(this.video_query).subscribe({
+      next: (result) => {
+        this.lastVideo = result.result[0];
+      },
+      error: (error) => {
+        this.toastr.error(error || 'An error occured, please refresh the application');
+      }
+    })
   }
 
 }

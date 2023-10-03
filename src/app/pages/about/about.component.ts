@@ -1,5 +1,7 @@
 import { DOCUMENT } from '@angular/common';
-import { Component, OnInit, ElementRef, Inject } from '@angular/core';
+import { Component, OnInit, ElementRef, Inject, Input } from '@angular/core';
+import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
+import { AboutUs, LastVideo } from 'src/app/core/models/index.model';
 
 @Component({
   selector: 'app-about',
@@ -8,7 +10,13 @@ import { Component, OnInit, ElementRef, Inject } from '@angular/core';
 })
 export class AboutComponent implements OnInit {
 
-  constructor(@Inject(DOCUMENT) private document: Document) { }
+  @Input()
+  about!: AboutUs;
+
+  @Input()
+  lastvideo!: LastVideo;
+
+  constructor(@Inject(DOCUMENT) private document: Document, private sanitizer: DomSanitizer) { }
 
   ngOnInit(): void {
     let doc = this.document.querySelector('.video-overlay, .video-overlay-close')
@@ -28,4 +36,9 @@ export class AboutComponent implements OnInit {
     doc?.classList.remove('open');
     doc?.querySelector('iframe')?.remove();
   }
+
+  getSafeUrl(url: string): SafeResourceUrl {
+    return this.sanitizer.bypassSecurityTrustResourceUrl(url);
+  }
+
 }

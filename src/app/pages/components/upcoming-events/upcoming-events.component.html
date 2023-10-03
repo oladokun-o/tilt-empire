@@ -19,7 +19,7 @@
 
 
 <h3 *ngIf="pastEvents.length">Past Events</h3>
-<div class="list pt-2" style="height: 330px;">
+<div class="list pt-2" style="height: 580px;">
   <ul>
     <li *ngFor="let event of pastEvents">
     <div class="dropcap_1 mb-2 text-uppercase">{{ convertToMonth(event.datetime) }} {{ convertToDate(event.datetime) }}</div>

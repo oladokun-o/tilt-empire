@@ -5,34 +5,52 @@
         <div class="row">
           <div class="col-12 pb-3 mb-3">
             <div class="heading -left">
-              <div class="subtitle">ABOUT TILT</div>
+              <div
+                class="subtitle text-start"
+                *ngIf="about"
+                [innerHTML]="about.title"
+              ></div>
               <!--<h1 class="title">What's TILT?</h1>
 									<div class="col-12 d-flex d-md-block justify-content-center mb-3">
 										<div class="col-12 col-md-7">
 											<img src="logo.png" alt="">
 										</div>
 									</div>-->
-              <article class="fs-5 text-center text-md-start">
-                Tilt is the first ever jam session in Estonia to bring together all kind of genre of music, hiphop,
-                ukdrill and afrofusion.
-                <br>
-                Tilt is the new wave of concept party in Estonia.
-              </article>
+              <article
+                *ngIf="about"
+                class="fs-5 text-md-start"
+                style="text-align: justify;"
+                [innerHTML]="about.mission"
+              ></article>
             </div>
           </div>
         </div>
       </div>
     </div>
     <div class="col-12 video">
-      <img src="assets/img/dj.jpg" alt="">
+      <img src="assets/img/dj.jpg" alt="" />
       <div class="img-overlay"></div>
-      <a (click)="openVideoModal(video)" class="video-play-button" href="javascript:void(0)">
+      <a
+        (click)="openVideoModal(video)"
+        class="video-play-button"
+        href="javascript:void(0)"
+      >
         <span></span>
       </a>
       <div #video id="video-overlay" class="video-overlay">
         <a class="video-overlay-close" (click)="close_video()">
           <i class="bi bi-x-lg"></i>
         </a>
+      </div>
+    </div>
+    <div *ngIf="lastvideo" class="col-12 pt-4">
+      <div class="subtitle">Last event</div>
+      <h5 style="color: white;" [innerHTML]="lastvideo.title"></h5>
+      <div class="video-container pt-3">
+        <video controls class="col-12 col-md-6">
+          <source [src]="'assets/video/yj.mp4'" type="video/mp4" />
+          Your browser does not support the video tag.
+        </video>
       </div>
     </div>
   </div>
