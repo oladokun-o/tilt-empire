@@ -2,11 +2,9 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@700&family=Raleway&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Varela+Round&display=swap');
 
-@font-face {
-  font-family: 'bronziermedium';
-  src: url(../fonts/Bronzier-Medium.ttf);
+h1,h2,h3,h4,h5,h6 {
+  font-family: 'Bronzier', 'Bungee', cursive !important;
 }
-
 
 img {
     width: 100%;
@@ -138,20 +136,20 @@ body {
 
 .home h4 {
   color: white;
-  font-family: 'bronziermeduim', 'Bungee', cursive;
+  font-family: 'Bronzier', 'Bungee', cursive;
   font-size: 36px;
 }
 
 .home h2 {
   color: white;
-  font-family: 'bronziermeduim', 'Bungee', cursive;
+  font-family: 'Bronzier', 'Bungee', cursive;
   font-size: 105px;
   line-height: 80px;
 }
 
 .home h3 {
   color: white;
-  font-family: 'bronziermeduim', 'Bungee', cursive;
+  font-family: 'Bronzier', 'Bungee', cursive;
   font-size: 80px;
 }
 
@@ -163,20 +161,20 @@ body {
 @media (max-width: 768px) {
   .home h4 {
     color: white;
-    font-family: 'bronziermeduim', 'Bungee', cursive;
+    font-family: 'Bronzier', 'Bungee', cursive;
     font-size: 30px;
   }
 
   .home h2 {
     color: white;
-    font-family: 'bronziermeduim', 'Bungee', cursive;
+    font-family: 'Bronzier', 'Bungee', cursive;
     font-size: 50px;
     line-height: 40px;
   }
 
   .home h3 {
     color: white;
-    font-family: 'bronziermeduim', 'Bungee', cursive;
+    font-family: 'Bronzier', 'Bungee', cursive;
     font-size: 42px;
   }
 }
@@ -189,7 +187,7 @@ body {
     text-transform: capitalize;
     font-size: 8vw;
     position: relative;
-    font-family: 'bronziermeduim', 'Bungee', cursive;
+    font-family: 'Bronzier', 'Bungee', cursive;
 }
 
 .title .log {
@@ -895,12 +893,12 @@ form {
 
 .newsletter h5 {
   color: #03051a;
-  font-family: 'bronziermeduim', 'Bungee', cursive;
+  font-family: 'Bronzier', 'Bungee', cursive;
 }
 
 .newsletter h2 {
   color: white;
-  font-family: 'bronziermeduim', 'Bungee', cursive;
+  font-family: 'Bronzier', 'Bungee', cursive;
 }
 
 .newsletter button[type="submit"] {
@@ -975,7 +973,7 @@ form {
 .events-contn .hero h1,
 .events-contn h1 {
   color: white;
-  font-family: 'bronziermeduim', 'Bungee', cursive;
+  font-family: 'Bronzier', 'Bungee', cursive;
   width: fit-content !important;
 }
 
