@@ -2,12 +2,13 @@
   <div class="home row position-relative text-center mb-5 pb-5">
     <h4 class="mb-5">NEXT PARTY</h4>
     <div *ngIf="event" class="col-12 scale-in-center">
-      <h2 class="text-uppercase m-0 p-0">{{ event.title }}</h2>
+      <h3 class="text-uppercase m-0 p-0">{{ event.title }}</h3>
       <h3 class="text-uppercase mt-0 d-none"></h3>
       <div class="col-12 d-flex mt-3 justify-content-center">
         <p *ngIf="event._id !== '4c4c9544-6edd-40e7-b898-4b850bef87c7' && event._id !==  '759e691e-88e2-4e00-8b42-271ca651da5d'"
           class="mb-3 col-8">
-          {{ event.description }}
+          <!-- {{ event.description }} -->
+          <img class="gallery col-12 col-md-6" src="{{ event.imageUrl }}">
         </p>
         <div
           *ngIf="event._id === '4c4c9544-6edd-40e7-b898-4b850bef87c7' || event._id ===  '759e691e-88e2-4e00-8b42-271ca651da5d'"

@@ -32,7 +32,7 @@
 .content__title {
 	font-size: 11vw;
 	position: relative;
-	font-family: 'Bungee', cursive;
+	font-family: 'bronziermedium', 'Bungee', cursive;
 	color: var(--color-title);
 	animation-name: glitch-anim-text;
 	animation-duration: var(--time-anim);
